@@ -20,7 +20,7 @@ import kr.co.sist.log.view.SelectLog;
 
 public class SelectLogEvt implements ActionListener {
 
-	// 1~6ì„ ì²˜ë¦¬í•œ ë‚´ìš©ì„ instance ë³€ìˆ˜ì— ì €ì¥í•´ì•¼ í•¨
+	// 1~6À» Ã³¸®ÇÑ ³»¿ëÀ» instance º¯¼ö¿¡ ÀúÀåÇØ¾ß ÇÔ
 	private SelectLog sl;
 	private String filePath;
 	private Map<String, Integer> mapKey;
@@ -53,14 +53,14 @@ public class SelectLogEvt implements ActionListener {
 			try {
 				readLog();
 
-				// readLogë¡œ ì½ì–´ë“¤ì¸ logì˜ ë‚´ìš©ì„ ê°€ê³µ, instanceë³€ìˆ˜ì— ì €ì¥
+				// readLog·Î ÀĞ¾îµéÀÎ logÀÇ ³»¿ëÀ» °¡°ø, instanceº¯¼ö¿¡ ÀúÀå
 				calMostFrequentKey();
 				calBrowserShare();
 				calCode403Share();
 			
-				// ê²°ê³¼ì°½
+				// °á°úÃ¢
 				new Result(this, sl);
-				System.out.println("ê²°ê³¼ì°½ ìƒì„±ì í˜¸ì¶œ");
+				System.out.println("°á°úÃ¢ »ı¼ºÀÚ È£Ãâ");
 
 			} catch (FileNotFoundException fnfe) {
 				fnfe.printStackTrace();
@@ -69,13 +69,13 @@ public class SelectLogEvt implements ActionListener {
 			}
 		}
 
-		// jbViewê°€ í•œë²ˆ ì´ìƒ ëˆŒë ¸ë‹¤ë©´ JOptionPane.showMessageDialogì— ë¶™ì—¬ ê²°ê³¼ ì¶œë ¥
+		// jbView°¡ ÇÑ¹ø ÀÌ»ó ´­·È´Ù¸é JOptionPane.showMessageDialog¿¡ ºÙ¿© °á°ú Ãâ·Â
 		if (e.getSource() == sl.getJbReport()) {
-			// jbViewê°€ í•œë²ˆì´ìƒ ëˆŒë ¸ì„ ë•Œ ìˆ˜í–‰ë˜ë„ë¡ êµ¬í˜„(boolean flagë¡œ êµ¬í˜„)
+			// jbView°¡ ÇÑ¹øÀÌ»ó ´­·ÈÀ» ¶§ ¼öÇàµÇµµ·Ï ±¸Çö(boolean flag·Î ±¸Çö)
 			if (reportFlag == true) {
-				// "report ì¶œë ¥"ì„ Componentë¡œ ëŒ€ì²´í•´ì•¼ í•¨, Componentë¥¼ ë°˜í™˜í•˜ëŠ” method ë§Œë“¤ ê²ƒ
+				// "report Ãâ·Â"À» Component·Î ´ëÃ¼ÇØ¾ß ÇÔ, Component¸¦ ¹İÈ¯ÇÏ´Â method ¸¸µé °Í
 
-				// íŒŒì¼ ì¶œë ¥ FileDialog êµ¬í˜„
+				// ÆÄÀÏ Ãâ·Â FileDialog ±¸Çö
 				try {
 					mkLogReport();
 				} catch (IOException e1) {
@@ -83,12 +83,12 @@ public class SelectLogEvt implements ActionListener {
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(sl, "Log Viewë¥¼ ë¨¼ì € ìˆ˜í–‰í•˜ì—¬ ì£¼ì„¸ìš”.");
+				JOptionPane.showMessageDialog(sl, "Log View¸¦ ¸ÕÀú ¼öÇàÇÏ¿© ÁÖ¼¼¿ä.");
 			}
 		}
 
 		if (e.getSource() == sl.getJbLineView()) {
-			// ì‹œì‘,ë ë¼ì¸ì´ ì…ë ¥ëì„ ë•Œ í•´ë‹¹ ë¼ì¸ ìˆ˜ë¥¼ ê°€ì ¸ì˜¨ë‹¤
+			// ½ÃÀÛ,³¡ ¶óÀÎÀÌ ÀÔ·ÂµÆÀ» ¶§ ÇØ´ç ¶óÀÎ ¼ö¸¦ °¡Á®¿Â´Ù
 			start = Integer.parseInt(sl.getJtStartLine().getText());
 			end = Integer.parseInt(sl.getJtEndLine().getText());
 
@@ -108,25 +108,25 @@ public class SelectLogEvt implements ActionListener {
 
 	public void mkLogReport() throws IOException {
 
-		// report, FileDialog SAVE, ì¶œë ¥í•˜ëŠ” method
+		// report, FileDialog SAVE, Ãâ·ÂÇÏ´Â method
 	}
 
 	public void calMostFrequentKey() {
-		// ê°€ì¥ ë¹ˆë„ìˆ˜ ë†’ì€ key(mostFrequentKey) êµ¬í•˜ëŠ” method
+		// °¡Àå ºóµµ¼ö ³ôÀº key(mostFrequentKey) ±¸ÇÏ´Â method
 	}
 
 	public void calMostFrequentHour() {
-		// ê°€ì¥ ë¹ˆë„ìˆ˜ ë†’ì€ ì‹œê°„(mostFrequentHour) êµ¬í•˜ëŠ” method 
+		// °¡Àå ºóµµ¼ö ³ôÀº ½Ã°£(mostFrequentHour) ±¸ÇÏ´Â method 
 	}
 	
-/////////////////////12.22 ì„ ì˜ ì½”ë“œ ì¶”ê°€ (ë¸Œë¼ìš°ì €ì˜ ë¹„ìœ¨êµ¬í•´ì„œ ë°˜í™˜) ì‹œì‘//////////////////////////////
+/////////////////////12.22 ¼±ÀÇ ÄÚµå Ãß°¡ (ºê¶ó¿ìÀúÀÇ ºñÀ²±¸ÇØ¼­ ¹İÈ¯) ½ÃÀÛ//////////////////////////////
 	public void calBrowserShare() {
 		ArrayList<String> al = new ArrayList<String>();
 		Set<String> set = mapBrowser.keySet();
 		Iterator<String> ita = set.iterator();
 		Iterator<String> ita2 = set.iterator();
 
-//		System.out.println("ëª¨ë“ ë„˜ë²„: " + requestNum);
+//		System.out.println("¸ğµç³Ñ¹ö: " + requestNum);
 //		System.out.println(mapBrowser);
 		for (int i = 0; i < browser.length; i++) {
 			mapBrowserShare.put(ita2.next(), String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
@@ -134,7 +134,7 @@ public class SelectLogEvt implements ActionListener {
 //		System.out.println(al);
 //		System.out.println(mapBrowserShare);
 	}
-/////////////////////12.22 ì„ ì˜ ì½”ë“œ ì¶”ê°€ (ë¸Œë¼ìš°ì €ì˜ ë¹„ìœ¨êµ¬í•´ì„œ ë°˜í™˜) ë//////////////////////////////
+/////////////////////12.22 ¼±ÀÇ ÄÚµå Ãß°¡ (ºê¶ó¿ìÀúÀÇ ºñÀ²±¸ÇØ¼­ ¹İÈ¯) ³¡//////////////////////////////
 
 
 	public void calCode403Share() {
@@ -142,8 +142,8 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void selectLog() {
-		// ì½ì–´ë“¤ì¸ logíŒŒì¼ì˜ ê²½ë¡œë¥¼ ì €ì¥í•˜ëŠ” method
-		FileDialog fd = new FileDialog(sl, "log íŒŒì¼ ì„ íƒ", FileDialog.LOAD);
+		// ÀĞ¾îµéÀÎ logÆÄÀÏÀÇ °æ·Î¸¦ ÀúÀåÇÏ´Â method
+		FileDialog fd = new FileDialog(sl, "log ÆÄÀÏ ¼±ÅÃ", FileDialog.LOAD);
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
@@ -161,8 +161,8 @@ public class SelectLogEvt implements ActionListener {
 			while ((temp = br.readLine()) != null) {
 
 				requestNum++;
-				// ì„ íƒëœ íŒŒì¼ì˜ ë‚´ìš©ì„ í•œ ì¤„ì”© ì½ì–´ë“¤ì„
-				// ì½ì–´ë“¤ì´ëŠ” ë‚´ìš©ì„ ì²˜ë¦¬í•˜ëŠ”ê±´ ë”°ë¡œ method ë§Œë“¤ì–´ì„œ ì²˜ë¦¬í•  ê²ƒ
+				// ¼±ÅÃµÈ ÆÄÀÏÀÇ ³»¿ëÀ» ÇÑ ÁÙ¾¿ ÀĞ¾îµéÀÓ
+				// ÀĞ¾îµéÀÌ´Â ³»¿ëÀ» Ã³¸®ÇÏ´Â°Ç µû·Î method ¸¸µé¾î¼­ Ã³¸®ÇÒ °Í
 				if (start == 0 && end == 0) {
 					countKey(temp);
 					countBrowser(temp);
@@ -184,15 +184,15 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void countKey(String temp) {
-		// 1. ìµœë‹¤ ì‚¬ìš© Keyì˜ ì´ë¦„ê³¼ íšŸìˆ˜ë¥¼ êµ¬í•˜ëŠ” method
+		// 1. ÃÖ´Ù »ç¿ë KeyÀÇ ÀÌ¸§°ú È½¼ö¸¦ ±¸ÇÏ´Â method
 	}
 
-//////////////////////12.22 ì„ ì˜ ì¶”ê°€ ì½”ë“œ(ë¸Œë¼ìš°ì €,ì¹´ìš´í„° mapBrowserì— ë„£ê¸°) ì‹œì‘ ////////////////////////////
+//////////////////////12.22 ¼±ÀÇ Ãß°¡ ÄÚµå(ºê¶ó¿ìÀú,Ä«¿îÅÍ mapBrowser¿¡ ³Ö±â) ½ÃÀÛ ////////////////////////////
 	private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
 	private int[] browserCnt = new int[browser.length];
 
 	public void countBrowser(String temp) {
-		// 2. ë¸Œë¼ìš°ì €ë³„ ì ‘ì† íšŸìˆ˜ êµ¬í•˜ëŠ” method, ë¹„ìœ¨ êµ¬í•˜ê¸°(ì•„ì§)
+		// 2. ºê¶ó¿ìÀúº° Á¢¼Ó È½¼ö ±¸ÇÏ´Â method, ºñÀ² ±¸ÇÏ±â(¾ÆÁ÷)
 //		System.out.println(temp);
 		int count = 0;
 //		System.out.println("temp :"+temp  );
@@ -205,15 +205,15 @@ public class SelectLogEvt implements ActionListener {
 		} // end for
 //		System.out.println("requestNum = " +requestNum+", "+mapBrowser);
 	}// countBrowser
-/////////////////////12.22 ì„ ì˜ ì¶”ê°€ ì½”ë“œ(ë¸Œë¼ìš°ì €,ì¹´ìš´í„° mapBrowserì— ë„£ê¸°) ë////////////////////////////
+/////////////////////12.22 ¼±ÀÇ Ãß°¡ ÄÚµå(ºê¶ó¿ìÀú,Ä«¿îÅÍ mapBrowser¿¡ ³Ö±â) ³¡////////////////////////////
 
 	public void countHttpStatusCode(String temp) {
-		// 3. ì„œë¹„ìŠ¤ë¥¼ ì„±ê³µì ìœ¼ë¡œ ìˆ˜í–‰í•œ íšŸìˆ˜, ì‹¤íŒ¨(404) íšŸìˆ˜
-		// 6. ë¹„ì •ìƒì ì¸ ìš”ì²­(403)ì´ ë°œìƒí•œ íšŸìˆ˜ êµ¬í•˜ëŠ” method, ë¹„ìœ¨ êµ¬í•˜ê¸° methodëŠ” calBrowserShare()ë¡œ êµ¬í˜„
+		// 3. ¼­ºñ½º¸¦ ¼º°øÀûÀ¸·Î ¼öÇàÇÑ È½¼ö, ½ÇÆĞ(404) È½¼ö
+		// 6. ºñÁ¤»óÀûÀÎ ¿äÃ»(403)ÀÌ ¹ß»ıÇÑ È½¼ö ±¸ÇÏ´Â method, ºñÀ² ±¸ÇÏ±â method´Â calBrowserShare()·Î ±¸Çö
 	}
 
 	public void countRequestHour(String temp) {
-		// 4. ìš”ì²­ ì‹œê°„ë³„ íšŸìˆ˜ë¥¼ êµ¬í•˜ëŠ” method.
+		// 4. ¿äÃ» ½Ã°£º° È½¼ö¸¦ ±¸ÇÏ´Â method.
 		Map<String, Integer>map=new HashMap<String,Integer>();
 		
 		// String key=
