@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import kr.co.sist.log.evt.ResultEvt;
 import kr.co.sist.log.evt.SelectLogEvt;
 
+
+/////////////// 12-22-2018 Result JDialog구현(정미) //////////////////////
 public class Result extends JDialog {
 	
 	private SelectLogEvt sle;
@@ -54,8 +56,6 @@ public class Result extends JDialog {
 		pnCe.setLayout(new GridLayout(6, 2));
 		setLayout(new BorderLayout());
 		
-		
-		
 		//배치
 		add("North",pnNo);
 		add("Center",pnCe);
@@ -69,3 +69,5 @@ public class Result extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 }
+
+/////////////// 12-22-2018 Result JDialog구현(정미) 끝 //////////////////////
