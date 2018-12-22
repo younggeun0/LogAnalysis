@@ -118,35 +118,33 @@ public class SelectLogEvt implements ActionListener {
 	public void mkLogReport() throws IOException {
 
 		// report, FileDialog SAVE, 출력하는 method
-
-		// report,  FileDialog SAVE, ����ϴ� method
-		
 	}
 
 	public void calMostFrequentKey() {
 		// 가장 빈도수 높은 key(mostFrequentKey) 구하는 method
 	}
 
-/////////////////////12.22 선의 코드 추가 (브라우저의 비율구해서 반환) 시작//////////////////////////////
 	public void calMostFrequentHour() {
-		// ���� �󵵼� ���� �ð��� ���ϴ� method 
+		// 가장 빈도수 높은 시간(mostFrequentHour) 구하는 method 
 	}
 	
+/////////////////////12.22 선의 코드 추가 (브라우저의 비율구해서 반환) 시작//////////////////////////////
 	public void calBrowserShare() {
 		ArrayList<String> al = new ArrayList<String>();
 		Set<String> set = mapBrowser.keySet();
 		Iterator<String> ita = set.iterator();
 		Iterator<String> ita2 = set.iterator();
 
-		System.out.println("모든넘버: " + requestNum);
-		System.out.println(mapBrowser);
+//		System.out.println("모든넘버: " + requestNum);
+//		System.out.println(mapBrowser);
 		for (int i = 0; i < browser.length; i++) {
 			mapBrowserShare.put(ita2.next(), String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
 		}
-		System.out.println(al);
-		System.out.println(mapBrowserShare);
+//		System.out.println(al);
+//		System.out.println(mapBrowserShare);
 	}
 /////////////////////12.22 선의 코드 추가 (브라우저의 비율구해서 반환) 끝//////////////////////////////
+
 
 	public void calCode403Share() {
 		code403Share = String.format("%3.2f", (code403 / (double) requestNum) * 100);
@@ -154,7 +152,7 @@ public class SelectLogEvt implements ActionListener {
 
 	public void selectLog() {
 		// 읽어들인 log파일의 경로를 저장하는 method
-		FileDialog fd = new FileDialog(sl, "log 파일 선택", FileDialog.LOAD);
+		FileDialog fd = new FileDialog(sl, "log �뙆�씪 �꽑�깮", FileDialog.LOAD);
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
@@ -195,9 +193,7 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void countKey(String temp) {
-
 		// 1. 최다 사용 Key의 이름과 횟수를 구하는 method
-
 	}
 
 //////////////////////12.22 선의 추가 코드(브라우저,카운터 mapBrowser에 넣기) 시작 ////////////////////////////
@@ -227,7 +223,6 @@ public class SelectLogEvt implements ActionListener {
 
 	public void countRequestHour(String temp) {
 		// 4. 요청 시간별 횟수를 구하는 method.
-
 		Map<String, Integer>map=new HashMap<String,Integer>();
 		
 		// String key=

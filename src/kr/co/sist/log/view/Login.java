@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 
 import kr.co.sist.log.evt.LoginEvt;
 
+/////////////// 12-22-2018 로그인  JFrame구현(헤원) //////////////////////
 public class Login extends JFrame {
 	
 	private JTextField jtId;
@@ -58,7 +59,6 @@ public class Login extends JFrame {
 	public JTextField getJtPw() {
 		return jtPw;
 	}
-	
 	
 }
 
