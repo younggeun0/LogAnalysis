@@ -1,28 +1,19 @@
 package kr.co.sist.log.evt;
 
 import java.awt.FileDialog;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import kr.co.sist.log.view.Result;
 import kr.co.sist.log.view.SelectLog;
@@ -152,7 +143,7 @@ public class SelectLogEvt implements ActionListener {
 
 	public void selectLog() {
 		// 읽어들인 log파일의 경로를 저장하는 method
-		FileDialog fd = new FileDialog(sl, "log �뙆�씪 �꽑�깮", FileDialog.LOAD);
+		FileDialog fd = new FileDialog(sl, "log 파일 선택", FileDialog.LOAD);
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
