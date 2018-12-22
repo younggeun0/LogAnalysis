@@ -189,6 +189,9 @@ public class SelectLogEvt implements ActionListener {
 	public void countRequestHour(String temp) {
 		// 4. 요청 시간별 횟수를 구하는 method.
 
+		Map<String, Integer>map=new HashMap<String,Integer>();
+		
+		// String key=
 	}
 	
 	public SelectLog getSl() {
