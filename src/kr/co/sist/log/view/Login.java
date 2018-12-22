@@ -23,6 +23,6 @@ public class Login extends JFrame {
 		
 		
 		// Login조건을 만족시켰을 때 아래 SelectDialog가 호출되도록 구현
-		new SelectLog(this);
+		 new SelectLog(this);
 	}
 }
