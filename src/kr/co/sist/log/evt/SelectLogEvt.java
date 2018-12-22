@@ -40,6 +40,7 @@ public class SelectLogEvt implements ActionListener {
 	private int start, end;
 	private String code403Share;
 	private Map<String, String> mapBrowserShare;
+	private String mostFrequentHour;
 	private String mostFrequentKey;
 	private boolean reportFlag;
 
@@ -118,14 +119,19 @@ public class SelectLogEvt implements ActionListener {
 
 		// report, FileDialog SAVE, 출력하는 method
 
+		// report,  FileDialog SAVE, ����ϴ� method
+		
 	}
 
 	public void calMostFrequentKey() {
-
 		// 가장 빈도수 높은 key(mostFrequentKey) 구하는 method
 	}
 
 /////////////////////12.22 선의 코드 추가 (브라우저의 비율구해서 반환) 시작//////////////////////////////
+	public void calMostFrequentHour() {
+		// ���� �󵵼� ���� �ð��� ���ϴ� method 
+	}
+	
 	public void calBrowserShare() {
 		ArrayList<String> al = new ArrayList<String>();
 		Set<String> set = mapBrowser.keySet();
@@ -147,7 +153,6 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void selectLog() {
-
 		// 읽어들인 log파일의 경로를 저장하는 method
 		FileDialog fd = new FileDialog(sl, "log 파일 선택", FileDialog.LOAD);
 		fd.setVisible(true);
@@ -223,6 +228,9 @@ public class SelectLogEvt implements ActionListener {
 	public void countRequestHour(String temp) {
 		// 4. 요청 시간별 횟수를 구하는 method.
 
+		Map<String, Integer>map=new HashMap<String,Integer>();
+		
+		// String key=
 	}
 
 	public SelectLog getSl() {
