@@ -66,9 +66,9 @@ public class SelectLogEvt implements ActionListener {
 				calMostFrequentKey();
 				calBrowserShare();
 				calCode403Share();
-
+			
 				// 결과창
-				new Result(this);
+				new Result(this, sl);
 				System.out.println("결과창 생성자 호출");
 
 			} catch (FileNotFoundException fnfe) {

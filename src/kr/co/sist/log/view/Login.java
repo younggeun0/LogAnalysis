@@ -47,18 +47,13 @@ public class Login extends JFrame {
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		// Login조건을 만족시켰을 때 아래 SelectDialog가 호출되도록 구현
-		// new SelectLog(this);
 	}
 
 	public JTextField getJtId() {
 		return jtId;
 	}
-
 	public JTextField getJtPw() {
 		return jtPw;
 	}
-	
 }
 
