@@ -53,15 +53,17 @@ public class SelectLogEvt implements ActionListener {
 			try {
 				readLog();
 
-				// readLog로 읽어들인 log의 내용을 가공, instance변수에 저장
-				calMostFrequentKey();
-				calBrowserShare();
-				calCode403Share();
-			
-				// 결과창
-				new Result(this, sl);
-				System.out.println("결과창 생성자 호출");
-
+				if (requestNum != 0) {
+					// readLog로 읽어들인 log의 내용을 가공, instance변수에 저장
+					calMostFrequentKey();
+					calMostFrequentHour();
+					calBrowserShare();
+					calCode403Share();
+					
+					// 결과창
+					new Result(this, sl);
+				}
+				
 			} catch (FileNotFoundException fnfe) {
 				fnfe.printStackTrace();
 			} catch (IOException ie) {
@@ -171,9 +173,7 @@ public class SelectLogEvt implements ActionListener {
 
 				} else if (requestNum >= start && requestNum <= end) {
 					countKey(temp);
-
 				}
-
 			}
 
 			reportFlag = true;
@@ -183,9 +183,18 @@ public class SelectLogEvt implements ActionListener {
 		}
 	}
 
+////////////////////// 12.22 영근 countKey 구현 시작 ////////////////////////////////////
 	public void countKey(String temp) {
 		// 1. 최다 사용 Key의 이름과 횟수를 구하는 method
+		String key = null;
+
+		// log 중간중간에 "key"가 없는 log 존재
+		if (temp.indexOf("key") != -1) {
+			key = temp.substring(temp.indexOf("=")+1, temp.indexOf("&"));
+			mapKey.put(key, mapKey.get(key) !=null ? mapKey.get(key)+1 : 1);
+		}
 	}
+////////////////////// 12.22 영근 countKey 구현 끝 ////////////////////////////////////
 
 //////////////////////12.22 선의 추가 코드(브라우저,카운터 mapBrowser에 넣기) 시작 ////////////////////////////
 	private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
