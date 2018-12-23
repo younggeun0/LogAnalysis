@@ -24,6 +24,7 @@ public class SelectLogEvt implements ActionListener {
 	private SelectLog sl;
 	private String filePath;
 	private Map<String, Integer> mapKey;
+	private Map<String, Integer> mapKeyBetween1000And1500;
 	private Map<String, Integer> mapBrowser;
 	private Map<String, Integer> mapHour;
 	private int code200, code404, code403;
@@ -32,6 +33,7 @@ public class SelectLogEvt implements ActionListener {
 	private Map<String, String> mapBrowserShare;
 	private String mostFrequentHour;
 	private String mostFrequentKey;
+	private String mostFrequentKeyBetween1000And1500;
 	private boolean reportFlag;
 
 	public SelectLogEvt(SelectLog sl) {
@@ -55,14 +57,15 @@ public class SelectLogEvt implements ActionListener {
 				if (requestNum != 0) {
 					// readLog로 읽어들인 log의 내용을 가공, instance변수에 저장
 					calMostFrequentKey();
+					calMostFrequentKeyBetween1000And1500();
 					calMostFrequentHour();
 					calBrowserShare();
 					calCode403Share();
-					
+
 					// 결과창
 					new Result(this, sl);
 				}
-				
+
 			} catch (FileNotFoundException fnfe) {
 				fnfe.printStackTrace();
 			} catch (IOException ie) {
@@ -95,13 +98,17 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void calMostFrequentKey() {
-		// 가장 빈도수 높은 key(mostFrequentKey) 구하는 method
+		// 가장 빈도수 높은 key(mostFrequentKey)를 구하는 method
+	}
+
+	public void calMostFrequentKeyBetween1000And1500() {
+		// 1000~1500라인에 가장 빈도수 높은 key(mostFrequentKey)를 구하는 method
 	}
 
 	public void calMostFrequentHour() {
-		// 가장 빈도수 높은 시간(mostFrequentHour) 구하는 method 
+		// 가장 빈도수 높은 시간(mostFrequentHour) 구하는 method
 	}
-	
+
 /////////////////////12.22 선의 코드 추가 (브라우저의 비율구해서 반환) 시작//////////////////////////////
 	public void calBrowserShare() {
 		ArrayList<String> al = new ArrayList<String>();
@@ -110,11 +117,11 @@ public class SelectLogEvt implements ActionListener {
 		Iterator<String> ita2 = set.iterator();
 
 		for (int i = 0; i < browser.length; i++) {
-			mapBrowserShare.put(ita2.next(), String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
+			mapBrowserShare.put(ita2.next(),
+					String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
 		}
 	}
 /////////////////////12.22 선의 코드 추가 (브라우저의 비율구해서 반환) 끝//////////////////////////////
-
 
 	public void calCode403Share() {
 		code403Share = String.format("%3.2f", (code403 / (double) requestNum) * 100);
@@ -155,18 +162,16 @@ public class SelectLogEvt implements ActionListener {
 		}
 	}
 
-////////////////////// 12.22 영근 countKey 구현 시작 ////////////////////////////////////
 	public void countKey(String temp) {
-		// 1. 최다 사용 Key의 이름과 횟수를 구하는 method
-		String key = null;
+		// 1. 최다 사용 Key의 이름과 횟수를 구하는 method,
+		// mapKey를 instance의 내용을 채우도록 구현
 
-		// log 중간중간에 "key"가 없는 log 존재
-		if (temp.indexOf("key") != -1) {
-			key = temp.substring(temp.indexOf("=")+1, temp.indexOf("&"));
-			mapKey.put(key, mapKey.get(key) !=null ? mapKey.get(key)+1 : 1);
+		// 1000에서 1500번 사이일 때 결과만 따로 저장해야 하기 때문에 
+		// mapKeyBetween1000And1500에 따로 값을 넣어줘야 함.
+		if (requestNum >= 1000 && requestNum <= 1500) {
+
 		}
 	}
-////////////////////// 12.22 영근 countKey 구현 끝 ////////////////////////////////////
 
 //////////////////////12.22 선의 추가 코드(브라우저,카운터 mapBrowser에 넣기) 시작 ////////////
 	private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
@@ -174,27 +179,24 @@ public class SelectLogEvt implements ActionListener {
 
 	public void countBrowser(String temp) {
 		// 2. 브라우저별 접속 횟수 구하는 method, 비율 구하기(아직)
-//		System.out.println(temp);
 		int count = 0;
-//		System.out.println("temp :"+temp  );
 		for (int i = 0; i < browser.length; i++) {
 			if (temp.contains(browser[i])) {
 				browserCnt[i]++;
 			} // end for
-//			count=0;
 			mapBrowser.put(browser[i], browserCnt[i]);
 		} // end for
-//		System.out.println("requestNum = " +requestNum+", "+mapBrowser);
 	}// countBrowser
 /////////////////////12.22 선의 추가 코드(브라우저,카운터 mapBrowser에 넣기) 끝///////////////
 
 	public void countHttpStatusCode(String temp) {
 		// 3. 서비스를 성공적으로 수행한 횟수, 실패(404) 횟수
-		// 6. 비정상적인 요청(403)이 발생한 횟수 구하는 method, 비율 구하기 method는 calBrowserShare()로 구현
+		// 6. 비정상적인 요청(403)이 발생한 횟수 구하는 method, 비율 구하기는 calBrowserShare()에 구현
 	}
 
 	public void countRequestHour(String temp) {
-		// 4. 요청 시간별 횟수를 구하는 method.
+		// 4. 요청 시간별 횟수를 구하는 method, mapHour instance변수에 값을 넣는 메소드 구현
+		// 4-1. 완성한 mapHour 변수를 이용, mostFrequentHour를 구해야 함(calMostFrequentHour()구현)
 	}
 
 	public SelectLog getSl() {
@@ -232,6 +234,7 @@ public class SelectLogEvt implements ActionListener {
 	public int getRequestNum() {
 		return requestNum;
 	}
+
 	public String getCode403Share() {
 		return code403Share;
 	}
