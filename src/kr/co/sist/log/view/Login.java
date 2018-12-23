@@ -23,7 +23,7 @@ public class Login extends JFrame {
 	public Login() {
 		super("·Î±×ÀÎ");
 
-		ImageIcon ii = new ImageIcon("D:\\git\\repositories\\logAnalysisApp\\img\\login.png");
+		ImageIcon ii = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\login.png");
 		JLabel jlLoginImage = new JLabel(ii);
 		jtId = new JTextField();
 		jtPw = new JTextField();
