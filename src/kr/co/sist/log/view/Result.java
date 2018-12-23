@@ -60,7 +60,6 @@ public class Result extends JDialog {
 		add("North",pnNo);
 		add("Center",pnCe);
 		
-		
 		ResultEvt r = new ResultEvt(this);
 		
 		setBounds(400, 300, 600, 500);
@@ -69,5 +68,4 @@ public class Result extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 }
-
 /////////////// 12-22-2018 Result JDialog구현(정미) 끝 //////////////////////
