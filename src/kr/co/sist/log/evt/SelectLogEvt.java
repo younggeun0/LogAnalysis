@@ -28,7 +28,6 @@ public class SelectLogEvt implements ActionListener {
 	private Map<String, Integer> mapHour;
 	private int code200, code404, code403;
 	private int requestNum;
-	private int start, end;
 	private String code403Share;
 	private Map<String, String> mapBrowserShare;
 	private String mostFrequentHour;
@@ -85,25 +84,7 @@ public class SelectLogEvt implements ActionListener {
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(sl, "Log View를 먼저 수행하여 주세요.");
-			}
-		}
-
-		if (e.getSource() == sl.getJbLineView()) {
-			// 시작,끝 라인이 입력됐을 때 해당 라인 수를 가져온다
-			start = Integer.parseInt(sl.getJtStartLine().getText());
-			end = Integer.parseInt(sl.getJtEndLine().getText());
-
-			selectLog();
-
-			System.out.println(start + " " + end);
-			try {
-				readLog();
-				calMostFrequentKey();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(sl, "View를 먼저 수행하여 주세요.");
 			}
 		}
 	}
@@ -128,13 +109,9 @@ public class SelectLogEvt implements ActionListener {
 		Iterator<String> ita = set.iterator();
 		Iterator<String> ita2 = set.iterator();
 
-//		System.out.println("모든넘버: " + requestNum);
-//		System.out.println(mapBrowser);
 		for (int i = 0; i < browser.length; i++) {
 			mapBrowserShare.put(ita2.next(), String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
 		}
-//		System.out.println(al);
-//		System.out.println(mapBrowserShare);
 	}
 /////////////////////12.22 선의 코드 추가 (브라우저의 비율구해서 반환) 끝//////////////////////////////
 
@@ -165,15 +142,10 @@ public class SelectLogEvt implements ActionListener {
 				requestNum++;
 				// 선택된 파일의 내용을 한 줄씩 읽어들임
 				// 읽어들이는 내용을 처리하는건 따로 method 만들어서 처리할 것
-				if (start == 0 && end == 0) {
-					countKey(temp);
-					countBrowser(temp);
-					countHttpStatusCode(temp);
-					countRequestHour(temp);
-
-				} else if (requestNum >= start && requestNum <= end) {
-					countKey(temp);
-				}
+				countKey(temp);
+				countBrowser(temp);
+				countHttpStatusCode(temp);
+				countRequestHour(temp);
 			}
 
 			reportFlag = true;
@@ -196,7 +168,7 @@ public class SelectLogEvt implements ActionListener {
 	}
 ////////////////////// 12.22 영근 countKey 구현 끝 ////////////////////////////////////
 
-//////////////////////12.22 선의 추가 코드(브라우저,카운터 mapBrowser에 넣기) 시작 ////////////////////////////
+//////////////////////12.22 선의 추가 코드(브라우저,카운터 mapBrowser에 넣기) 시작 ////////////
 	private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
 	private int[] browserCnt = new int[browser.length];
 
@@ -214,7 +186,7 @@ public class SelectLogEvt implements ActionListener {
 		} // end for
 //		System.out.println("requestNum = " +requestNum+", "+mapBrowser);
 	}// countBrowser
-/////////////////////12.22 선의 추가 코드(브라우저,카운터 mapBrowser에 넣기) 끝////////////////////////////
+/////////////////////12.22 선의 추가 코드(브라우저,카운터 mapBrowser에 넣기) 끝///////////////
 
 	public void countHttpStatusCode(String temp) {
 		// 3. 서비스를 성공적으로 수행한 횟수, 실패(404) 횟수
@@ -223,9 +195,6 @@ public class SelectLogEvt implements ActionListener {
 
 	public void countRequestHour(String temp) {
 		// 4. 요청 시간별 횟수를 구하는 method.
-		Map<String, Integer>map=new HashMap<String,Integer>();
-		
-		// String key=
 	}
 
 	public SelectLog getSl() {
@@ -263,15 +232,6 @@ public class SelectLogEvt implements ActionListener {
 	public int getRequestNum() {
 		return requestNum;
 	}
-
-	public int getStart() {
-		return start;
-	}
-
-	public int getEnd() {
-		return end;
-	}
-
 	public String getCode403Share() {
 		return code403Share;
 	}
