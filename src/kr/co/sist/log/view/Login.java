@@ -56,7 +56,10 @@ public class Login extends JFrame {
 		setLocationRelativeTo(null);
 		setSize(400, 600);
 		setResizable(false);
-		setVisible(true);
+		///// 12-24 영근 ////////////////
+		// 빠른 작업을 위해 Login 창 막음
+		setVisible(false);
+		/////////////////////////////////
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 

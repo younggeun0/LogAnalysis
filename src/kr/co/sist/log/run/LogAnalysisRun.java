@@ -6,6 +6,6 @@ import kr.co.sist.log.view.SelectLog;
 public class LogAnalysisRun {
 
 	public static void main(String[] args) {
-		new Login();
+		new SelectLog(new Login());
 	}
 }
