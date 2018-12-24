@@ -120,7 +120,7 @@ public class SelectLogEvt implements ActionListener {
 		BufferedWriter bw=null;
 		try {
 			bw = new BufferedWriter(new FileWriter("C:/dev/Report/"+sb.toString()));
-			bw.write("test");
+			bw.write(printReport());
 			bw.flush();
 			System.out.println(sb.toString());			
 		}finally{
@@ -143,7 +143,14 @@ public class SelectLogEvt implements ActionListener {
 		}
 	}
 ///////////////// 12-24 getLogTxtCreationDate method 구현 끝 ///////////////////////////////////
-	
+	public String printReport() {
+		
+		
+		
+		
+		
+		return null;
+	}
 
 	public void calMostFrequentKey() {
 		// 가장 빈도수 높은 key(mostFrequentKey)를 구하는 method
