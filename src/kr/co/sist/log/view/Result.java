@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import kr.co.sist.log.evt.ResultEvt;
@@ -78,7 +77,7 @@ public class Result extends JDialog {
 		pnNo.add(new JLabel(sle.getLogTxtCreationDate()));
 		
 		pnCe.add(new JButton("1.  최다 사용 key"));
-		pnCe.add(new JTextArea(sle.getMostFrequentKey()));
+		pnCe.add(new JLabel(sle.getMostFrequentKey()));
 		pnCe.add(new JButton("2. 브라우저별 접속횟수, 비율"));
 		pnCe.add(browserInfo()); 
 		pnCe.add(new JButton("3. 서비스 성공(200) 실패(404) 횟수"));
@@ -86,7 +85,7 @@ public class Result extends JDialog {
 		pnCe.add(new JButton("4. 요청이 가장 많은 시간"));
 		pnCe.add(new JLabel(sle.getMostFrequentHour()+"시"));
 		pnCe.add(new JButton("5. 비정상 요청 횟수와 비율"));
-		pnCe.add(new JTextField(sle.getCode403()+" ("
+		pnCe.add(new JLabel(sle.getCode403()+" ("
 				+ String.format("4.2f", 
 						sle.getCode403()/(double)sle.getRequestNum()*100)
 				+"%)"));
