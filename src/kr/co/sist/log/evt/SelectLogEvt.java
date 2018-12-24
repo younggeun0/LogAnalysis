@@ -93,8 +93,9 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void mkLogReport() throws IOException {
-
 		// report, FileDialog SAVE, 출력하는 method
+		
+		
 	}
 
 	public void calMostFrequentKey() {
