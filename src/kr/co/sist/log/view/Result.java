@@ -76,22 +76,22 @@ public class Result extends JDialog {
 		// 날짜를 받아올 인스턴스 변수 필요(선의 구현 요청)
 		pnNo.add(new JLabel(sle.getLogTxtCreationDate()));
 		
-		pnCe.add(new JButton("1.  최다 사용 key"));
-		pnCe.add(new JLabel(sle.getMostFrequentKey()));
+		pnCe.add(new JButton("1.  최다 사용 key의 이름과 횟수 : "));
+		pnCe.add(new JLabel(sle.getMostFrequentKey()+" : "+sle.getMapKey().get(sle.getMostFrequentKey())+"번"));
 		pnCe.add(new JButton("2. 브라우저별 접속횟수, 비율"));
 		pnCe.add(browserInfo()); 
 		pnCe.add(new JButton("3. 서비스 성공(200) 실패(404) 횟수"));
-		pnCe.add(new JLabel("200 : "+sle.getCode200()+", 404 : "+sle.getCode404()));
+		pnCe.add(new JLabel("성공(200) : "+sle.getCode200()+", 실패(404) : "+sle.getCode404()));
 		pnCe.add(new JButton("4. 요청이 가장 많은 시간"));
 		pnCe.add(new JLabel(sle.getMostFrequentHour()+"시"));
 		pnCe.add(new JButton("5. 비정상 요청 횟수와 비율"));
 		pnCe.add(new JLabel(sle.getCode403()+" ("
-				+ String.format("4.2f", 
+				+ String.format("%4.2f", 
 						sle.getCode403()/(double)sle.getRequestNum()*100)
 				+"%)"));
-		pnCe.add(new JButton("6.  1000~1500 라인 가장 빈도수가 높은 key와 횟수"));
+		pnCe.add(new JButton("6. 1000~1500 라인 가장 빈도수가 높은 key와 횟수"));
 		try {
-			pnCe.add(new JTextField("key "+sle.getMostFrequentKeyBetween1000And1500()+" : "
+			pnCe.add(new JLabel("key "+sle.getMostFrequentKeyBetween1000And1500()+" : "
 					+sle.getMapKeyBetween1000And1500().get(sle.getMostFrequentKeyBetween1000And1500())
 					+"번"));
 		} catch (NullPointerException e) {
@@ -103,7 +103,6 @@ public class Result extends JDialog {
 		pnCe.setLayout(new GridLayout(6, 2));
 		setLayout(new BorderLayout());
 		//이벤트발생
-		
 		
 		//배치
 		add("North",pnNo);

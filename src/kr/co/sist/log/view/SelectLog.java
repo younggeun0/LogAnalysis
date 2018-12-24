@@ -3,8 +3,6 @@ package kr.co.sist.log.view;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import kr.co.sist.log.evt.SelectLogEvt;
 
