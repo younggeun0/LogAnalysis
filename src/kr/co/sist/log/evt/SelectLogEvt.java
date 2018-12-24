@@ -29,7 +29,6 @@ import kr.co.sist.log.view.SelectLog;
 
 public class SelectLogEvt implements ActionListener {
 
-	// 1~6 泥섎━�븳 �궡�슜�쓣 instance 蹂��닔�뿉 ���옣
 	private SelectLog sl;
 	private String filePath;
 	private String logTxtCreationDate;
@@ -64,11 +63,9 @@ public class SelectLogEvt implements ActionListener {
 			selectLog();
 
 			try {
-				// readLog濡� log�뙆�씪�쓣 �씫�뼱�뱾�씤�떎.
 				readLog();
 
 				if (requestNum != 0) {
-					// �씫�뼱�뱾�씤 �궡�슜�쓣 媛�怨�, instance蹂��닔�뿉 ���옣
 					calLogTxtCreationDate();
 					calMostFrequentKey();
 					calMostFrequentKeyBetween1000And1500();
@@ -79,8 +76,7 @@ public class SelectLogEvt implements ActionListener {
 					try {
 						new Result(this, sl);
 					} catch (NullPointerException npe) {
-						System.out.println("�뿉�윭諛쒖깮");
-						npe.printStackTrace();
+						System.err.println(npe.getMessage());
 					}
 				}
 
@@ -91,24 +87,21 @@ public class SelectLogEvt implements ActionListener {
 			}
 		}
 
-		// jbView媛� �븳踰� �씠�긽 �닃�졇�떎硫� �떎�뻾�릺�룄濡� 援ы쁽
 		if (e.getSource() == sl.getJbReport()) {
-			// reportFlag濡� View �떎�뻾�뿬遺�瑜� �뙋�떒 �썑 �떎�뻾
 			if (reportFlag == true) {
 
 				try {
 					mkLogReport();
-					JOptionPane.showMessageDialog(sl, "�뙆�씪 �깮�꽦 �꽦怨�!");
+					JOptionPane.showMessageDialog(sl, "report file created!");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(sl, "View瑜� 癒쇱� �닔�뻾�빐二쇱꽭�슂.");
+				JOptionPane.showMessageDialog(sl, "Please Press 'View' before Report");
 			}
 		}
 	}
-////////////////////////////////12.24 Report �뤃�뜑 �깮�꽦, report_�쁽�옱�궇吏�.dat �뙆�씪�깮�꽦 �떆�옉(�꽑�쓽)///////////////////////////////////////////////////
 	public void mkLogReport() throws IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date d= new Date();
@@ -121,19 +114,15 @@ public class SelectLogEvt implements ActionListener {
 		BufferedWriter bw=null;
 		try {
 			bw = new BufferedWriter(new FileWriter("C:/dev/Report/"+sb.toString()));
-			bw.write("test");
+			bw.write(printReport());
 			bw.flush();
 			System.out.println(sb.toString());			
 		}finally{
 			if(bw!=null) {bw.close();}
-		}//end finally
+		}
 	}
-////////////////////////////////12.24 Report �뤃�뜑 �깮�꽦 �걹///////////////////////////////////////////////////
 	
-///////////////// 12-24 getLogTxtCreationDate method 援ы쁽(�쁺洹�) ///////////////////////////////////
-///////////////// Result�뿉 �궗�슜�릺湲� �쐞�븳 Log�뙆�씪 �깮�꽦 �궇吏쒕�� 援ы빐 ���옣�븯�뒗 method /////////////
 	public void calLogTxtCreationDate() {
-		// �씫�뼱�뱾�씤 log�뙆�씪�쓽 �깮�꽦 �궇吏쒕�� 援ы븯�뒗 method
 		try {
 			BasicFileAttributes attrs = Files.readAttributes(new File(filePath).toPath(), BasicFileAttributes.class);
 			FileTime creationTime = attrs.creationTime();
@@ -143,30 +132,40 @@ public class SelectLogEvt implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-///////////////// 12-24 getLogTxtCreationDate method 援ы쁽 �걹 ///////////////////////////////////
-	
+
+	public String printReport() {
+		
+		
+		return null;
+	}
 
 	public void calMostFrequentKey() {
-		// 媛��옣 鍮덈룄�닔 �넂�� key(mostFrequentKey)瑜� 援ы븯�뒗 method
 		int maxValue = (Collections.max(mapKey.values())); //
 		for (Map.Entry<String, Integer> entry : mapKey.entrySet()) {
 			if (entry.getValue() == maxValue) {
-//				System.out.println("理쒕떎 �궗�슜�궎  : " + entry.getKey() + "\n�슏�닔 : " + entry.getValue());
-			} // end if
-		} // end for
-
+			}
+		} 
 	}
-//calMostFrequentKey
 
 	public void calMostFrequentKeyBetween1000And1500() {
-		// 1000~1500�씪�씤�뿉 媛��옣 鍮덈룄�닔 �넂�� key(mostFrequentKey)瑜� 援ы븯�뒗 method)
 	}
 
 	public void calMostFrequentHour() {
-		// 媛��옣 �슂泥� 鍮덈룄�닔媛� �넂�� �떆媛�(mostFrequentHour)�쓣 援ы븯�뒗 method
+		Set<String> setHour = mapHour.keySet();
+		Iterator<String> it = setHour.iterator(); 
+		
+		int max = 0;
+		String hour = "";
+		
+		while(it.hasNext()) {
+			hour = it.next();
+			if (mapHour.get(hour) > max) {
+				mostFrequentHour = hour;
+				max = mapHour.get(hour);
+			}
+		}
 	}
 
-/////////////////////12.22 釉뚮씪�슦�� 鍮꾩쑉 援ы빐 諛섑솚 援ы쁽 �떆�옉 (�꽑�쓽)//////////////////////////////
 	public void calBrowserShare() {
 		ArrayList<String> al = new ArrayList<String>();
 		Set<String> set = mapBrowser.keySet();
@@ -178,15 +177,13 @@ public class SelectLogEvt implements ActionListener {
 					String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
 		}
 	}
-/////////////////////12.22 釉뚮씪�슦�� 鍮꾩쑉 援ы빐 諛섑솚 援ы쁽 �걹//////////////////////////////
 
 	public void calCode403Share() {
 		code403Share = String.format("%3.2f", (code403 / (double) requestNum) * 100);
 	}
 
 	public void selectLog() {
-		// �씫�뼱�뱾�씤 log�뙆�씪�쓽 寃쎈줈瑜� ���옣�븯�뒗 method
-		FileDialog fd = new FileDialog(sl, "log �뙆�씪 �꽑�깮", FileDialog.LOAD);
+		FileDialog fd = new FileDialog(sl, "log ���� ����", FileDialog.LOAD);
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
@@ -201,10 +198,9 @@ public class SelectLogEvt implements ActionListener {
 			br = new BufferedReader(new FileReader(filePath));
 
 			String temp = "";
-			while ((temp = br.readLine()) != null) { // �꽑�깮�맂 �뙆�씪�쓽 �궡�슜�쓣 �븳以꾩뵫 �씫�쓬
+			while ((temp = br.readLine()) != null) { 
 
 				requestNum++;
-				// �씫�뼱�뱾�씠�뒗 �궡�슜�쓣 泥섎━�븯�뒗嫄� �뵲濡� method�뱾濡� 泥섎━
 				countKey(temp);
 				countBrowser(temp);
 				countHttpStatusCode(temp);
@@ -219,48 +215,42 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void countKey(String temp) {
-		// 1. 理쒕떎 �궗�슜 Key�쓽 �씠由꾧낵 �슏�닔瑜� 援ы븯�뒗 method,
-		// mapKey瑜� instance�쓽 �궡�슜�쓣 梨꾩슦�룄濡� 援ы쁽
 		String key = null;
 		if (temp.contains("key")) {
 
 			if (temp.indexOf("key") != -1) {
 				key = temp.substring(temp.indexOf("=") + 1, temp.indexOf("&"));
 				mapKey.put(key, mapKey.get(key) != null ? mapKey.get(key) + 1 : 1);
-			} // end if
-		} // end if
-		// 1000�뿉�꽌 1500踰� �궗�씠�씪 �븣 寃곌낵留� �뵲濡� ���옣�빐�빞 �븯湲� �븣臾몄뿉
-		// mapKeyBetween1000And1500�뿉 �뵲濡� 媛믪쓣 �꽔�뼱以섏빞 �븿.
-	}// countKey
+			}
+		}
+	}
 
-//////////////////////12.22 釉뚮씪�슦�� 移댁슫�꽣, mapBrowser�뿉 ���옣 援ы쁽 �떆�옉 (�꽑�쓽)////////////
 	public void countBrowser(String temp) {
-		// 2. 釉뚮씪�슦��蹂� �젒�냽 �슏�닔瑜� 援ы븯�뒗 method
 		int count = 0;
 		for (int i = 0; i < browser.length; i++) {
 			if (temp.contains(browser[i])) {
 				browserCnt[i]++;
-			} // end for
+			}
 			mapBrowser.put(browser[i], browserCnt[i]);
-		} // end for
-	}// countBrowser
-//////////////////////12.22 釉뚮씪�슦�� 移댁슫�꽣, mapBrowser�뿉 ���옣 援ы쁽 �걹 (�꽑�쓽)////////////
+		} 
+	}
 
 	public void countHttpStatusCode(String temp) {
-		// 3. �꽌鍮꾩뒪瑜� �꽦怨듭쟻�쑝濡� �닔�뻾�븳 �슏�닔, �떎�뙣(404) �슏�닔
-		// 6. 鍮꾩젙�긽�쟻�씤 �슂泥�(403)�씠 諛쒖깮�븳 �슏�닔 援ы븯�뒗 method, 鍮꾩쑉 援ы븯湲곕뒗 calBrowserShare()�뿉 援ы쁽
-
-	}// countHttpStatusCod
+		// 3�� 5�� ���񽺸� ��������(200)�� Ƚ��, ���� Ƚ��(404), �������� �����ս�Ŵ(code200, code404, code403)
+		// ������ calCode403Share()�� ����
+//		if() {
+//			
+//		}
+		
+	}
 
 
 	public void countRequestHour(String temp) {
-		// 4. �슂泥� �떆媛꾨퀎 �슏�닔瑜� 援ы븯�뒗 method, mapHour�뿉 <�떆媛�,cnt>瑜� ���옣
-		// 4-1.�셿�꽦�븳 mapHour蹂��닔瑜� �씠�슜, mostFrequentHour瑜� 援ы빐�빞 �븿(calMostFrequentHour()援ы쁽)
 		String hour = temp.substring(
 				temp.lastIndexOf("[")+1, temp.lastIndexOf("]"))
 				.substring(11, 13);
-		
-		mapHour.put(hour, 0);
+
+		mapHour.put(hour, mapHour.get(hour) != null ? mapHour.get(hour)+1 : 1);
 	}
 
 	
@@ -339,8 +329,4 @@ public class SelectLogEvt implements ActionListener {
 	public boolean isReportFlag() {
 		return reportFlag;
 	}
-
-	
-	
-	
 }
