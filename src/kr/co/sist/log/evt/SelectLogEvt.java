@@ -206,7 +206,6 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void calBrowserShare() {
-		ArrayList<String> al = new ArrayList<String>();
 		Set<String> set = mapBrowser.keySet();
 		Iterator<String> ita = set.iterator();
 		Iterator<String> ita2 = set.iterator();
@@ -266,7 +265,6 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void countBrowser(String temp) {
-		int count = 0;
 		for (int i = 0; i < browser.length; i++) {
 			if (temp.contains(browser[i])) {
 				browserCnt[i]++;
