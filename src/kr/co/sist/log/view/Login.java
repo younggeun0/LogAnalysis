@@ -53,12 +53,11 @@ public class Login extends JFrame {
 		add(jtPw);
 		add(jbLogin);
 			
-		setLocationRelativeTo(null);
-		setSize(400, 600);
+		setBounds(500,250,400, 600);
 		setResizable(false);
 		///// 12-24 영근 ////////////////
 		// 빠른 작업을 위해 Login 창 막음
-		setVisible(false);
+		setVisible(true);
 		/////////////////////////////////
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
