@@ -29,7 +29,7 @@ public class Result extends JDialog {
 	public JPanel browserInfo() {
 		
 		JPanel jpBrowser = new JPanel();
-		setLayout(new GridLayout(1, 4));
+		setLayout(new GridLayout(1, 5));
 		
 		JLabel[] jlBrowser = new JLabel[sle.getBrowser().length];
 		
@@ -50,6 +50,7 @@ public class Result extends JDialog {
 			jlBrowser[i] = new JLabel(content.toString());
 			jpBrowser.add(jlBrowser[i]);
 			i++;
+			content.delete(0, content.length());
 		}
 		
 		return jpBrowser;
