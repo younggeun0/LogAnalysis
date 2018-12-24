@@ -153,6 +153,19 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void calMostFrequentHour() {
+		Set<String> setHour = mapHour.keySet();
+		Iterator<String> it = setHour.iterator(); 
+		
+		int max = 0;
+		String hour = "";
+		
+		while(it.hasNext()) {
+			hour = it.next();
+			if (mapHour.get(hour) > max) {
+				mostFrequentHour = hour;
+				max = mapHour.get(hour);
+			}
+		}
 	}
 
 	public void calBrowserShare() {
@@ -233,8 +246,8 @@ public class SelectLogEvt implements ActionListener {
 		String hour = temp.substring(
 				temp.lastIndexOf("[")+1, temp.lastIndexOf("]"))
 				.substring(11, 13);
-		
-		mapHour.put(hour, 0);
+
+		mapHour.put(hour, mapHour.get(hour) != null ? mapHour.get(hour)+1 : 1);
 	}
 
 	
