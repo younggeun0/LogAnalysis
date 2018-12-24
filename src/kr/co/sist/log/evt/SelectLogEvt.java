@@ -21,8 +21,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.html.parser.Entity;
 
 import kr.co.sist.log.view.Result;
 import kr.co.sist.log.view.SelectLog;
@@ -46,14 +48,17 @@ public class SelectLogEvt implements ActionListener {
 	private String mostFrequentKey;
 	private String mostFrequentKeyBetween1000And1500;
 	private boolean reportFlag;
-
+	
+	
 	public SelectLogEvt(SelectLog sl) {
 		this.sl = sl;
 		mapKey = new HashMap<String, Integer>();
+		mapKeyBetween1000And1500 = new HashMap<String, Integer>();
 		mapBrowser = new HashMap<String, Integer>();
 		mapHour = new HashMap<String, Integer>();
 		mapBrowserShare = new HashMap<String, String>();
 		reportFlag = false;
+	
 	}
 
 	@Override
@@ -116,7 +121,6 @@ public class SelectLogEvt implements ActionListener {
 			bw = new BufferedWriter(new FileWriter("C:/dev/Report/"+sb.toString()));
 			bw.write(printReport());
 			bw.flush();
-			System.out.println(sb.toString());			
 		}finally{
 			if(bw!=null) {bw.close();}
 		}
@@ -143,11 +147,19 @@ public class SelectLogEvt implements ActionListener {
 		int maxValue = (Collections.max(mapKey.values())); //
 		for (Map.Entry<String, Integer> entry : mapKey.entrySet()) {
 			if (entry.getValue() == maxValue) {
+				mostFrequentKey = entry.getKey();
 			}
 		} 
 	}
 
 	public void calMostFrequentKeyBetween1000And1500() {
+		int Value = (Collections.max(mapKeyBetween1000And1500.values())); //
+		for (Map.Entry<String, Integer> entry : mapKeyBetween1000And1500.entrySet()) {
+			if (entry.getValue() == Value) {
+				mostFrequentKeyBetween1000And1500 = entry.getKey();
+			}
+		} 
+				
 	}
 
 	public void calMostFrequentHour() {
@@ -217,10 +229,11 @@ public class SelectLogEvt implements ActionListener {
 	public void countKey(String temp) {
 		String key = null;
 		if (temp.contains("key")) {
-
-			if (temp.indexOf("key") != -1) {
-				key = temp.substring(temp.indexOf("=") + 1, temp.indexOf("&"));
-				mapKey.put(key, mapKey.get(key) != null ? mapKey.get(key) + 1 : 1);
+			key = temp.substring(temp.indexOf("=") + 1, temp.indexOf("&"));
+			mapKey.put(key, mapKey.get(key) != null ? mapKey.get(key) + 1 : 1);
+			if (requestNum >= 1000 && requestNum <= 1500) {
+				mapKeyBetween1000And1500.put(key,
+						mapKeyBetween1000And1500.get(key) != null ? mapKeyBetween1000And1500.get(key) + 1 : 1);
 			}
 		}
 	}
