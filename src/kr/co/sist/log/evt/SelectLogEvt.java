@@ -4,10 +4,16 @@ import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -23,6 +29,7 @@ public class SelectLogEvt implements ActionListener {
 	// 1~6을 처리한 내용을 instance 변수에 저장해야 함
 	private SelectLog sl;
 	private String filePath;
+	private String logTxtCreationDate;
 	private Map<String, Integer> mapKey;
 	private Map<String, Integer> mapKeyBetween1000And1500;
 	private Map<String, Integer> mapBrowser;
@@ -56,6 +63,7 @@ public class SelectLogEvt implements ActionListener {
 
 				if (requestNum != 0) {
 					// readLog로 읽어들인 log의 내용을 가공, instance변수에 저장
+					getLogTxtCreationDate();
 					calMostFrequentKey();
 					calMostFrequentKeyBetween1000And1500();
 					calMostFrequentHour();
@@ -91,6 +99,22 @@ public class SelectLogEvt implements ActionListener {
 			}
 		}
 	}
+	
+	///////////////// 12-24 getLogTxtCreationDate method 구현 ///////////////////////////////////
+	///////////////// Result에 사용되기위한 Log파일 생성날짜를 구해 저장하는 method /////////////
+	public void getLogTxtCreationDate() {
+		// 읽어들인 log파일의 생성 날짜를 구하는 method
+		try {
+			BasicFileAttributes attrs = Files.readAttributes(new File(filePath).toPath(), BasicFileAttributes.class);
+			FileTime creationTime = attrs.creationTime();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-ss hh:mm");
+			logTxtCreationDate = sdf.format(new Date(creationTime.toMillis()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	///////////////// 12-24 getLogTxtCreationDate method 구현 끝 ///////////////////////////////////
+	
 
 	public void mkLogReport() throws IOException {
 		
