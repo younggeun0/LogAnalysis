@@ -112,7 +112,7 @@ public class Result extends JDialog {
 		ResultEvt r = new ResultEvt(this);
 		jbConfirm.addActionListener(r);
 		
-		setBounds(400, 300, 600, 500);
+		setBounds(400, 300, 650, 500);
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
