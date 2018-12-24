@@ -15,6 +15,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class SelectLogEvt implements ActionListener {
 
 	private SelectLog sl;
 	private String filePath;
+	private String fName;
 	private String logTxtCreationDate;
 	private Map<String, Integer> mapKey;
 	private Map<String, Integer> mapKeyBetween1000And1500;
@@ -133,11 +135,52 @@ public class SelectLogEvt implements ActionListener {
 		}
 	}
 
-
 	public String printReport() {
+//		private SelectLog sl;
+//		private String filePath;
+//		private String fName;
+//		private String logTxtCreationDate;
+//		private Map<String, Integer> mapKey;
+//		private Map<String, Integer> mapKeyBetween1000And1500;
+//		private Map<String, Integer> mapBrowser;
+//		private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
+//		private int[] browserCnt = new int[browser.length];
+//		private Map<String, Integer> mapHour;
+//		private int code200, code404, code403;
+//		private int requestNum;
+//		private String code403Share;
+//		private Map<String, String> mapBrowserShare;
+//		private String mostFrequentHour;
+//		private String mostFrequentKey;
+//		private String mostFrequentKeyBetween1000And1500;
+//		private boolean reportFlag;
+		StringBuilder sb = new StringBuilder();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date d = new Date();
+		String s = sdf.format(d);
+		Set<String> set = mapBrowser.keySet();
+		Iterator<String> it = set.iterator();
+		String key = "";
+		sb.append("-------------------------------------------------------------\n");
+		sb.append("íŒŒì¼ëª…(").append(fName).append(") log (").append(s).append(")\n");
+		sb.append("-------------------------------------------------------------\n");
+		sb.append("1. ìµœë‹¤ ì‚¬ìš©í‚¤: ").append(mostFrequentKey).append(" ").append(mapKey.get(mostFrequentKey)).append("íšŒ\n");
+		sb.append("2. ë¸Œë¼ìš°ì €ë³„ ì ‘ì† íšŸìˆ˜ì™€ ë¹„ìœ¨ : \n");
+		while(it.hasNext()) {
+			key = it.next();
+			sb.append("\t").append(key).append(" :").append(mapBrowser.get(key)).append("ë²ˆ(")
+			.append(mapBrowserShare.get(key)).append("%)\n");
+		}
+		sb.append("3. ì„œë¹„ìŠ¤ë¥¼ ì„±ê³µì ìˆ˜í–‰(200) íšŸìˆ˜, ì‹¤íŒ¨(404)íšŸìˆ˜: \n")
+		.append("\t200: ").append(code200).append("ë²ˆ 404 :").append(code404).append("ë²ˆ\n");
+		sb.append("4. ìš”ì²­ì´ ê°€ì¥ ë§ì€ ì‹œê°„: [").append(mostFrequentHour).append("ì‹œ]\n");
+		sb.append("5.ë¹„ì •ìƒì ì¸ ìš”ì²­(403)ì´ ë°œìƒí•œ íšŸìˆ˜, ë¹„ìœ¨: ").append(code403).append("ë²ˆ(")
+		.append(code403Share).append("%)\n");
+		sb.append("6. 1000~1500ë²ˆì§¸ ì •ë³´ ìµœë‹¤ ì‚¬ìš© í‚¤ì˜ ì´ë¦„ê³¼ íšŸìˆ˜: \n")
+		.append("\t").append("í‚¤ëª…: ").append(mostFrequentKeyBetween1000And1500);
 		
 		
-		return null;
+		return sb.toString();
 	}
 
 	public void calMostFrequentKey() {
@@ -185,11 +228,11 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void selectLog() {
-		FileDialog fd = new FileDialog(sl, "log ÆÄÀÏ ¼±ÅÃ", FileDialog.LOAD);
+		FileDialog fd = new FileDialog(sl, "log íŒŒì¼ ì„ íƒ", FileDialog.LOAD);
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
-		String fName = fd.getFile();
+		fName = fd.getFile();
 		filePath = dirPath + fName;
 	}
 
@@ -238,12 +281,17 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void countHttpStatusCode(String temp) {
-		// 3°ú 5¹ø ¼­ºñ½º¸¦ ¼º°ø¼öÇà(200)ÇÑ È½¼ö, ½ÇÆĞ È½¼ö(404), ºñÁ¤»óÀ» ´©ÀûÇÕ½ÃÅ´(code200, code404, code403)
-		// ºñÀ²Àº calCode403Share()¿¡ ±¸Çö
-//		if() {
-//			
-//		}
-		
+
+		int serviceCode  = Integer.parseInt(temp.substring(temp.indexOf("[")+1, temp.indexOf("]")));
+				
+		if(serviceCode ==200) {
+			code200++;
+		}else if(serviceCode==404){
+			code404++;
+		}else if(serviceCode ==403){
+			code403++;
+		}
+
 	}
 
 
