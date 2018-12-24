@@ -11,9 +11,9 @@ public class ResultEvt implements ActionListener {
 	public ResultEvt(Result r) {
 		this.r = r;
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// 확인 버튼 누르면 종료 구현
+		r.dispose();
 	}
 }
