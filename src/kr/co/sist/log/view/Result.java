@@ -21,8 +21,6 @@ import kr.co.sist.log.evt.SelectLogEvt;
 public class Result extends JDialog {
 	
 	private SelectLogEvt sle;
-//	private JButton jbConfirm; 
-	private JPanel jpn;
 
 	public Result(SelectLogEvt sle, SelectLog sl) {
 		super(sl, "결과 출력",true);
@@ -33,6 +31,7 @@ public class Result extends JDialog {
 		
 		JPanel pnNo = new JPanel();
 		JPanel pnCe= new JPanel();
+		JButton jbConfirm = new JButton("확인"); 
 		
 		pnNo.add(new JButton("파일명"));
 		pnNo.add(new JLabel("file_result"));
@@ -59,6 +58,7 @@ public class Result extends JDialog {
 		//배치
 		add("North",pnNo);
 		add("Center",pnCe);
+		add("South",jbConfirm);
 		
 		ResultEvt r = new ResultEvt(this);
 		
