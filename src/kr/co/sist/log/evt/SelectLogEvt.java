@@ -63,7 +63,7 @@ public class SelectLogEvt implements ActionListener {
 
 				if (requestNum != 0) {
 					// readLog로 읽어들인 log의 내용을 가공, instance변수에 저장
-					getLogTxtCreationDate();
+					calLogTxtCreationDate();
 					calMostFrequentKey();
 					calMostFrequentKeyBetween1000And1500();
 					calMostFrequentHour();
@@ -102,7 +102,7 @@ public class SelectLogEvt implements ActionListener {
 	
 	///////////////// 12-24 getLogTxtCreationDate method 구현 ///////////////////////////////////
 	///////////////// Result에 사용되기위한 Log파일 생성날짜를 구해 저장하는 method /////////////
-	public void getLogTxtCreationDate() {
+	public void calLogTxtCreationDate() {
 		// 읽어들인 log파일의 생성 날짜를 구하는 method
 		try {
 			BasicFileAttributes attrs = Files.readAttributes(new File(filePath).toPath(), BasicFileAttributes.class);
@@ -278,6 +278,10 @@ public class SelectLogEvt implements ActionListener {
 
 	public int getRequestNum() {
 		return requestNum;
+	}
+
+	public String getLogTxtCreationDate() {
+		return logTxtCreationDate;
 	}
 
 	public String getCode403Share() {
