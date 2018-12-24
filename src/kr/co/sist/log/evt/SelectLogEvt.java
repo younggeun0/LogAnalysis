@@ -70,8 +70,10 @@ public class SelectLogEvt implements ActionListener {
 					calBrowserShare();
 					calCode403Share();
 
-					// 결과창
-					new Result(this, sl);
+					////////////////// 12-24 영근 결과 차단 //////////////////////
+					// 결과창, instancd변수 다 작성하면 결과창 띄울 예정
+					// 일단 sysout만 찍으면서 제대로 변수에 결과 들어갔는지만 보길
+					// new Result(this, sl);
 				}
 
 			} catch (FileNotFoundException fnfe) {
@@ -227,7 +229,6 @@ public class SelectLogEvt implements ActionListener {
 		
 		mapHour.put(hour, 0);
 		System.out.println(mapHour);
-		
 	}
 
 	
