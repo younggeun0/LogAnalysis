@@ -223,6 +223,27 @@ public class SelectLogEvt implements ActionListener {
 		// 4-1. 완성한 mapHour 변수를 이용, mostFrequentHour를 구해야 함(calMostFrequentHour()구현)
 	}
 
+	
+	public Map<String, Integer> getMapKeyBetween1000And1500() {
+		return mapKeyBetween1000And1500;
+	}
+
+	public String getMostFrequentHour() {
+		return mostFrequentHour;
+	}
+
+	public String getMostFrequentKeyBetween1000And1500() {
+		return mostFrequentKeyBetween1000And1500;
+	}
+
+	public String[] getBrowser() {
+		return browser;
+	}
+
+	public int[] getBrowserCnt() {
+		return browserCnt;
+	}
+
 	public SelectLog getSl() {
 		return sl;
 	}
