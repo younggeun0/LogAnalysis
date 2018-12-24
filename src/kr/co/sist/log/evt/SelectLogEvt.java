@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -99,7 +100,15 @@ public class SelectLogEvt implements ActionListener {
 
 	public void calMostFrequentKey() {
 		// 가장 빈도수 높은 key(mostFrequentKey)를 구하는 method
+		int maxValue = (Collections.max(mapKey.values())); //
+		for (Map.Entry<String, Integer> entry : mapKey.entrySet()) {
+			if (entry.getValue() == maxValue) {
+//				System.out.println("최다 사용키  : " + entry.getKey() + "\n횟수 : " + entry.getValue());
+			} // end if
+		} // end for
+
 	}
+//calMostFrequentKey
 
 	public void calMostFrequentKeyBetween1000And1500() {
 		// 1000~1500라인에 가장 빈도수 높은 key(mostFrequentKey)를 구하는 method
@@ -165,13 +174,19 @@ public class SelectLogEvt implements ActionListener {
 	public void countKey(String temp) {
 		// 1. 최다 사용 Key의 이름과 횟수를 구하는 method,
 		// mapKey를 instance의 내용을 채우도록 구현
+		String key = null;
+		if (temp.contains("key")) {
 
-		// 1000에서 1500번 사이일 때 결과만 따로 저장해야 하기 때문에 
+			if (temp.indexOf("key") != -1) {
+				key = temp.substring(temp.indexOf("=") + 1, temp.indexOf("&"));
+				mapKey.put(key, mapKey.get(key) != null ? mapKey.get(key) + 1 : 1);
+			} // end if
+		} // end if
+
+		// 1000에서 1500번 사이일 때 결과만 따로 저장해야 하기 때문에
 		// mapKeyBetween1000And1500에 따로 값을 넣어줘야 함.
-		if (requestNum >= 1000 && requestNum <= 1500) {
-
-		}
-	}
+	
+	}// countKey
 
 //////////////////////12.22 선의 추가 코드(브라우저,카운터 mapBrowser에 넣기) 시작 ////////////
 	private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
@@ -192,7 +207,8 @@ public class SelectLogEvt implements ActionListener {
 	public void countHttpStatusCode(String temp) {
 		// 3. 서비스를 성공적으로 수행한 횟수, 실패(404) 횟수
 		// 6. 비정상적인 요청(403)이 발생한 횟수 구하는 method, 비율 구하기는 calBrowserShare()에 구현
-	}
+
+	}// countHttpStatusCod
 
 	public void countRequestHour(String temp) {
 		// 4. 요청 시간별 횟수를 구하는 method, mapHour instance변수에 값을 넣는 메소드 구현
@@ -250,4 +266,8 @@ public class SelectLogEvt implements ActionListener {
 	public boolean isReportFlag() {
 		return reportFlag;
 	}
+
+	
+	
+	
 }
