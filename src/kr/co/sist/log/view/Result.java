@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.io.File;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -30,18 +33,23 @@ public class Result extends JDialog {
 		
 		JLabel[] jlBrowser = new JLabel[sle.getBrowser().length];
 		
-		String[] browser = sle.getBrowser();
-		int[] browserCnt = sle.getBrowserCnt();
+		Map<String, Integer> mapBrowser = sle.getMapBrowser();
+		Map<String, String> mapBrowserShare = sle.getMapBrowserShare();
+		
 		StringBuilder content = new StringBuilder();
 		
-		for(int i=0; i<jlBrowser.length; i++) {
+		Set<String> key = mapBrowser.keySet();
+		Iterator<String> itKey = key.iterator();
+		String bName = "";
+		int i = 0;
+		while(itKey.hasNext()) {
+			bName = itKey.next();
 			
-			content.append(browser[i]).append(" : ").append(browserCnt[i]).append(" (")
-			.append(String.format("%4.2f", browserCnt[i]/(double)sle.getRequestNum()*100))
-			.append("%)");
-			
+			content.append(bName).append(" : ").append(mapBrowser.get(bName)).append(" (")
+			.append(mapBrowserShare.get(bName)).append("%)");
 			jlBrowser[i] = new JLabel(content.toString());
 			jpBrowser.add(jlBrowser[i]);
+			i++;
 		}
 		
 		return jpBrowser;
