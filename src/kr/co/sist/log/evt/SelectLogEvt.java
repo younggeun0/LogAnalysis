@@ -136,24 +136,6 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public String printReport() {
-//		private SelectLog sl;
-//		private String filePath;
-//		private String fName;
-//		private String logTxtCreationDate;
-//		private Map<String, Integer> mapKey;
-//		private Map<String, Integer> mapKeyBetween1000And1500;
-//		private Map<String, Integer> mapBrowser;
-//		private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
-//		private int[] browserCnt = new int[browser.length];
-//		private Map<String, Integer> mapHour;
-//		private int code200, code404, code403;
-//		private int requestNum;
-//		private String code403Share;
-//		private Map<String, String> mapBrowserShare;
-//		private String mostFrequentHour;
-//		private String mostFrequentKey;
-//		private String mostFrequentKeyBetween1000And1500;
-//		private boolean reportFlag;
 		StringBuilder sb = new StringBuilder();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date d = new Date();
@@ -162,22 +144,22 @@ public class SelectLogEvt implements ActionListener {
 		Iterator<String> it = set.iterator();
 		String key = "";
 		sb.append("-------------------------------------------------------------\n");
-		sb.append("íŒŒì¼ëª…(").append(fName).append(") log (").append(s).append(")\n");
+		sb.append("ÆÄÀÏ¸í(").append(fName).append(") log (").append(s).append(")\n");
 		sb.append("-------------------------------------------------------------\n");
-		sb.append("1. ìµœë‹¤ ì‚¬ìš©í‚¤: ").append(mostFrequentKey).append(" ").append(mapKey.get(mostFrequentKey)).append("íšŒ\n");
-		sb.append("2. ë¸Œë¼ìš°ì €ë³„ ì ‘ì† íšŸìˆ˜ì™€ ë¹„ìœ¨ : \n");
+		sb.append("1. ÃÖ´Ù »ç¿ëÅ°: ").append(mostFrequentKey).append(" ").append(mapKey.get(mostFrequentKey)).append("È¸\n");
+		sb.append("2. ºê¶ó¿ìÀúº° Á¢¼Ó È½¼ö¿Í ºñÀ² : \n");
 		while(it.hasNext()) {
 			key = it.next();
-			sb.append("\t").append(key).append(" :").append(mapBrowser.get(key)).append("ë²ˆ(")
+			sb.append("\t").append(key).append(" :").append(mapBrowser.get(key)).append("¹ø(")
 			.append(mapBrowserShare.get(key)).append("%)\n");
 		}
-		sb.append("3. ì„œë¹„ìŠ¤ë¥¼ ì„±ê³µì ìˆ˜í–‰(200) íšŸìˆ˜, ì‹¤íŒ¨(404)íšŸìˆ˜: \n")
-		.append("\t200: ").append(code200).append("ë²ˆ 404 :").append(code404).append("ë²ˆ\n");
-		sb.append("4. ìš”ì²­ì´ ê°€ì¥ ë§ì€ ì‹œê°„: [").append(mostFrequentHour).append("ì‹œ]\n");
-		sb.append("5.ë¹„ì •ìƒì ì¸ ìš”ì²­(403)ì´ ë°œìƒí•œ íšŸìˆ˜, ë¹„ìœ¨: ").append(code403).append("ë²ˆ(")
+		sb.append("3. ¼­ºñ½º¸¦ ¼º°øÀû¼öÇà(200) È½¼ö, ½ÇÆĞ(404)È½¼ö: \n")
+		.append("\t200: ").append(code200).append("¹ø 404 :").append(code404).append("¹ø\n");
+		sb.append("4. ¿äÃ»ÀÌ °¡Àå ¸¹Àº ½Ã°£: [").append(mostFrequentHour).append("½Ã]\n");
+		sb.append("5.ºñÁ¤»óÀûÀÎ ¿äÃ»(403)ÀÌ ¹ß»ıÇÑ È½¼ö, ºñÀ²: ").append(code403).append("¹ø(")
 		.append(code403Share).append("%)\n");
-		sb.append("6. 1000~1500ë²ˆì§¸ ì •ë³´ ìµœë‹¤ ì‚¬ìš© í‚¤ì˜ ì´ë¦„ê³¼ íšŸìˆ˜: \n")
-		.append("\t").append("í‚¤ëª…: ").append(mostFrequentKeyBetween1000And1500);
+		sb.append("6. 1000~1500¹øÂ° Á¤º¸ ÃÖ´Ù »ç¿ë Å°ÀÇ ÀÌ¸§°ú È½¼ö: \n")
+		.append("\t").append("Å°¸í: ").append(mostFrequentKeyBetween1000And1500);
 		
 		
 		return sb.toString();
@@ -228,7 +210,7 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void selectLog() {
-		FileDialog fd = new FileDialog(sl, "log íŒŒì¼ ì„ íƒ", FileDialog.LOAD);
+		FileDialog fd = new FileDialog(sl, "log ÆÄÀÏ ¼±ÅÃ", FileDialog.LOAD);
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
@@ -281,11 +263,7 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void countHttpStatusCode(String temp) {
-		// 3ê³¼ 5ë²ˆ ì„œë¹„ìŠ¤ë¥¼ ì„±ê³µìˆ˜í–‰(200)í•œ íšŸìˆ˜, ì‹¤íŒ¨ íšŸìˆ˜(404), ë¹„ì •ìƒì„ ëˆ„ì í•©ì‹œí‚´(code200, code404, code403)
-		// ë¹„ìœ¨ì€ calCode403Share()ì— êµ¬í˜„
-//		if() {
-//			
-//		}
+
 		
 	}
 
