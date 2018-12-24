@@ -35,6 +35,8 @@ public class SelectLogEvt implements ActionListener {
 	private Map<String, Integer> mapKey;
 	private Map<String, Integer> mapKeyBetween1000And1500;
 	private Map<String, Integer> mapBrowser;
+	private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
+	private int[] browserCnt = new int[browser.length];
 	private Map<String, Integer> mapHour;
 	private int code200, code404, code403;
 	private int requestNum;
@@ -73,8 +75,12 @@ public class SelectLogEvt implements ActionListener {
 					calBrowserShare();
 					calCode403Share();
 
-					new Result(this, sl);
-					System.out.println("결과창 출력");
+					try {
+						new Result(this, sl);
+					} catch (NullPointerException npe) {
+						System.out.println("에러발생");
+						npe.printStackTrace();
+					}
 				}
 
 			} catch (FileNotFoundException fnfe) {
@@ -123,8 +129,8 @@ public class SelectLogEvt implements ActionListener {
 	}
 ////////////////////////////////12.24 Report 폴더 생성 끝///////////////////////////////////////////////////
 	
-	///////////////// 12-24 getLogTxtCreationDate method 구현(영근) ///////////////////////////////////
-	///////////////// Result에 사용되기 위한 Log파일 생성 날짜를 구해 저장하는 method /////////////
+///////////////// 12-24 getLogTxtCreationDate method 구현(영근) ///////////////////////////////////
+///////////////// Result에 사용되기 위한 Log파일 생성 날짜를 구해 저장하는 method /////////////
 	public void calLogTxtCreationDate() {
 		// 읽어들인 log파일의 생성 날짜를 구하는 method
 		try {
@@ -136,7 +142,7 @@ public class SelectLogEvt implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	///////////////// 12-24 getLogTxtCreationDate method 구현 끝 ///////////////////////////////////
+///////////////// 12-24 getLogTxtCreationDate method 구현 끝 ///////////////////////////////////
 	
 
 	public void calMostFrequentKey() {
@@ -215,9 +221,6 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 //////////////////////12.22 브라우저 카운터, mapBrowser에 저장 구현 시작 (선의)////////////
-	private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
-	private int[] browserCnt = new int[browser.length];
-
 	public void countBrowser(String temp) {
 		// 2. 브라우저별 접속 횟수를 구하는 method
 		int count = 0;
@@ -243,7 +246,6 @@ public class SelectLogEvt implements ActionListener {
 				.substring(11, 13);
 		
 		mapHour.put(hour, 0);
-		System.out.println(mapHour);
 	}
 
 	

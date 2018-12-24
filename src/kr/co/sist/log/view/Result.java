@@ -90,9 +90,14 @@ public class Result extends JDialog {
 						sle.getCode403()/(double)sle.getRequestNum()*100)
 				+"%)"));
 		pnCe.add(new JButton("6.  1000~1500 라인 가장 빈도수가 높은 key와 횟수"));
-		pnCe.add(new JTextField("key "+sle.getMostFrequentKeyBetween1000And1500()+" : "
-				+sle.getMapKeyBetween1000And1500().get(sle.getMostFrequentKeyBetween1000And1500())
-				+"번"));
+		try {
+			pnCe.add(new JTextField("key "+sle.getMostFrequentKeyBetween1000And1500()+" : "
+					+sle.getMapKeyBetween1000And1500().get(sle.getMostFrequentKeyBetween1000And1500())
+					+"번"));
+		} catch (NullPointerException e) {
+			System.out.println("NullPointerException");
+			System.out.println("에러처리 해야함");
+		}
 		
 		pnNo.setLayout(new GridLayout(1, 4));
 		pnCe.setLayout(new GridLayout(6, 2));
