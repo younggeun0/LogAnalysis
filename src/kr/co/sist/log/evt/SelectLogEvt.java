@@ -238,6 +238,11 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void countHttpStatusCode(String temp) {
+		// 3과 5번 서비스를 성공수행(200)한 횟수, 실패 횟수(404), 비정상을 누적합시킴(code200, code404, code403)
+		// 비율은 calCode403Share()에 구현
+//		if() {
+//			
+//		}
 		
 	}
 
