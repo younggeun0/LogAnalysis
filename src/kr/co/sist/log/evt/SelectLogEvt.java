@@ -29,7 +29,7 @@ import kr.co.sist.log.view.SelectLog;
 
 public class SelectLogEvt implements ActionListener {
 
-	// 1~6 처리한 내용을 instance 변수에 저장
+	// 1~6 泥섎━�븳 �궡�슜�쓣 instance 蹂��닔�뿉 ���옣
 	private SelectLog sl;
 	private String filePath;
 	private String logTxtCreationDate;
@@ -64,11 +64,11 @@ public class SelectLogEvt implements ActionListener {
 			selectLog();
 
 			try {
-				// readLog로 log파일을 읽어들인다.
+				// readLog濡� log�뙆�씪�쓣 �씫�뼱�뱾�씤�떎.
 				readLog();
 
 				if (requestNum != 0) {
-					// 읽어들인 내용을 가공, instance변수에 저장
+					// �씫�뼱�뱾�씤 �궡�슜�쓣 媛�怨�, instance蹂��닔�뿉 ���옣
 					calLogTxtCreationDate();
 					calMostFrequentKey();
 					calMostFrequentKeyBetween1000And1500();
@@ -79,7 +79,7 @@ public class SelectLogEvt implements ActionListener {
 					try {
 						new Result(this, sl);
 					} catch (NullPointerException npe) {
-						System.out.println("에러발생");
+						System.out.println("�뿉�윭諛쒖깮");
 						npe.printStackTrace();
 					}
 				}
@@ -91,24 +91,24 @@ public class SelectLogEvt implements ActionListener {
 			}
 		}
 
-		// jbView가 한번 이상 눌렸다면 실행되도록 구현
+		// jbView媛� �븳踰� �씠�긽 �닃�졇�떎硫� �떎�뻾�릺�룄濡� 援ы쁽
 		if (e.getSource() == sl.getJbReport()) {
-			// reportFlag로 View 실행여부를 판단 후 실행
+			// reportFlag濡� View �떎�뻾�뿬遺�瑜� �뙋�떒 �썑 �떎�뻾
 			if (reportFlag == true) {
 
 				try {
 					mkLogReport();
-					JOptionPane.showMessageDialog(sl, "파일 생성 성공!");
+					JOptionPane.showMessageDialog(sl, "�뙆�씪 �깮�꽦 �꽦怨�!");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(sl, "View를 먼저 수행해주세요.");
+				JOptionPane.showMessageDialog(sl, "View瑜� 癒쇱� �닔�뻾�빐二쇱꽭�슂.");
 			}
 		}
 	}
-////////////////////////////////12.24 Report 폴더 생성, report_현재날짜.dat 파일생성 시작(선의)///////////////////////////////////////////////////
+////////////////////////////////12.24 Report �뤃�뜑 �깮�꽦, report_�쁽�옱�궇吏�.dat �뙆�씪�깮�꽦 �떆�옉(�꽑�쓽)///////////////////////////////////////////////////
 	public void mkLogReport() throws IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date d= new Date();
@@ -128,12 +128,12 @@ public class SelectLogEvt implements ActionListener {
 			if(bw!=null) {bw.close();}
 		}//end finally
 	}
-////////////////////////////////12.24 Report 폴더 생성 끝///////////////////////////////////////////////////
+////////////////////////////////12.24 Report �뤃�뜑 �깮�꽦 �걹///////////////////////////////////////////////////
 	
-///////////////// 12-24 getLogTxtCreationDate method 구현(영근) ///////////////////////////////////
-///////////////// Result에 사용되기 위한 Log파일 생성 날짜를 구해 저장하는 method /////////////
+///////////////// 12-24 getLogTxtCreationDate method 援ы쁽(�쁺洹�) ///////////////////////////////////
+///////////////// Result�뿉 �궗�슜�릺湲� �쐞�븳 Log�뙆�씪 �깮�꽦 �궇吏쒕�� 援ы빐 ���옣�븯�뒗 method /////////////
 	public void calLogTxtCreationDate() {
-		// 읽어들인 log파일의 생성 날짜를 구하는 method
+		// �씫�뼱�뱾�씤 log�뙆�씪�쓽 �깮�꽦 �궇吏쒕�� 援ы븯�뒗 method
 		try {
 			BasicFileAttributes attrs = Files.readAttributes(new File(filePath).toPath(), BasicFileAttributes.class);
 			FileTime creationTime = attrs.creationTime();
@@ -143,15 +143,15 @@ public class SelectLogEvt implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-///////////////// 12-24 getLogTxtCreationDate method 구현 끝 ///////////////////////////////////
+///////////////// 12-24 getLogTxtCreationDate method 援ы쁽 �걹 ///////////////////////////////////
 	
 
 	public void calMostFrequentKey() {
-		// 가장 빈도수 높은 key(mostFrequentKey)를 구하는 method
+		// 媛��옣 鍮덈룄�닔 �넂�� key(mostFrequentKey)瑜� 援ы븯�뒗 method
 		int maxValue = (Collections.max(mapKey.values())); //
 		for (Map.Entry<String, Integer> entry : mapKey.entrySet()) {
 			if (entry.getValue() == maxValue) {
-//				System.out.println("최다 사용키  : " + entry.getKey() + "\n횟수 : " + entry.getValue());
+//				System.out.println("理쒕떎 �궗�슜�궎  : " + entry.getKey() + "\n�슏�닔 : " + entry.getValue());
 			} // end if
 		} // end for
 
@@ -159,14 +159,14 @@ public class SelectLogEvt implements ActionListener {
 //calMostFrequentKey
 
 	public void calMostFrequentKeyBetween1000And1500() {
-		// 1000~1500라인에 가장 빈도수 높은 key(mostFrequentKey)를 구하는 method)
+		// 1000~1500�씪�씤�뿉 媛��옣 鍮덈룄�닔 �넂�� key(mostFrequentKey)瑜� 援ы븯�뒗 method)
 	}
 
 	public void calMostFrequentHour() {
-		// 가장 요청 빈도수가 높은 시간(mostFrequentHour)을 구하는 method
+		// 媛��옣 �슂泥� 鍮덈룄�닔媛� �넂�� �떆媛�(mostFrequentHour)�쓣 援ы븯�뒗 method
 	}
 
-/////////////////////12.22 브라우저 비율 구해 반환 구현 시작 (선의)//////////////////////////////
+/////////////////////12.22 釉뚮씪�슦�� 鍮꾩쑉 援ы빐 諛섑솚 援ы쁽 �떆�옉 (�꽑�쓽)//////////////////////////////
 	public void calBrowserShare() {
 		ArrayList<String> al = new ArrayList<String>();
 		Set<String> set = mapBrowser.keySet();
@@ -178,15 +178,15 @@ public class SelectLogEvt implements ActionListener {
 					String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
 		}
 	}
-/////////////////////12.22 브라우저 비율 구해 반환 구현 끝//////////////////////////////
+/////////////////////12.22 釉뚮씪�슦�� 鍮꾩쑉 援ы빐 諛섑솚 援ы쁽 �걹//////////////////////////////
 
 	public void calCode403Share() {
 		code403Share = String.format("%3.2f", (code403 / (double) requestNum) * 100);
 	}
 
 	public void selectLog() {
-		// 읽어들인 log파일의 경로를 저장하는 method
-		FileDialog fd = new FileDialog(sl, "log 파일 선택", FileDialog.LOAD);
+		// �씫�뼱�뱾�씤 log�뙆�씪�쓽 寃쎈줈瑜� ���옣�븯�뒗 method
+		FileDialog fd = new FileDialog(sl, "log �뙆�씪 �꽑�깮", FileDialog.LOAD);
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
@@ -201,10 +201,10 @@ public class SelectLogEvt implements ActionListener {
 			br = new BufferedReader(new FileReader(filePath));
 
 			String temp = "";
-			while ((temp = br.readLine()) != null) { // 선택된 파일의 내용을 한줄씩 읽음
+			while ((temp = br.readLine()) != null) { // �꽑�깮�맂 �뙆�씪�쓽 �궡�슜�쓣 �븳以꾩뵫 �씫�쓬
 
 				requestNum++;
-				// 읽어들이는 내용을 처리하는건 따로 method들로 처리
+				// �씫�뼱�뱾�씠�뒗 �궡�슜�쓣 泥섎━�븯�뒗嫄� �뵲濡� method�뱾濡� 泥섎━
 				countKey(temp);
 				countBrowser(temp);
 				countHttpStatusCode(temp);
@@ -219,8 +219,8 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void countKey(String temp) {
-		// 1. 최다 사용 Key의 이름과 횟수를 구하는 method,
-		// mapKey를 instance의 내용을 채우도록 구현
+		// 1. 理쒕떎 �궗�슜 Key�쓽 �씠由꾧낵 �슏�닔瑜� 援ы븯�뒗 method,
+		// mapKey瑜� instance�쓽 �궡�슜�쓣 梨꾩슦�룄濡� 援ы쁽
 		String key = null;
 		if (temp.contains("key")) {
 
@@ -229,13 +229,13 @@ public class SelectLogEvt implements ActionListener {
 				mapKey.put(key, mapKey.get(key) != null ? mapKey.get(key) + 1 : 1);
 			} // end if
 		} // end if
-		// 1000에서 1500번 사이일 때 결과만 따로 저장해야 하기 때문에
-		// mapKeyBetween1000And1500에 따로 값을 넣어줘야 함.
+		// 1000�뿉�꽌 1500踰� �궗�씠�씪 �븣 寃곌낵留� �뵲濡� ���옣�빐�빞 �븯湲� �븣臾몄뿉
+		// mapKeyBetween1000And1500�뿉 �뵲濡� 媛믪쓣 �꽔�뼱以섏빞 �븿.
 	}// countKey
 
-//////////////////////12.22 브라우저 카운터, mapBrowser에 저장 구현 시작 (선의)////////////
+//////////////////////12.22 釉뚮씪�슦�� 移댁슫�꽣, mapBrowser�뿉 ���옣 援ы쁽 �떆�옉 (�꽑�쓽)////////////
 	public void countBrowser(String temp) {
-		// 2. 브라우저별 접속 횟수를 구하는 method
+		// 2. 釉뚮씪�슦��蹂� �젒�냽 �슏�닔瑜� 援ы븯�뒗 method
 		int count = 0;
 		for (int i = 0; i < browser.length; i++) {
 			if (temp.contains(browser[i])) {
@@ -244,18 +244,18 @@ public class SelectLogEvt implements ActionListener {
 			mapBrowser.put(browser[i], browserCnt[i]);
 		} // end for
 	}// countBrowser
-//////////////////////12.22 브라우저 카운터, mapBrowser에 저장 구현 끝 (선의)////////////
+//////////////////////12.22 釉뚮씪�슦�� 移댁슫�꽣, mapBrowser�뿉 ���옣 援ы쁽 �걹 (�꽑�쓽)////////////
 
 	public void countHttpStatusCode(String temp) {
-		// 3. 서비스를 성공적으로 수행한 횟수, 실패(404) 횟수
-		// 6. 비정상적인 요청(403)이 발생한 횟수 구하는 method, 비율 구하기는 calBrowserShare()에 구현
+		// 3. �꽌鍮꾩뒪瑜� �꽦怨듭쟻�쑝濡� �닔�뻾�븳 �슏�닔, �떎�뙣(404) �슏�닔
+		// 6. 鍮꾩젙�긽�쟻�씤 �슂泥�(403)�씠 諛쒖깮�븳 �슏�닔 援ы븯�뒗 method, 鍮꾩쑉 援ы븯湲곕뒗 calBrowserShare()�뿉 援ы쁽
 
 	}// countHttpStatusCod
 
 
 	public void countRequestHour(String temp) {
-		// 4. 요청 시간별 횟수를 구하는 method, mapHour에 <시간,cnt>를 저장
-		// 4-1.완성한 mapHour변수를 이용, mostFrequentHour를 구해야 함(calMostFrequentHour()구현)
+		// 4. �슂泥� �떆媛꾨퀎 �슏�닔瑜� 援ы븯�뒗 method, mapHour�뿉 <�떆媛�,cnt>瑜� ���옣
+		// 4-1.�셿�꽦�븳 mapHour蹂��닔瑜� �씠�슜, mostFrequentHour瑜� 援ы빐�빞 �븿(calMostFrequentHour()援ы쁽)
 		String hour = temp.substring(
 				temp.lastIndexOf("[")+1, temp.lastIndexOf("]"))
 				.substring(11, 13);
