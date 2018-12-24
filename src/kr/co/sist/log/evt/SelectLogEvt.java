@@ -4,10 +4,18 @@ import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -91,11 +99,27 @@ public class SelectLogEvt implements ActionListener {
 			}
 		}
 	}
-
+////////////////////////////////12.24 Report 폴더생성 , report_현재날짜.dat 파일생성 시작///////////////////////////////////////////////////
 	public void mkLogReport() throws IOException {
-
-		// report, FileDialog SAVE, 출력하는 method
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date d= new Date();
+		String s =sdf.format(d);
+		StringBuilder sb = new StringBuilder();
+		sb.append("report_").append(s).append(".dat");
+		File file = new File("C:/dev/Report/");		
+		file.mkdirs();
+		
+		BufferedWriter bw=null;
+		try {
+			bw = new BufferedWriter(new FileWriter("C:/dev/Report/"+sb.toString()));
+			bw.write("test");
+			bw.flush();
+			System.out.println(sb.toString());			
+		}finally{
+			if(bw!=null) {bw.close();} 
+		}//end finally
 	}
+////////////////////////////////12.24 Report 폴더생성 , report_현재날짜.dat 파일생성 끝///////////////////////////////////////////////////
 
 	public void calMostFrequentKey() {
 		// 가장 빈도수 높은 key(mostFrequentKey)를 구하는 method
