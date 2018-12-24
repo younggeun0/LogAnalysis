@@ -197,6 +197,13 @@ public class SelectLogEvt implements ActionListener {
 	public void countRequestHour(String temp) {
 		// 4. 요청 시간별 횟수를 구하는 method, mapHour instance변수에 값을 넣는 메소드 구현
 		// 4-1. 완성한 mapHour 변수를 이용, mostFrequentHour를 구해야 함(calMostFrequentHour()구현)
+		String hour = temp.substring(
+				temp.lastIndexOf("[")+1, temp.lastIndexOf("]"))
+				.substring(11, 13);
+		
+		mapHour.put(hour, 0);
+		System.out.println(mapHour);
+		
 	}
 
 	public SelectLog getSl() {
