@@ -50,6 +50,7 @@ public class Result extends JDialog {
 			jlBrowser[i] = new JLabel(content.toString());
 			jpBrowser.add(jlBrowser[i]);
 			i++;
+			content.delete(0, content.length());
 		}
 		
 		return jpBrowser;
