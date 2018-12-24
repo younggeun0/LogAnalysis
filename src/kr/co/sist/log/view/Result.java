@@ -55,6 +55,8 @@ public class Result extends JDialog {
 		pnNo.setLayout(new GridLayout(1, 4));
 		pnCe.setLayout(new GridLayout(6, 2));
 		setLayout(new BorderLayout());
+		//이벤트발생
+		
 		
 		//배치
 		add("North",pnNo);
