@@ -74,6 +74,7 @@ public class SelectLogEvt implements ActionListener {
 					// 결과창, instancd변수 다 작성하면 결과창 띄울 예정
 					// 일단 sysout만 찍으면서 제대로 변수에 결과 들어갔는지만 보길
 					// new Result(this, sl);
+					System.out.println("결과창 출력");
 				}
 
 			} catch (FileNotFoundException fnfe) {
