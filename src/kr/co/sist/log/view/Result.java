@@ -1,9 +1,11 @@
 package kr.co.sist.log.view;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.TextArea;
 import java.awt.TextField;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -17,7 +19,9 @@ import kr.co.sist.log.evt.ResultEvt;
 import kr.co.sist.log.evt.SelectLogEvt;
 
 
-/////////////// 12-22-2018 Result JDialog구현(정미) //////////////////////
+/////////////// 12-22 Result JDialog구현(정미) //////////////////////
+// //////////// 12-24 Result 디자인 변경(영근), 출력 변수 설정 //////
+@SuppressWarnings("serial")
 public class Result extends JDialog {
 	
 	private SelectLogEvt sle;
@@ -32,9 +36,10 @@ public class Result extends JDialog {
 		JPanel pnNo = new JPanel();
 		JPanel pnCe= new JPanel();
 		JButton jbConfirm = new JButton("확인"); 
+		jbConfirm.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
 		
 		pnNo.add(new JButton("파일명"));
-		pnNo.add(new JLabel("file_result"));
+		pnNo.add(new JLabel(new File(sle.getFilePath()).getName()));
 		pnNo.add(new JButton("생성된 날짜"));
 		pnNo.add(new JLabel("Date_result"));
 		
@@ -61,6 +66,7 @@ public class Result extends JDialog {
 		add("South",jbConfirm);
 		
 		ResultEvt r = new ResultEvt(this);
+		jbConfirm.addActionListener(r);
 		
 		setBounds(400, 300, 600, 500);
 		setVisible(true);
@@ -68,4 +74,3 @@ public class Result extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 }
-/////////////// 12-22-2018 Result JDialog구현(정미) 끝 //////////////////////
