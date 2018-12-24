@@ -5,17 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
@@ -34,7 +28,7 @@ import kr.co.sist.log.view.SelectLog;
 
 public class SelectLogEvt implements ActionListener {
 
-	// 1~6ì„ ì²˜ë¦¬í•œ ë‚´ìš©ì„ instance ë³€ìˆ˜ì— ì €ì¥í•´ì•¼ í•¨
+	// 1~6 Ã³¸®ÇÑ ³»¿ëÀ» instance º¯¼ö¿¡ ÀúÀå
 	private SelectLog sl;
 	private String filePath;
 	private String logTxtCreationDate;
@@ -67,10 +61,11 @@ public class SelectLogEvt implements ActionListener {
 			selectLog();
 
 			try {
+				// readLog·Î logÆÄÀÏÀ» ÀĞ¾îµéÀÎ´Ù.
 				readLog();
 
 				if (requestNum != 0) {
-					// readLogë¡œ ì½ì–´ë“¤ì¸ logì˜ ë‚´ìš©ì„ ê°€ê³µ, instanceë³€ìˆ˜ì— ì €ì¥
+					// ÀĞ¾îµéÀÎ ³»¿ëÀ» °¡°ø, instanceº¯¼ö¿¡ ÀúÀå
 					calLogTxtCreationDate();
 					calMostFrequentKey();
 					calMostFrequentKeyBetween1000And1500();
@@ -78,11 +73,8 @@ public class SelectLogEvt implements ActionListener {
 					calBrowserShare();
 					calCode403Share();
 
-					////////////////// 12-24 ì˜ê·¼ ê²°ê³¼ ì°¨ë‹¨ //////////////////////
-					// ê²°ê³¼ì°½, instancdë³€ìˆ˜ ë‹¤ ì‘ì„±í•˜ë©´ ê²°ê³¼ì°½ ë„ìš¸ ì˜ˆì •
-					// ì¼ë‹¨ sysoutë§Œ ì°ìœ¼ë©´ì„œ ì œëŒ€ë¡œ ë³€ìˆ˜ì— ê²°ê³¼ ë“¤ì–´ê°”ëŠ”ì§€ë§Œ ë³´ê¸¸
-					// new Result(this, sl);
-					System.out.println("ê²°ê³¼ì°½ ì¶œë ¥");
+					new Result(this, sl);
+					System.out.println("°á°úÃ¢ Ãâ·Â");
 				}
 
 			} catch (FileNotFoundException fnfe) {
@@ -92,25 +84,24 @@ public class SelectLogEvt implements ActionListener {
 			}
 		}
 
-		// jbViewê°€ í•œë²ˆ ì´ìƒ ëˆŒë ¸ë‹¤ë©´ JOptionPane.showMessageDialogì— ë¶™ì—¬ ê²°ê³¼ ì¶œë ¥
+		// jbView°¡ ÇÑ¹ø ÀÌ»ó ´­·È´Ù¸é ½ÇÇàµÇµµ·Ï ±¸Çö
 		if (e.getSource() == sl.getJbReport()) {
-			// jbViewê°€ í•œë²ˆì´ìƒ ëˆŒë ¸ì„ ë•Œ ìˆ˜í–‰ë˜ë„ë¡ êµ¬í˜„(boolean flagë¡œ êµ¬í˜„)
+			// reportFlag·Î View ½ÇÇà¿©ºÎ¸¦ ÆÇ´Ü ÈÄ ½ÇÇà
 			if (reportFlag == true) {
-				// "report ì¶œë ¥"ì„ Componentë¡œ ëŒ€ì²´í•´ì•¼ í•¨, Componentë¥¼ ë°˜í™˜í•˜ëŠ” method ë§Œë“¤ ê²ƒ
 
-				// íŒŒì¼ ì¶œë ¥ FileDialog êµ¬í˜„
 				try {
 					mkLogReport();
+					JOptionPane.showMessageDialog(sl, "ÆÄÀÏ »ı¼º ¼º°ø!");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(sl, "Viewë¥¼ ë¨¼ì € ìˆ˜í–‰í•˜ì—¬ ì£¼ì„¸ìš”.");
+				JOptionPane.showMessageDialog(sl, "View¸¦ ¸ÕÀú ¼öÇàÇØÁÖ¼¼¿ä.");
 			}
 		}
 	}
-////////////////////////////////12.24 Report í´ë”ìƒì„± , report_í˜„ì¬ë‚ ì§œ.dat íŒŒì¼ìƒì„± ì‹œì‘///////////////////////////////////////////////////
+////////////////////////////////12.24 Report Æú´õ »ı¼º, report_ÇöÀç³¯Â¥.dat ÆÄÀÏ»ı¼º ½ÃÀÛ(¼±ÀÇ)///////////////////////////////////////////////////
 	public void mkLogReport() throws IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date d= new Date();
@@ -127,13 +118,15 @@ public class SelectLogEvt implements ActionListener {
 			bw.flush();
 			System.out.println(sb.toString());			
 		}finally{
-			if(bw!=null) {bw.close();} 
+			if(bw!=null) {bw.close();}
 		}//end finally
+	}
+////////////////////////////////12.24 Report Æú´õ »ı¼º ³¡///////////////////////////////////////////////////
 	
-	///////////////// 12-24 getLogTxtCreationDate method êµ¬í˜„ ///////////////////////////////////
-	///////////////// Resultì— ì‚¬ìš©ë˜ê¸°ìœ„í•œ LogíŒŒì¼ ìƒì„±ë‚ ì§œë¥¼ êµ¬í•´ ì €ì¥í•˜ëŠ” method /////////////
+	///////////////// 12-24 getLogTxtCreationDate method ±¸Çö(¿µ±Ù) ///////////////////////////////////
+	///////////////// Result¿¡ »ç¿ëµÇ±â À§ÇÑ LogÆÄÀÏ »ı¼º ³¯Â¥¸¦ ±¸ÇØ ÀúÀåÇÏ´Â method /////////////
 	public void calLogTxtCreationDate() {
-		// ì½ì–´ë“¤ì¸ logíŒŒì¼ì˜ ìƒì„± ë‚ ì§œë¥¼ êµ¬í•˜ëŠ” method
+		// ÀĞ¾îµéÀÎ logÆÄÀÏÀÇ »ı¼º ³¯Â¥¸¦ ±¸ÇÏ´Â method
 		try {
 			BasicFileAttributes attrs = Files.readAttributes(new File(filePath).toPath(), BasicFileAttributes.class);
 			FileTime creationTime = attrs.creationTime();
@@ -143,23 +136,22 @@ public class SelectLogEvt implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	///////////////// 12-24 getLogTxtCreationDate method êµ¬í˜„ ë ///////////////////////////////////
+	///////////////// 12-24 getLogTxtCreationDate method ±¸Çö ³¡ ///////////////////////////////////
 	
-////////////////////////////////12.24 Report í´ë”ìƒì„± , report_í˜„ì¬ë‚ ì§œ.dat íŒŒì¼ìƒì„± ë///////////////////////////////////////////////////
 
 	public void calMostFrequentKey() {
-		// ê°€ì¥ ë¹ˆë„ìˆ˜ ë†’ì€ key(mostFrequentKey)ë¥¼ êµ¬í•˜ëŠ” method
+		// °¡Àå ºóµµ¼ö ³ôÀº key(mostFrequentKey)¸¦ ±¸ÇÏ´Â method
 	}
 
 	public void calMostFrequentKeyBetween1000And1500() {
-		// 1000~1500ë¼ì¸ì— ê°€ì¥ ë¹ˆë„ìˆ˜ ë†’ì€ key(mostFrequentKey)ë¥¼ êµ¬í•˜ëŠ” method
+		// 1000~1500¶óÀÎ¿¡ °¡Àå ºóµµ¼ö ³ôÀº key(mostFrequentKey)¸¦ ±¸ÇÏ´Â method)
 	}
 
 	public void calMostFrequentHour() {
-		// ê°€ì¥ ë¹ˆë„ìˆ˜ ë†’ì€ ì‹œê°„(mostFrequentHour) êµ¬í•˜ëŠ” method
+		// °¡Àå ¿äÃ» ºóµµ¼ö°¡ ³ôÀº ½Ã°£(mostFrequentHour)À» ±¸ÇÏ´Â method
 	}
 
-/////////////////////12.22 ì„ ì˜ ì½”ë“œ ì¶”ê°€ (ë¸Œë¼ìš°ì €ì˜ ë¹„ìœ¨êµ¬í•´ì„œ ë°˜í™˜) ì‹œì‘//////////////////////////////
+/////////////////////12.22 ºê¶ó¿ìÀú ºñÀ² ±¸ÇØ ¹İÈ¯ ±¸Çö ½ÃÀÛ (¼±ÀÇ)//////////////////////////////
 	public void calBrowserShare() {
 		ArrayList<String> al = new ArrayList<String>();
 		Set<String> set = mapBrowser.keySet();
@@ -171,15 +163,15 @@ public class SelectLogEvt implements ActionListener {
 					String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
 		}
 	}
-/////////////////////12.22 ì„ ì˜ ì½”ë“œ ì¶”ê°€ (ë¸Œë¼ìš°ì €ì˜ ë¹„ìœ¨êµ¬í•´ì„œ ë°˜í™˜) ë//////////////////////////////
+/////////////////////12.22 ºê¶ó¿ìÀú ºñÀ² ±¸ÇØ ¹İÈ¯ ±¸Çö ³¡//////////////////////////////
 
 	public void calCode403Share() {
 		code403Share = String.format("%3.2f", (code403 / (double) requestNum) * 100);
 	}
 
 	public void selectLog() {
-		// ì½ì–´ë“¤ì¸ logíŒŒì¼ì˜ ê²½ë¡œë¥¼ ì €ì¥í•˜ëŠ” method
-		FileDialog fd = new FileDialog(sl, "log íŒŒì¼ ì„ íƒ", FileDialog.LOAD);
+		// ÀĞ¾îµéÀÎ logÆÄÀÏÀÇ °æ·Î¸¦ ÀúÀåÇÏ´Â method
+		FileDialog fd = new FileDialog(sl, "log ÆÄÀÏ ¼±ÅÃ", FileDialog.LOAD);
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
@@ -194,11 +186,10 @@ public class SelectLogEvt implements ActionListener {
 			br = new BufferedReader(new FileReader(filePath));
 
 			String temp = "";
-			while ((temp = br.readLine()) != null) {
+			while ((temp = br.readLine()) != null) { // ¼±ÅÃµÈ ÆÄÀÏÀÇ ³»¿ëÀ» ÇÑÁÙ¾¿ ÀĞÀ½
 
 				requestNum++;
-				// ì„ íƒëœ íŒŒì¼ì˜ ë‚´ìš©ì„ í•œ ì¤„ì”© ì½ì–´ë“¤ì„
-				// ì½ì–´ë“¤ì´ëŠ” ë‚´ìš©ì„ ì²˜ë¦¬í•˜ëŠ”ê±´ ë”°ë¡œ method ë§Œë“¤ì–´ì„œ ì²˜ë¦¬í•  ê²ƒ
+				// ÀĞ¾îµéÀÌ´Â ³»¿ëÀ» Ã³¸®ÇÏ´Â°Ç µû·Î methodµé·Î Ã³¸®
 				countKey(temp);
 				countBrowser(temp);
 				countHttpStatusCode(temp);
@@ -213,22 +204,22 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void countKey(String temp) {
-		// 1. ìµœë‹¤ ì‚¬ìš© Keyì˜ ì´ë¦„ê³¼ íšŸìˆ˜ë¥¼ êµ¬í•˜ëŠ” method,
-		// mapKeyë¥¼ instanceì˜ ë‚´ìš©ì„ ì±„ìš°ë„ë¡ êµ¬í˜„
+		// 1. ÃÖ´Ù »ç¿ë KeyÀÇ ÀÌ¸§°ú È½¼ö¸¦ ±¸ÇÏ´Â method
+		// mapKeyÀÇ key°ª, cnt°ª ÀúÀå
 
-		// 1000ì—ì„œ 1500ë²ˆ ì‚¬ì´ì¼ ë•Œ ê²°ê³¼ë§Œ ë”°ë¡œ ì €ì¥í•´ì•¼ í•˜ê¸° ë•Œë¬¸ì— 
-		// mapKeyBetween1000And1500ì— ë”°ë¡œ ê°’ì„ ë„£ì–´ì¤˜ì•¼ í•¨.
+		// 1000~1500¹ø »çÀÌÀÏ ¶§ °á°ú¸¸ µû·Î ÀúÀåÇØ¾ß ÇÔ
+		// mapKeyBetween1000And1500 key°ª, cnt°ª ÀúÀå
 		if (requestNum >= 1000 && requestNum <= 1500) {
 
 		}
 	}
 
-//////////////////////12.22 ì„ ì˜ ì¶”ê°€ ì½”ë“œ(ë¸Œë¼ìš°ì €,ì¹´ìš´í„° mapBrowserì— ë„£ê¸°) ì‹œì‘ ////////////
+//////////////////////12.22 ºê¶ó¿ìÀú Ä«¿îÅÍ, mapBrowser¿¡ ÀúÀå ±¸Çö ½ÃÀÛ (¼±ÀÇ)////////////
 	private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
 	private int[] browserCnt = new int[browser.length];
 
 	public void countBrowser(String temp) {
-		// 2. ë¸Œë¼ìš°ì €ë³„ ì ‘ì† íšŸìˆ˜ êµ¬í•˜ëŠ” method, ë¹„ìœ¨ êµ¬í•˜ê¸°(ì•„ì§)
+		// 2. ºê¶ó¿ìÀúº° Á¢¼Ó È½¼ö¸¦ ±¸ÇÏ´Â method
 		int count = 0;
 		for (int i = 0; i < browser.length; i++) {
 			if (temp.contains(browser[i])) {
@@ -237,16 +228,16 @@ public class SelectLogEvt implements ActionListener {
 			mapBrowser.put(browser[i], browserCnt[i]);
 		} // end for
 	}// countBrowser
-/////////////////////12.22 ì„ ì˜ ì¶”ê°€ ì½”ë“œ(ë¸Œë¼ìš°ì €,ì¹´ìš´í„° mapBrowserì— ë„£ê¸°) ë///////////////
+//////////////////////12.22 ºê¶ó¿ìÀú Ä«¿îÅÍ, mapBrowser¿¡ ÀúÀå ±¸Çö ³¡ (¼±ÀÇ)////////////
 
 	public void countHttpStatusCode(String temp) {
-		// 3. ì„œë¹„ìŠ¤ë¥¼ ì„±ê³µì ìœ¼ë¡œ ìˆ˜í–‰í•œ íšŸìˆ˜, ì‹¤íŒ¨(404) íšŸìˆ˜
-		// 6. ë¹„ì •ìƒì ì¸ ìš”ì²­(403)ì´ ë°œìƒí•œ íšŸìˆ˜ êµ¬í•˜ëŠ” method, ë¹„ìœ¨ êµ¬í•˜ê¸°ëŠ” calBrowserShare()ì— êµ¬í˜„
+		// 3°ú 6¹ø ¼­ºñ½º¸¦ ¼º°ø¼öÇà(200)ÇÑ È½¼ö, ½ÇÆĞ È½¼ö(404), ºñÁ¤»óÀ» ´©ÀûÇÕ½ÃÅ´(code200, code404, code403)
+		// ºñÀ²Àº calCode403Share()¿¡ ±¸Çö
 	}
 
 	public void countRequestHour(String temp) {
-		// 4. ìš”ì²­ ì‹œê°„ë³„ íšŸìˆ˜ë¥¼ êµ¬í•˜ëŠ” method, mapHour instanceë³€ìˆ˜ì— ê°’ì„ ë„£ëŠ” ë©”ì†Œë“œ êµ¬í˜„
-		// 4-1. ì™„ì„±í•œ mapHour ë³€ìˆ˜ë¥¼ ì´ìš©, mostFrequentHourë¥¼ êµ¬í•´ì•¼ í•¨(calMostFrequentHour()êµ¬í˜„)
+		// 4. ¿äÃ» ½Ã°£º° È½¼ö¸¦ ±¸ÇÏ´Â method, mapHour¿¡ <½Ã°£,cnt>¸¦ ÀúÀå
+		// 4-1.¿Ï¼ºÇÑ mapHourº¯¼ö¸¦ ÀÌ¿ë, mostFrequentHour¸¦ ±¸ÇØ¾ß ÇÔ(calMostFrequentHour()±¸Çö)
 		String hour = temp.substring(
 				temp.lastIndexOf("[")+1, temp.lastIndexOf("]"))
 				.substring(11, 13);
