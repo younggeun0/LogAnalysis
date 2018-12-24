@@ -15,6 +15,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class SelectLogEvt implements ActionListener {
 
 	private SelectLog sl;
 	private String filePath;
+	private String fName;
 	private String logTxtCreationDate;
 	private Map<String, Integer> mapKey;
 	private Map<String, Integer> mapKeyBetween1000And1500;
@@ -133,11 +135,53 @@ public class SelectLogEvt implements ActionListener {
 		}
 	}
 
-
+	
 	public String printReport() {
+//		private SelectLog sl;
+//		private String filePath;
+//		private String fName;
+//		private String logTxtCreationDate;
+//		private Map<String, Integer> mapKey;
+//		private Map<String, Integer> mapKeyBetween1000And1500;
+//		private Map<String, Integer> mapBrowser;
+//		private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
+//		private int[] browserCnt = new int[browser.length];
+//		private Map<String, Integer> mapHour;
+//		private int code200, code404, code403;
+//		private int requestNum;
+//		private String code403Share;
+//		private Map<String, String> mapBrowserShare;
+//		private String mostFrequentHour;
+//		private String mostFrequentKey;
+//		private String mostFrequentKeyBetween1000And1500;
+//		private boolean reportFlag;
+		StringBuilder sb = new StringBuilder();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date d = new Date();
+		String s = sdf.format(d);
+		Set<String> set = mapBrowser.keySet();
+		Iterator<String> it = set.iterator();
+		String key = "";
+		sb.append("-------------------------------------------------------------\n");
+		sb.append("파일명(").append(fName).append(") log (").append(s).append(")\n");
+		sb.append("-------------------------------------------------------------\n");
+		sb.append("1. 최다 사용키: ").append(mostFrequentKey).append(" ").append(mapKey.get(mostFrequentKey)).append("회\n");
+		sb.append("2. 브라우저별 접속 횟수와 비율 : \n");
+		while(it.hasNext()) {
+			key = it.next();
+			sb.append("\t").append(key).append(" :").append(mapBrowser.get(key)).append("번(")
+			.append(mapBrowserShare.get(key)).append("%)\n");
+		}
+		sb.append("3. 서비스를 성공적수행(200) 횟수, 실패(404)횟수: \n")
+		.append("\t200: ").append(code200).append("번 404 :").append(code404).append("번\n");
+		sb.append("4. 요청이 가장 많은 시간: [").append(mostFrequentHour).append("시]\n");
+		sb.append("5.비정상적인 요청(403)이 발생한 횟수, 비율: ").append(code403).append("번(")
+		.append(code403Share).append("%)\n");
+		sb.append("6. 1000~1500번째 정보 최다 사용 키의 이름과 횟수: \n")
+		.append("\t").append("키명: ").append(mostFrequentKeyBetween1000And1500);
 		
 		
-		return null;
+		return sb.toString();
 	}
 
 	public void calMostFrequentKey() {
@@ -146,7 +190,7 @@ public class SelectLogEvt implements ActionListener {
 			if (entry.getValue() == maxValue) {
 			}
 		} 
-
+		
 	}
 
 	public void calMostFrequentKeyBetween1000And1500() {
@@ -176,7 +220,7 @@ public class SelectLogEvt implements ActionListener {
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
-		String fName = fd.getFile();
+		fName = fd.getFile();
 		filePath = dirPath + fName;
 	}
 
