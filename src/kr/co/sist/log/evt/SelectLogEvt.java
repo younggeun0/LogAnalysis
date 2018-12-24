@@ -29,7 +29,6 @@ import kr.co.sist.log.view.SelectLog;
 
 public class SelectLogEvt implements ActionListener {
 
-	// 1~6 처리한 내용을 instance 변수에 저장
 	private SelectLog sl;
 	private String filePath;
 	private String logTxtCreationDate;
@@ -64,11 +63,9 @@ public class SelectLogEvt implements ActionListener {
 			selectLog();
 
 			try {
-				// readLog로 log파일을 읽어들인다.
 				readLog();
 
 				if (requestNum != 0) {
-					// 읽어들인 내용을 가공, instance변수에 저장
 					calLogTxtCreationDate();
 					calMostFrequentKey();
 					calMostFrequentKeyBetween1000And1500();
@@ -79,8 +76,7 @@ public class SelectLogEvt implements ActionListener {
 					try {
 						new Result(this, sl);
 					} catch (NullPointerException npe) {
-						System.out.println("에러발생");
-						npe.printStackTrace();
+						System.err.println(npe.getMessage());
 					}
 				}
 
@@ -91,24 +87,21 @@ public class SelectLogEvt implements ActionListener {
 			}
 		}
 
-		// jbView가 한번 이상 눌렸다면 실행되도록 구현
 		if (e.getSource() == sl.getJbReport()) {
-			// reportFlag로 View 실행여부를 판단 후 실행
 			if (reportFlag == true) {
 
 				try {
 					mkLogReport();
-					JOptionPane.showMessageDialog(sl, "파일 생성 성공!");
+					JOptionPane.showMessageDialog(sl, "report file created!");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(sl, "View를 먼저 수행해주세요.");
+				JOptionPane.showMessageDialog(sl, "Please Press 'View' before Report");
 			}
 		}
 	}
-////////////////////////////////12.24 Report 폴더 생성, report_현재날짜.dat 파일생성 시작(선의)///////////////////////////////////////////////////
 	public void mkLogReport() throws IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date d= new Date();
@@ -126,14 +119,10 @@ public class SelectLogEvt implements ActionListener {
 			System.out.println(sb.toString());			
 		}finally{
 			if(bw!=null) {bw.close();}
-		}//end finally
+		}
 	}
-////////////////////////////////12.24 Report 폴더 생성 끝///////////////////////////////////////////////////
 	
-///////////////// 12-24 getLogTxtCreationDate method 구현(영근) ///////////////////////////////////
-///////////////// Result에 사용되기 위한 Log파일 생성 날짜를 구해 저장하는 method /////////////
 	public void calLogTxtCreationDate() {
-		// 읽어들인 log파일의 생성 날짜를 구하는 method
 		try {
 			BasicFileAttributes attrs = Files.readAttributes(new File(filePath).toPath(), BasicFileAttributes.class);
 			FileTime creationTime = attrs.creationTime();
@@ -143,7 +132,6 @@ public class SelectLogEvt implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-///////////////// 12-24 getLogTxtCreationDate method 구현 끝 ///////////////////////////////////
 
 
 	public String printReport() {
@@ -153,26 +141,20 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void calMostFrequentKey() {
-		// 가장 빈도수 높은 key(mostFrequentKey)를 구하는 method
 		int maxValue = (Collections.max(mapKey.values())); //
 		for (Map.Entry<String, Integer> entry : mapKey.entrySet()) {
 			if (entry.getValue() == maxValue) {
-//				System.out.println("최다 사용키  : " + entry.getKey() + "\n횟수 : " + entry.getValue());
-			} // end if
-		} // end for
+			}
+		} 
 
 	}
-//calMostFrequentKey
 
 	public void calMostFrequentKeyBetween1000And1500() {
-		// 1000~1500라인에 가장 빈도수 높은 key(mostFrequentKey)를 구하는 method)
 	}
 
 	public void calMostFrequentHour() {
-		// 가장 요청 빈도수가 높은 시간(mostFrequentHour)을 구하는 method
 	}
 
-/////////////////////12.22 브라우저 비율 구해 반환 구현 시작 (선의)//////////////////////////////
 	public void calBrowserShare() {
 		ArrayList<String> al = new ArrayList<String>();
 		Set<String> set = mapBrowser.keySet();
@@ -184,15 +166,13 @@ public class SelectLogEvt implements ActionListener {
 					String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
 		}
 	}
-/////////////////////12.22 브라우저 비율 구해 반환 구현 끝//////////////////////////////
 
 	public void calCode403Share() {
 		code403Share = String.format("%3.2f", (code403 / (double) requestNum) * 100);
 	}
 
 	public void selectLog() {
-		// 읽어들인 log파일의 경로를 저장하는 method
-		FileDialog fd = new FileDialog(sl, "log 파일 선택", FileDialog.LOAD);
+		FileDialog fd = new FileDialog(sl, "log ���� ����", FileDialog.LOAD);
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
@@ -207,10 +187,9 @@ public class SelectLogEvt implements ActionListener {
 			br = new BufferedReader(new FileReader(filePath));
 
 			String temp = "";
-			while ((temp = br.readLine()) != null) { // 선택된 파일의 내용을 한줄씩 읽음
+			while ((temp = br.readLine()) != null) { 
 
 				requestNum++;
-				// 읽어들이는 내용을 처리하는건 따로 method들로 처리
 				countKey(temp);
 				countBrowser(temp);
 				countHttpStatusCode(temp);
@@ -225,43 +204,32 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void countKey(String temp) {
-		// 1. 최다 사용 Key의 이름과 횟수를 구하는 method,
-		// mapKey를 instance의 내용을 채우도록 구현
 		String key = null;
 		if (temp.contains("key")) {
 
 			if (temp.indexOf("key") != -1) {
 				key = temp.substring(temp.indexOf("=") + 1, temp.indexOf("&"));
 				mapKey.put(key, mapKey.get(key) != null ? mapKey.get(key) + 1 : 1);
-			} // end if
-		} // end if
-		// 1000에서 1500번 사이일 때 결과만 따로 저장해야 하기 때문에
-		// mapKeyBetween1000And1500에 따로 값을 넣어줘야 함.
-	}// countKey
+			}
+		}
+	}
 
-//////////////////////12.22 브라우저 카운터, mapBrowser에 저장 구현 시작 (선의)////////////
 	public void countBrowser(String temp) {
-		// 2. 브라우저별 접속 횟수를 구하는 method
 		int count = 0;
 		for (int i = 0; i < browser.length; i++) {
 			if (temp.contains(browser[i])) {
 				browserCnt[i]++;
-			} // end for
+			}
 			mapBrowser.put(browser[i], browserCnt[i]);
-		} // end for
-	}// countBrowser
-//////////////////////12.22 브라우저 카운터, mapBrowser에 저장 구현 끝 (선의)////////////
+		} 
+	}
 
 	public void countHttpStatusCode(String temp) {
-		// 3. 서비스를 성공적으로 수행한 횟수, 실패(404) 횟수
-		// 6. 비정상적인 요청(403)이 발생한 횟수 구하는 method, 비율 구하기는 calBrowserShare()에 구현
-
-	}// countHttpStatusCod
+		
+	}
 
 
 	public void countRequestHour(String temp) {
-		// 4. 요청 시간별 횟수를 구하는 method, mapHour에 <시간,cnt>를 저장
-		// 4-1.완성한 mapHour변수를 이용, mostFrequentHour를 구해야 함(calMostFrequentHour()구현)
 		String hour = temp.substring(
 				temp.lastIndexOf("[")+1, temp.lastIndexOf("]"))
 				.substring(11, 13);
@@ -345,8 +313,4 @@ public class SelectLogEvt implements ActionListener {
 	public boolean isReportFlag() {
 		return reportFlag;
 	}
-
-	
-	
-	
 }
