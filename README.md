@@ -1,6 +1,9 @@
 # 로그 분석 시스템
 
 * 제작기간 일주일 (2018.12.22~2018.12.28)
+* 클래스 다이어그램
+
+![class diagram](https://github.com/younggeun0/logAnalysisApp/blob/master/img/classDiagram(logAnalysis).jpg?raw=true)
 
 * 업무분장
   * younggeun0
