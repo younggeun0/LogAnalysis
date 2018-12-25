@@ -71,9 +71,9 @@ public class SelectMenuEvt implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sm.getJbView()) {
 			initInstances();
+			try {
 			selectLog();
 
-			try {
 				readLog();
 
 				if (requestNum != 0) {
@@ -89,7 +89,7 @@ public class SelectMenuEvt implements ActionListener {
 				}
 
 			} catch (FileNotFoundException fnfe) {
-				fnfe.printStackTrace();
+				JOptionPane.showMessageDialog(sm, "취소하셨습니다.");
 			} catch (IOException ie) {
 				ie.printStackTrace();
 			}
@@ -150,9 +150,9 @@ public class SelectMenuEvt implements ActionListener {
 						return;
 					}
 					
+					try {
 					selectLog();
 
-					try {
 						readLog();
 
 						if (requestNum != 0) {
@@ -168,7 +168,7 @@ public class SelectMenuEvt implements ActionListener {
 							JOptionPane.showConfirmDialog(sm, "읽어올 요청 정보가 없습니다.");
 						}
 					} catch (FileNotFoundException fnfe) {
-						fnfe.printStackTrace();
+						JOptionPane.showMessageDialog(sm, "취소하셨습니다.");
 					} catch (IOException ie) {
 						ie.printStackTrace();
 					}
@@ -222,19 +222,19 @@ public class SelectMenuEvt implements ActionListener {
 		sb.append("2. 브라우저별 접속 횟수와 비율 : \n");
 		while(it.hasNext()) {
 			key = it.next();
-			sb.append("\t").append(key).append(" :").append(mapBrowser.get(key)).append("번(")
+			sb.append("\t").append(key).append(" : ").append(mapBrowser.get(key)).append("번(")
 			.append(mapBrowserShare.get(key)).append("%)\n");
 		}
-		sb.append("3. 서비스를 성공적수행(200) 횟수, 실패(404)횟수: \n")
-		.append("\t200: ").append(code200).append("번 404 :").append(code404).append("번\n");
+		sb.append("3. 서비스를 성공적수행(200) 횟수, 실패(404)횟수 : \n")
+		.append("\t200 : ").append(code200).append("번 404 : ").append(code404).append("번\n");
 		sb.append("4. 요청이 가장 많은 시간: [").append(mostFrequentHour).append("시]\n");
-		sb.append("5.비정상적인 요청(403)이 발생한 횟수, 비율: ").append(code403).append("번(")
+		sb.append("5.비정상적인 요청(403)이 발생한 횟수, 비율 : ").append(code403).append("번(")
 		.append(code403Share).append("%)\n");
 		if(start == 0 && end == 0) {
-			sb.append("6. "+(start+1)+"~"+requestNum+"번째 정보 최다 사용 키의 이름과 횟수: \n")
+			sb.append("6. "+(start+1)+"~"+requestNum+"번째 정보 최다 사용 키의 이름과 횟수 : \n")
 			.append("\t").append(mostFrequentKey).append(mapKey.get(mostFrequentKey));
 		} else {
-			sb.append("6. "+start+"~"+end+"번째 정보 최다 사용 키의 이름과 횟수: \n")
+			sb.append("6. "+start+"~"+end+"번째 정보 최다 사용 키의 이름과 횟수 : \n")
 			.append("\t").append(mostFrequentKeyBetweenStartAndEnd).append(" ")
 			.append(mapKeyBetweenStartAndEnd.get(mostFrequentKeyBetweenStartAndEnd)).append("회");
 		}

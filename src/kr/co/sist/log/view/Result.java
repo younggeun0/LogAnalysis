@@ -71,7 +71,7 @@ public class Result extends JDialog {
 		pnNo.add(new JLabel(reportFile.getName()));
 		pnNo.add(new JButton("생성된 날짜"));
 		pnNo.add(new JLabel(sme.getLogTxtCreationDate()));
-		pnCe.add(new JButton("1. 최다 사용 key의 이름과 횟수 : "));
+		pnCe.add(new JButton("1. 최다 사용 key의 이름과 횟수"));
 		pnCe.add(new JLabel(sme.getMostFrequentKey()+" : "+sme.getMapKey().get(sme.getMostFrequentKey())+"번"));
 		pnCe.add(new JButton("2. 브라우저별 접속횟수, 비율"));
 		pnCe.add(browserInfo()); 
