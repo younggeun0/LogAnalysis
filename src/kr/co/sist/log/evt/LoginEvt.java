@@ -24,13 +24,13 @@ public class LoginEvt implements ActionListener {
 		String pw=login.getJtPw().getText();
 		
 		if(id.equals("admin")&& pw.equals("1234")) {
-			JOptionPane.showMessageDialog(null, "로그인 성공");
+			JOptionPane.showMessageDialog(login, "로그인 성공");
 			new SelectLog(login);
 		}else if(id.equals("root")&& pw.equals("1111")) {
-			JOptionPane.showMessageDialog(null, "로그인 성공");
+			JOptionPane.showMessageDialog(login, "로그인 성공");
 			new SelectLog(login);
 		}else {
-			JOptionPane.showMessageDialog(null, "로그인 실패");	
+			JOptionPane.showMessageDialog(login, "로그인 실패");	
 		}
 	}
 }

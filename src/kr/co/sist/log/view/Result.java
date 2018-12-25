@@ -59,9 +59,6 @@ public class Result extends JDialog {
 		super(sl, "결과 출력",true);
 		this.sle = sle;
 		
-		// 결과를 출력할 결과창 구현
-		//컴포넌트 만들기
-		
 		JPanel pnNo = new JPanel();
 		JPanel pnCe= new JPanel();
 		JButton jbConfirm = new JButton("확인"); 
@@ -73,10 +70,8 @@ public class Result extends JDialog {
 		pnNo.add(new JButton("파일명"));
 		pnNo.add(new JLabel(reportFile.getName()));
 		pnNo.add(new JButton("생성된 날짜"));
-		// 날짜를 받아올 인스턴스 변수 필요(선의 구현 요청)
 		pnNo.add(new JLabel(sle.getLogTxtCreationDate()));
-		
-		pnCe.add(new JButton("1.  최다 사용 key의 이름과 횟수 : "));
+		pnCe.add(new JButton("1. 최다 사용 key의 이름과 횟수 : "));
 		pnCe.add(new JLabel(sle.getMostFrequentKey()+" : "+sle.getMapKey().get(sle.getMostFrequentKey())+"번"));
 		pnCe.add(new JButton("2. 브라우저별 접속횟수, 비율"));
 		pnCe.add(browserInfo()); 
@@ -89,22 +84,19 @@ public class Result extends JDialog {
 				+ String.format("%4.2f", 
 						sle.getCode403()/(double)sle.getRequestNum()*100)
 				+"%)"));
-		pnCe.add(new JButton("6. 1000~1500 라인 가장 빈도수가 높은 key와 횟수"));
-		try {
-			pnCe.add(new JLabel("key "+sle.getMostFrequentKeyBetween1000And1500()+" : "
-					+sle.getMapKeyBetween1000And1500().get(sle.getMostFrequentKeyBetween1000And1500())
-					+"번"));
-		} catch (NullPointerException e) {
-			System.out.println("NullPointerException");
-			System.out.println("에러처리 해야함");
+		if (sle.getStart() == 0 && sle.getEnd() == 0) {
+			pnCe.add(new JButton("6. "+(sle.getStart()+1)+"~"+sle.getRequestNum()+" 라인 가장 빈도수가 높은 key와 횟수"));
+			pnCe.add(new JLabel(sle.getMostFrequentKey()+" : "
+					+sle.getMapKey().get(sle.getMostFrequentKey())+"번"));
+		} else {
+			pnCe.add(new JButton("6. "+sle.getStart()+"~"+sle.getEnd()+" 라인 가장 빈도수가 높은 key와 횟수"));
+			pnCe.add(new JLabel(sle.getMostFrequentKeyBetweenStartAndEnd()+" : "
+					+sle.getMapKeyBetweenStartAndEnd().get(sle.getMostFrequentKeyBetweenStartAndEnd())+"번"));
 		}
-		
 		pnNo.setLayout(new GridLayout(1, 4));
 		pnCe.setLayout(new GridLayout(6, 2));
 		setLayout(new BorderLayout());
-		//이벤트발생
 		
-		//배치
 		add("North",pnNo);
 		add("Center",pnCe);
 		add("South",jbConfirm);

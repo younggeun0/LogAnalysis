@@ -14,18 +14,14 @@ import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
-import javax.swing.text.html.parser.Entity;
 
 import kr.co.sist.log.view.Result;
 import kr.co.sist.log.view.SelectLog;
@@ -37,7 +33,7 @@ public class SelectLogEvt implements ActionListener {
 	private String fName;
 	private String logTxtCreationDate;
 	private Map<String, Integer> mapKey;
-	private Map<String, Integer> mapKeyBetween1000And1500;
+	private Map<String, Integer> mapKeyBetweenStartAndEnd;
 	private Map<String, Integer> mapBrowser;
 	private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
 	private int[] browserCnt = new int[browser.length];
@@ -48,25 +44,33 @@ public class SelectLogEvt implements ActionListener {
 	private Map<String, String> mapBrowserShare;
 	private String mostFrequentHour;
 	private String mostFrequentKey;
-	private String mostFrequentKeyBetween1000And1500;
+	private String mostFrequentKeyBetweenStartAndEnd;
 	private boolean reportFlag;
+	private int start;
+	private int end;
 	
 	
 	public SelectLogEvt(SelectLog sl) {
 		this.sl = sl;
+		initInstances();
+	}
+	
+	public void initInstances() {
 		mapKey = new HashMap<String, Integer>();
-		mapKeyBetween1000And1500 = new HashMap<String, Integer>();
+		mapKeyBetweenStartAndEnd = new HashMap<String, Integer>();
 		mapBrowser = new HashMap<String, Integer>();
 		mapHour = new HashMap<String, Integer>();
 		mapBrowserShare = new HashMap<String, String>();
 		reportFlag = false;
-	
+		code200 = 0; code404 = 0; code403 = 0;
+		requestNum = 0;
+		start = 0; end = 0;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sl.getJbView()) {
-
+			initInstances();
 			selectLog();
 
 			try {
@@ -75,16 +79,13 @@ public class SelectLogEvt implements ActionListener {
 				if (requestNum != 0) {
 					calLogTxtCreationDate();
 					calMostFrequentKey();
-					calMostFrequentKeyBetween1000And1500();
 					calMostFrequentHour();
 					calBrowserShare();
 					calCode403Share();
 
-					try {
-						new Result(this, sl);
-					} catch (NullPointerException npe) {
-						System.err.println(npe.getMessage());
-					}
+					new Result(this, sl);
+				} else {
+					JOptionPane.showConfirmDialog(sl, "읽어올 요청 정보가 없습니다.");
 				}
 
 			} catch (FileNotFoundException fnfe) {
@@ -99,13 +100,79 @@ public class SelectLogEvt implements ActionListener {
 
 				try {
 					mkLogReport();
-					JOptionPane.showMessageDialog(sl, "report file created!");
+					JOptionPane.showMessageDialog(sl, "report 파일이 생성되었습니다.");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(sl, "Please Press 'View' before Report");
+				JOptionPane.showMessageDialog(sl, "View를 먼저 실행 후 Report가 가능합니다.");
+			}
+		}
+		
+		if (e.getSource() == sl.getJbLineView()) {
+			initInstances();
+			
+			if (sl.getJtStart().getText().equals("")) {
+				JOptionPane.showMessageDialog(sl, "시작라인을 입력해주세요.");
+				sl.getJtStart().requestFocus();
+			} else {
+				if (sl.getJtEnd().getText().equals("")) {
+					JOptionPane.showMessageDialog(sl, "종료라인을 입력해주세요.");
+					sl.getJtEnd().requestFocus();
+				} else {
+					try {
+						start = Integer.parseInt(sl.getJtStart().getText());
+					} catch (NumberFormatException nfe) {
+						JOptionPane.showMessageDialog(sl, "시작라인은 숫자만 입력가능합니다.");
+						sl.getJtStart().requestFocus();
+						return;
+					}
+					try {
+						end = Integer.parseInt(sl.getJtEnd().getText());
+					} catch (NumberFormatException nfe) {
+						JOptionPane.showMessageDialog(sl, "끝라인은 숫자만 입력가능합니다.");
+						sl.getJtEnd().requestFocus();
+					}
+					if(start > end) {
+						JOptionPane.showMessageDialog(sl, "끝라인은 시작라인보다 커야 합니다.");
+						sl.getJtEnd().requestFocus();
+						return;
+					}
+					if (start < 0) {
+						JOptionPane.showMessageDialog(sl, "입력라인은 0보다 커야 합니다.");
+						sl.getJtStart().requestFocus();
+						return;
+					}
+					if (end < 0) {
+						JOptionPane.showMessageDialog(sl, "끝라인은 0보다 커야 합니다.");
+						sl.getJtEnd().requestFocus();
+						return;
+					}
+					
+					selectLog();
+
+					try {
+						readLog();
+
+						if (requestNum != 0) {
+							calLogTxtCreationDate();
+							calMostFrequentKey();
+							calMostFrequentKeyBetweenStartAndEnd();
+							calMostFrequentHour();
+							calBrowserShare();
+							calCode403Share();
+
+							new Result(this, sl);
+						} else {
+							JOptionPane.showConfirmDialog(sl, "읽어올 요청 정보가 없습니다.");
+						}
+					} catch (FileNotFoundException fnfe) {
+						fnfe.printStackTrace();
+					} catch (IOException ie) {
+						ie.printStackTrace();
+					}
+				}
 			}
 		}
 	}
@@ -162,9 +229,14 @@ public class SelectLogEvt implements ActionListener {
 		sb.append("4. 요청이 가장 많은 시간: [").append(mostFrequentHour).append("시]\n");
 		sb.append("5.비정상적인 요청(403)이 발생한 횟수, 비율: ").append(code403).append("번(")
 		.append(code403Share).append("%)\n");
-		sb.append("6. 1000~1500번째 정보 최다 사용 키의 이름과 횟수: \n")
-		.append("\t").append("키명: ").append(mostFrequentKeyBetween1000And1500);
-		
+		if(start == 0 && end == 0) {
+			sb.append("6. "+(start+1)+"~"+requestNum+"번째 정보 최다 사용 키의 이름과 횟수: \n")
+			.append("\t").append(mostFrequentKey).append(mapKey.get(mostFrequentKey));
+		} else {
+			sb.append("6. "+start+"~"+end+"번째 정보 최다 사용 키의 이름과 횟수: \n")
+			.append("\t").append(mostFrequentKeyBetweenStartAndEnd).append(" ")
+			.append(mapKeyBetweenStartAndEnd.get(mostFrequentKeyBetweenStartAndEnd)).append("회");
+		}
 		
 		return sb.toString();
 	}
@@ -179,14 +251,13 @@ public class SelectLogEvt implements ActionListener {
 
 	}
 
-	public void calMostFrequentKeyBetween1000And1500() {
-		int Value = (Collections.max(mapKeyBetween1000And1500.values())); //
-		for (Map.Entry<String, Integer> entry : mapKeyBetween1000And1500.entrySet()) {
-			if (entry.getValue() == Value) {
-				mostFrequentKeyBetween1000And1500 = entry.getKey();
+	public void calMostFrequentKeyBetweenStartAndEnd() {
+		int maxValue = (Collections.max(mapKeyBetweenStartAndEnd.values()));
+		for (Map.Entry<String, Integer> entry : mapKeyBetweenStartAndEnd.entrySet()) {
+			if (entry.getValue() == maxValue) {
+				mostFrequentKeyBetweenStartAndEnd = entry.getKey();
 			}
-		} 
-				
+		}
 	}
 
 	public void calMostFrequentHour() {
@@ -243,6 +314,11 @@ public class SelectLogEvt implements ActionListener {
 				countBrowser(temp);
 				countHttpStatusCode(temp);
 				countRequestHour(temp);
+				if (start != 0 && end != 0) {
+					if (requestNum >= start && requestNum <= end) { 
+						countKeyBetweenStartAndEnd(temp);
+					}
+				}
 			}
 
 			reportFlag = true;
@@ -257,10 +333,15 @@ public class SelectLogEvt implements ActionListener {
 		if (temp.contains("key")) {
 			key = temp.substring(temp.indexOf("=") + 1, temp.indexOf("&"));
 			mapKey.put(key, mapKey.get(key) != null ? mapKey.get(key) + 1 : 1);
-			if (requestNum >= 1000 && requestNum <= 1500) {
-				mapKeyBetween1000And1500.put(key,
-						mapKeyBetween1000And1500.get(key) != null ? mapKeyBetween1000And1500.get(key) + 1 : 1);
-			}
+		}
+	}
+	
+	public void countKeyBetweenStartAndEnd(String temp) {
+		String key = null;
+		if (temp.contains("key")) {
+			key = temp.substring(temp.indexOf("=") + 1, temp.indexOf("&"));
+			mapKeyBetweenStartAndEnd.put(key,
+					mapKeyBetweenStartAndEnd.get(key) != null ? mapKeyBetweenStartAndEnd.get(key) + 1 : 1);
 		}
 	}
 
@@ -298,16 +379,16 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	
-	public Map<String, Integer> getMapKeyBetween1000And1500() {
-		return mapKeyBetween1000And1500;
+	public Map<String, Integer> getMapKeyBetweenStartAndEnd() {
+		return mapKeyBetweenStartAndEnd;
 	}
 
 	public String getMostFrequentHour() {
 		return mostFrequentHour;
 	}
 
-	public String getMostFrequentKeyBetween1000And1500() {
-		return mostFrequentKeyBetween1000And1500;
+	public String getMostFrequentKeyBetweenStartAndEnd() {
+		return mostFrequentKeyBetweenStartAndEnd;
 	}
 
 	public String[] getBrowser() {
@@ -372,5 +453,17 @@ public class SelectLogEvt implements ActionListener {
 
 	public boolean isReportFlag() {
 		return reportFlag;
+	}
+
+	public String getfName() {
+		return fName;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public int getEnd() {
+		return end;
 	}
 }
