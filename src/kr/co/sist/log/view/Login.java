@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import kr.co.sist.log.evt.LoginEvt;
@@ -16,7 +17,7 @@ import kr.co.sist.log.evt.LoginEvt;
 public class Login extends JFrame {
 	
 	private JTextField jtId;
-	private JTextField jtPw;
+	private JPasswordField jpfPw;
 	private JButton jbLogin;
 
 	public Login() {
@@ -25,7 +26,7 @@ public class Login extends JFrame {
 		ImageIcon ii = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\login.png");
 		JLabel jlLoginImage = new JLabel(ii);
 		jtId = new JTextField();
-		jtPw = new JTextField();
+		jpfPw = new JPasswordField();
 		jbLogin = new JButton("로그인");
 		jbLogin.setFont(new Font(Font.DIALOG, Font.BOLD, 40));
 		JLabel jlId= new JLabel("아이디");
@@ -42,14 +43,14 @@ public class Login extends JFrame {
 		jlId.setBounds(30, 300, 150, 30);
 		jlPw.setBounds(30, 360, 150, 30);
 		jtId.setBounds(180,300, 180, 30);
-		jtPw.setBounds(180,360, 180, 30);
+		jpfPw.setBounds(180,360, 180, 30);
 		jbLogin.setBounds(50, 430, 300, 100);
 		
 		add(jlLoginImage);
 		add(jlId);
 		add(jlPw);
 		add(jtId);
-		add(jtPw);
+		add(jpfPw);
 		add(jbLogin);
 			
 		setBounds(500,250,400, 600);
@@ -61,8 +62,8 @@ public class Login extends JFrame {
 	public JTextField getJtId() {
 		return jtId;
 	}
-	public JTextField getJtPw() {
-		return jtPw;
+	public JPasswordField getJpfPw() {
+		return jpfPw;
 	}
 }
 
