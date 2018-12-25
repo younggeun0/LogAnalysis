@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import kr.co.sist.log.view.Login;
-import kr.co.sist.log.view.SelectLog;
+import kr.co.sist.log.view.SelectMenu;
 
 /////////////// 12-22-2018 로그인  Event구현(헤원) //////////////////////
 public class LoginEvt implements ActionListener {
@@ -25,10 +25,10 @@ public class LoginEvt implements ActionListener {
 		
 		if(id.equals("admin")&& pw.equals("1234")) {
 			JOptionPane.showMessageDialog(login, "로그인 성공");
-			new SelectLog(login);
+			new SelectMenu(login);
 		}else if(id.equals("root")&& pw.equals("1111")) {
 			JOptionPane.showMessageDialog(login, "로그인 성공");
-			new SelectLog(login);
+			new SelectMenu(login);
 		}else {
 			JOptionPane.showMessageDialog(login, "로그인 실패");	
 		}

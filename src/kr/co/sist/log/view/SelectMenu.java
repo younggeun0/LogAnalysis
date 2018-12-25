@@ -6,10 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import kr.co.sist.log.evt.SelectLogEvt;
+import kr.co.sist.log.evt.SelectMenuEvt;
 
 @SuppressWarnings("serial")
-public class SelectLog extends JDialog {
+public class SelectMenu extends JDialog {
 
 	private JButton jbView;
 	private JButton jbReport;
@@ -17,7 +17,7 @@ public class SelectLog extends JDialog {
 	private JTextField jtStart;
 	private JTextField jtEnd;
 	
-	public SelectLog(JFrame login) {
+	public SelectMenu(JFrame login) {
 		super(login, "Log Analysis App", true);
 		
 		JLabel jlStart = new JLabel("Ω√¿€");
@@ -46,10 +46,10 @@ public class SelectLog extends JDialog {
 		jlEnd.setBounds(55,140,50,30);
 		add(jlEnd);
 		
-		SelectLogEvt sde = new SelectLogEvt(this);
-		jbView.addActionListener(sde);
-		jbReport.addActionListener(sde);
-		jbLineView.addActionListener(sde);
+		SelectMenuEvt sme = new SelectMenuEvt(this);
+		jbView.addActionListener(sme);
+		jbReport.addActionListener(sme);
+		jbLineView.addActionListener(sme);
 		
 		setBounds(400, 300, 420, 240);
 		setResizable(false);

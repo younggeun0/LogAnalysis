@@ -24,11 +24,11 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 
 import kr.co.sist.log.view.Result;
-import kr.co.sist.log.view.SelectLog;
+import kr.co.sist.log.view.SelectMenu;
 
-public class SelectLogEvt implements ActionListener {
+public class SelectMenuEvt implements ActionListener {
 
-	private SelectLog sl;
+	private SelectMenu sm;
 	private String filePath;
 	private String fName;
 	private String logTxtCreationDate;
@@ -50,8 +50,8 @@ public class SelectLogEvt implements ActionListener {
 	private int end;
 	
 	
-	public SelectLogEvt(SelectLog sl) {
-		this.sl = sl;
+	public SelectMenuEvt(SelectMenu sm) {
+		this.sm = sm;
 		initInstances();
 	}
 	
@@ -69,7 +69,7 @@ public class SelectLogEvt implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == sl.getJbView()) {
+		if (e.getSource() == sm.getJbView()) {
 			initInstances();
 			selectLog();
 
@@ -83,9 +83,9 @@ public class SelectLogEvt implements ActionListener {
 					calBrowserShare();
 					calCode403Share();
 
-					new Result(this, sl);
+					new Result(this, sm);
 				} else {
-					JOptionPane.showConfirmDialog(sl, "읽어올 요청 정보가 없습니다.");
+					JOptionPane.showConfirmDialog(sm, "읽어올 요청 정보가 없습니다.");
 				}
 
 			} catch (FileNotFoundException fnfe) {
@@ -95,58 +95,58 @@ public class SelectLogEvt implements ActionListener {
 			}
 		}
 
-		if (e.getSource() == sl.getJbReport()) {
+		if (e.getSource() == sm.getJbReport()) {
 			if (reportFlag == true) {
 
 				try {
 					mkLogReport();
-					JOptionPane.showMessageDialog(sl, "report 파일이 생성되었습니다.");
+					JOptionPane.showMessageDialog(sm, "report 파일이 생성되었습니다.");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(sl, "View를 먼저 실행 후 Report가 가능합니다.");
+				JOptionPane.showMessageDialog(sm, "View를 먼저 실행 후 Report가 가능합니다.");
 			}
 		}
 		
-		if (e.getSource() == sl.getJbLineView()) {
+		if (e.getSource() == sm.getJbLineView()) {
 			initInstances();
 			
-			if (sl.getJtStart().getText().equals("")) {
-				JOptionPane.showMessageDialog(sl, "시작라인을 입력해주세요.");
-				sl.getJtStart().requestFocus();
+			if (sm.getJtStart().getText().equals("")) {
+				JOptionPane.showMessageDialog(sm, "시작라인을 입력해주세요.");
+				sm.getJtStart().requestFocus();
 			} else {
-				if (sl.getJtEnd().getText().equals("")) {
-					JOptionPane.showMessageDialog(sl, "종료라인을 입력해주세요.");
-					sl.getJtEnd().requestFocus();
+				if (sm.getJtEnd().getText().equals("")) {
+					JOptionPane.showMessageDialog(sm, "종료라인을 입력해주세요.");
+					sm.getJtEnd().requestFocus();
 				} else {
 					try {
-						start = Integer.parseInt(sl.getJtStart().getText());
+						start = Integer.parseInt(sm.getJtStart().getText());
 					} catch (NumberFormatException nfe) {
-						JOptionPane.showMessageDialog(sl, "시작라인은 숫자만 입력가능합니다.");
-						sl.getJtStart().requestFocus();
+						JOptionPane.showMessageDialog(sm, "시작라인은 숫자만 입력가능합니다.");
+						sm.getJtStart().requestFocus();
 						return;
 					}
 					try {
-						end = Integer.parseInt(sl.getJtEnd().getText());
+						end = Integer.parseInt(sm.getJtEnd().getText());
 					} catch (NumberFormatException nfe) {
-						JOptionPane.showMessageDialog(sl, "끝라인은 숫자만 입력가능합니다.");
-						sl.getJtEnd().requestFocus();
+						JOptionPane.showMessageDialog(sm, "끝라인은 숫자만 입력가능합니다.");
+						sm.getJtEnd().requestFocus();
 					}
 					if(start > end) {
-						JOptionPane.showMessageDialog(sl, "끝라인은 시작라인보다 커야 합니다.");
-						sl.getJtEnd().requestFocus();
+						JOptionPane.showMessageDialog(sm, "끝라인은 시작라인보다 커야 합니다.");
+						sm.getJtEnd().requestFocus();
 						return;
 					}
 					if (start < 0) {
-						JOptionPane.showMessageDialog(sl, "입력라인은 0보다 커야 합니다.");
-						sl.getJtStart().requestFocus();
+						JOptionPane.showMessageDialog(sm, "입력라인은 0보다 커야 합니다.");
+						sm.getJtStart().requestFocus();
 						return;
 					}
 					if (end < 0) {
-						JOptionPane.showMessageDialog(sl, "끝라인은 0보다 커야 합니다.");
-						sl.getJtEnd().requestFocus();
+						JOptionPane.showMessageDialog(sm, "끝라인은 0보다 커야 합니다.");
+						sm.getJtEnd().requestFocus();
 						return;
 					}
 					
@@ -163,9 +163,9 @@ public class SelectLogEvt implements ActionListener {
 							calBrowserShare();
 							calCode403Share();
 
-							new Result(this, sl);
+							new Result(this, sm);
 						} else {
-							JOptionPane.showConfirmDialog(sl, "읽어올 요청 정보가 없습니다.");
+							JOptionPane.showConfirmDialog(sm, "읽어올 요청 정보가 없습니다.");
 						}
 					} catch (FileNotFoundException fnfe) {
 						fnfe.printStackTrace();
@@ -292,7 +292,7 @@ public class SelectLogEvt implements ActionListener {
 	}
 
 	public void selectLog() {
-		FileDialog fd = new FileDialog(sl, "log 파일 선택", FileDialog.LOAD);
+		FileDialog fd = new FileDialog(sm, "log 파일 선택", FileDialog.LOAD);
 		fd.setVisible(true);
 
 		String dirPath = fd.getDirectory();
@@ -399,8 +399,8 @@ public class SelectLogEvt implements ActionListener {
 		return browserCnt;
 	}
 
-	public SelectLog getSl() {
-		return sl;
+	public SelectMenu getsm() {
+		return sm;
 	}
 
 	public String getFilePath() {

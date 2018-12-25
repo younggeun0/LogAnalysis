@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import kr.co.sist.log.evt.ResultEvt;
-import kr.co.sist.log.evt.SelectLogEvt;
+import kr.co.sist.log.evt.SelectMenuEvt;
 
 
 /////////////// 12-22 Result JDialog구현, Event처리(정미) /////////////////////
@@ -23,7 +23,7 @@ import kr.co.sist.log.evt.SelectLogEvt;
 @SuppressWarnings("serial")
 public class Result extends JDialog {
 	
-	private SelectLogEvt sle;
+	private SelectMenuEvt sle;
 	
 	public JPanel browserInfo() {
 		
@@ -55,7 +55,7 @@ public class Result extends JDialog {
 		return jpBrowser;
 	}
 
-	public Result(SelectLogEvt sle, SelectLog sl) {
+	public Result(SelectMenuEvt sle, SelectMenu sl) {
 		super(sl, "결과 출력",true);
 		this.sle = sle;
 		
