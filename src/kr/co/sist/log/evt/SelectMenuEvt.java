@@ -176,6 +176,7 @@ public class SelectMenuEvt implements ActionListener {
 			}
 		}
 	}
+	
 	public void mkLogReport() throws IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date d= new Date();
@@ -355,8 +356,6 @@ public class SelectMenuEvt implements ActionListener {
 	}
 
 	public void countHttpStatusCode(String temp) {
-
-
 		int serviceCode  = Integer.parseInt(temp.substring(temp.indexOf("[")+1, temp.indexOf("]")));
 				
 		if(serviceCode ==200) {
@@ -366,10 +365,8 @@ public class SelectMenuEvt implements ActionListener {
 		}else if(serviceCode ==403){
 			code403++;
 		}
-
 	}
-
-
+	
 	public void countRequestHour(String temp) {
 		String hour = temp.substring(
 				temp.lastIndexOf("[")+1, temp.lastIndexOf("]"))
@@ -377,92 +374,68 @@ public class SelectMenuEvt implements ActionListener {
 
 		mapHour.put(hour, mapHour.get(hour) != null ? mapHour.get(hour)+1 : 1);
 	}
-
 	
+	// getters
 	public Map<String, Integer> getMapKeyBetweenStartAndEnd() {
 		return mapKeyBetweenStartAndEnd;
 	}
-
 	public String getMostFrequentHour() {
 		return mostFrequentHour;
 	}
-
 	public String getMostFrequentKeyBetweenStartAndEnd() {
 		return mostFrequentKeyBetweenStartAndEnd;
 	}
-
 	public String[] getBrowser() {
 		return browser;
 	}
-
 	public int[] getBrowserCnt() {
 		return browserCnt;
 	}
-
 	public SelectMenu getsm() {
 		return sm;
 	}
-
 	public String getFilePath() {
 		return filePath;
 	}
-
 	public Map<String, Integer> getMapKey() {
 		return mapKey;
 	}
-
 	public Map<String, Integer> getMapBrowser() {
 		return mapBrowser;
 	}
-
 	public Map<String, Integer> getMapHour() {
 		return mapHour;
 	}
-
 	public int getCode200() {
 		return code200;
 	}
-
 	public int getCode404() {
 		return code404;
 	}
-
 	public int getCode403() {
 		return code403;
 	}
-
 	public int getRequestNum() {
 		return requestNum;
 	}
-
 	public String getLogTxtCreationDate() {
 		return logTxtCreationDate;
 	}
-
 	public String getCode403Share() {
 		return code403Share;
 	}
-
 	public Map<String, String> getMapBrowserShare() {
 		return mapBrowserShare;
 	}
-
 	public String getMostFrequentKey() {
 		return mostFrequentKey;
 	}
-
-	public boolean isReportFlag() {
-		return reportFlag;
-	}
-
 	public String getfName() {
 		return fName;
 	}
-
 	public int getStart() {
 		return start;
 	}
-
 	public int getEnd() {
 		return end;
 	}
