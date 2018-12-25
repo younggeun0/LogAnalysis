@@ -133,6 +133,7 @@ public class SelectMenuEvt implements ActionListener {
 					} catch (NumberFormatException nfe) {
 						JOptionPane.showMessageDialog(sm, "끝라인은 숫자만 입력가능합니다.");
 						sm.getJtEnd().requestFocus();
+						return;
 					}
 					if(start > end) {
 						JOptionPane.showMessageDialog(sm, "끝라인은 시작라인보다 커야 합니다.");
