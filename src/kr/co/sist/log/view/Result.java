@@ -89,7 +89,8 @@ public class Result extends JDialog {
 			pnCe.add(new JLabel(sme.getMostFrequentKey()+" : "
 					+sme.getMapKey().get(sme.getMostFrequentKey())+"번"));
 		} else {
-			pnCe.add(new JButton("6. "+sme.getStart()+"~"+sme.getEnd()+" 라인 가장 빈도수가 높은 key와 횟수"));
+			pnCe.add(new JButton("6. "+sme.getStart()+"~"+(sme.getEnd() > sme.getRequestNum() ? sme.getRequestNum() : sme.getEnd())
+					+" 라인 가장 빈도수가 높은 key와 횟수"));
 			pnCe.add(new JLabel(sme.getMostFrequentKeyBetweenStartAndEnd()+" : "
 					+sme.getMapKeyBetweenStartAndEnd().get(sme.getMostFrequentKeyBetweenStartAndEnd())+"번"));
 		}

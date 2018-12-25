@@ -154,6 +154,12 @@ public class SelectMenuEvt implements ActionListener {
 					selectLog();
 
 						readLog();
+						
+						if (start > requestNum) {
+							JOptionPane.showMessageDialog(sm, "시작라인은 "+requestNum+"보다 클 수 없습니다.");
+							reportFlag = false;
+							return;
+						}
 
 						if (requestNum != 0) {
 							calLogTxtCreationDate();
@@ -234,7 +240,7 @@ public class SelectMenuEvt implements ActionListener {
 			sb.append("6. "+(start+1)+"~"+requestNum+"번째 정보 최다 사용 키의 이름과 횟수 : \n")
 			.append("\t").append(mostFrequentKey).append(mapKey.get(mostFrequentKey));
 		} else {
-			sb.append("6. "+start+"~"+end+"번째 정보 최다 사용 키의 이름과 횟수 : \n")
+			sb.append("6. "+start+"~"+(end > requestNum ? requestNum : end)+"번째 정보 최다 사용 키의 이름과 횟수 : \n")
 			.append("\t").append(mostFrequentKeyBetweenStartAndEnd).append(" ")
 			.append(mapKeyBetweenStartAndEnd.get(mostFrequentKeyBetweenStartAndEnd)).append("회");
 		}
