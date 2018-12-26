@@ -152,8 +152,7 @@ public class SelectMenuEvt implements ActionListener {
 						sm.getJtEnd().requestFocus();
 						return;
 					}
-					
-					if (start == 0 && end == 0) {
+					if (start == 0 || end == 0) {
 						JOptionPane.showMessageDialog(sm, "시작, 끝라인으로 0은 입력하실 수 없습니다.");
 						sm.getJtStart().requestFocus();
 						return;
