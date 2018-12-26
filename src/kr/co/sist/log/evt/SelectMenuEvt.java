@@ -323,11 +323,6 @@ public class SelectMenuEvt implements ActionListener {
 
 			String temp = "";
 			while ((temp = br.readLine()) != null) { 
-				// 로그아닌 파일 임시예외처리
-				/*if (!(temp.contains("[") || temp.contains("]"))) {
-					JOptionPane.showMessageDialog(sm, "로그파일이 아닙니다.");
-					return;
-				}*/
 
 				requestNum++;
 				countKey(temp);
