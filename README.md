@@ -7,7 +7,7 @@
 
 * 업무분장
   * younggeun0
-    * base code 작성, 내용 통합, 입력된 줄 로그처리 구현
+    * base code 작성, 내용 통합, 입력된 줄 로그처리 구현, 
   * gkwl7878
     * browser 로그처리, Report 구현
   * jeongmipark94
