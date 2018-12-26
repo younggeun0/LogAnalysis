@@ -167,6 +167,9 @@ public class SelectMenuEvt implements ActionListener {
 							reportFlag = false;
 							return;
 						}
+						if (end > requestNum) {
+							JOptionPane.showMessageDialog(sm, "해당 파일은 "+requestNum+"개의 로그만 존재합니다.");
+						}
 
 						if (requestNum != 0) {
 							calLogTxtCreationDate();
