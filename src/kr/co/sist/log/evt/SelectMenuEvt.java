@@ -345,9 +345,6 @@ public class SelectMenuEvt implements ActionListener {
 				br.close();
 		}
 	}
-//	public checkFile(String br) {
-//		
-//	}
 
 	public void countKey(String temp) {
 		String key = null;
