@@ -189,9 +189,7 @@ public class SelectMenuEvt implements ActionListener {
 			}
 		}
 	}
-	public void checkFile() {
-		
-	}
+
 	public void mkLogReport() throws IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date d = new Date();

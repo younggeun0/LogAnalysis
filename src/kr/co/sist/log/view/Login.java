@@ -38,14 +38,13 @@ public class Login extends JFrame {
 		JLabel jlPw = new JLabel("비밀번호");
 		jlPw.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
 		
+		setLayout(null);
+		
 		LoginEvt le = new LoginEvt(this);
 		jbLogin.addActionListener(le);
-		// enter로 로그인처리 
 		jbLogin.setActionCommand("login");
 		jtId.registerKeyboardAction(le, "login", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
 		jpfPw.registerKeyboardAction(le, "login", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
-		
-		setLayout(null);
 		
 		jlLoginImage.setBounds(30, 30, 330, 214);
 		jlId.setBounds(30, 300, 150, 30);
