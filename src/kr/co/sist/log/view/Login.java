@@ -1,13 +1,16 @@
 package kr.co.sist.log.view;
 
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import kr.co.sist.log.evt.LoginEvt;
 
@@ -36,6 +39,10 @@ public class Login extends JFrame {
 		
 		LoginEvt le = new LoginEvt(this);
 		jbLogin.addActionListener(le);
+		// enter로 로그인처리 
+		jbLogin.setActionCommand("login");
+		jtId.registerKeyboardAction(le, "login", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
+		jpfPw.registerKeyboardAction(le, "login", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
 		
 		setLayout(null);
 		

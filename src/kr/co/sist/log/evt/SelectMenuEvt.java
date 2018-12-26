@@ -86,7 +86,7 @@ public class SelectMenuEvt implements ActionListener {
 
 					new Result(this, sm);
 				} else {
-					JOptionPane.showConfirmDialog(sm, "읽어올 요청 정보가 없습니다.");
+					JOptionPane.showMessageDialog(sm, "읽어올 요청 정보가 없습니다.");
 				}
 
 			} catch (FileNotFoundException fnfe) {
@@ -173,7 +173,7 @@ public class SelectMenuEvt implements ActionListener {
 
 							new Result(this, sm);
 						} else {
-							JOptionPane.showConfirmDialog(sm, "읽어올 요청 정보가 없습니다.");
+							JOptionPane.showMessageDialog(sm, "읽어올 요청 정보가 없습니다.");
 						}
 					} catch (FileNotFoundException fnfe) {
 						JOptionPane.showMessageDialog(sm, "취소하셨습니다.");
