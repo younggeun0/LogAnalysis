@@ -7,12 +7,12 @@
 
 * 업무분장
   * younggeun0
-    * base code 작성, 내용 통합, 입력된 줄 로그처리 구현
+    * base code 작성, 내용 통합, 입력된 줄 로그처리 구현, 예외처리
   * gkwl7878
-    * browser 로그처리, Report 구현
+    * browser 로그처리, Report 구현, 테스팅
   * jeongmipark94
-    * httpStatus코드 로그처리, Result JDialog 구현
+    * httpStatus코드 로그처리, Result JDialog 구현, 테스팅
   * hyewon0218
-    * hour 로그처리, Login JFrame 구현
+    * hour 로그처리, Login JFrame 구현, 테스팅
   * kimkunha
-    * key 로그처리
+    * key 로그처리, 테스팅
