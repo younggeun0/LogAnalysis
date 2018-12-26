@@ -36,7 +36,7 @@ public class SelectMenuEvt implements ActionListener {
 	private Map<String, Integer> mapKeyBetweenStartAndEnd;
 	private Map<String, Integer> mapBrowser;
 	private String[] browser = { "opera", "ie", "firefox", "Chrome", "Safari" };
-	private int[] browserCnt = new int[browser.length];
+	private int[] browserCnt;
 	private Map<String, Integer> mapHour;
 	private int code200, code404, code403;
 	private int requestNum;
@@ -56,6 +56,7 @@ public class SelectMenuEvt implements ActionListener {
 	}
 	
 	public void initInstances() {
+		browserCnt = new int[browser.length];
 		mapKey = new HashMap<String, Integer>();
 		mapKeyBetweenStartAndEnd = new HashMap<String, Integer>();
 		mapBrowser = new HashMap<String, Integer>();
