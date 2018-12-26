@@ -112,7 +112,7 @@ public class SelectMenuEvt implements ActionListener {
 			}
 		}
 
-		if (e.getSource() == sm.getJbLineView()) {
+		if (e.getActionCommand() == "lineView") {
 			initInstances();
 
 			if (sm.getJtStart().getText().equals("")) {
@@ -157,7 +157,6 @@ public class SelectMenuEvt implements ActionListener {
 						sm.getJtStart().requestFocus();
 						return;
 					}
-					
 
 					try {
 						selectLog();

@@ -1,10 +1,14 @@
 package kr.co.sist.log.view;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import kr.co.sist.log.evt.SelectMenuEvt;
 
@@ -50,6 +54,9 @@ public class SelectMenu extends JDialog {
 		jbView.addActionListener(sme);
 		jbReport.addActionListener(sme);
 		jbLineView.addActionListener(sme);
+		jbLineView.setActionCommand("lineView");
+		jtStart.registerKeyboardAction(sme, "lineView", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
+		jtEnd.registerKeyboardAction(sme, "lineView", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
 		
 		setBounds(400, 300, 420, 240);
 		setResizable(false);
