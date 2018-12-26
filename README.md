@@ -15,4 +15,4 @@
   * hyewon0218
     * hour 로그처리, Login JFrame 구현, 테스팅
   * kimkunha
-    * key 로그처리, 
+    * key 로그처리, 테스팅
