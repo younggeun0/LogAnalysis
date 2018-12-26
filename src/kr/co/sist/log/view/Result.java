@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import kr.co.sist.log.evt.ResultEvt;
 import kr.co.sist.log.evt.SelectMenuEvt;

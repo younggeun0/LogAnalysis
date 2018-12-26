@@ -17,6 +17,7 @@ import kr.co.sist.log.evt.LoginEvt;
 /////////////// 12-22-2018 로그인  JFrame구현(헤원) /////////////////
 /////////////// 12-23-2018 로그인 디자인 추가(영근) /////////////////
 // 변경 내용 : 배치, 컴포넌트 사이즈 수정/ 이미지 추가
+@SuppressWarnings("serial")
 public class Login extends JFrame {
 	
 	private JTextField jtId;
