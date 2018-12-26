@@ -87,7 +87,7 @@ public class SelectMenuEvt implements ActionListener {
 
 					new Result(this, sm);
 				} else {
-					JOptionPane.showMessageDialog(sm, "읽어올 요청 정보가 없습니다.");
+					JOptionPane.showMessageDialog(sm, "읽어올 로그 정보가 없습니다.");
 				}
 
 			} catch (FileNotFoundException fnfe) {
@@ -152,6 +152,13 @@ public class SelectMenuEvt implements ActionListener {
 						sm.getJtEnd().requestFocus();
 						return;
 					}
+					
+					if (start == 0 && end == 0) {
+						JOptionPane.showMessageDialog(sm, "시작, 끝라인으로 0은 입력하실 수 없습니다.");
+						sm.getJtStart().requestFocus();
+						return;
+					}
+					
 
 					try {
 						selectLog();
@@ -173,7 +180,7 @@ public class SelectMenuEvt implements ActionListener {
 
 							new Result(this, sm);
 						} else {
-							JOptionPane.showMessageDialog(sm, "읽어올 요청 정보가 없습니다.");
+							JOptionPane.showMessageDialog(sm, "읽어올 로그 정보가 없습니다.");
 						}
 					} catch (FileNotFoundException fnfe) {
 						JOptionPane.showMessageDialog(sm, "취소하셨습니다.");
