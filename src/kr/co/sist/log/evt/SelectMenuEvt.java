@@ -324,18 +324,8 @@ public class SelectMenuEvt implements ActionListener {
 			br = new BufferedReader(new FileReader(filePath));
 
 			String temp = "";
-		/*	try {
-				if(!(br.toString().contains("[200][http://sist.co.kr/find/books?key=mongodb&query=sist][ie][2018-04-05 09:35:16]"))
-						&&(!(br.toString().contains("[200][http://sist.co.kr/find/books?key=mongodb&query=sist][ie][2018-04-06 09:35:16]")))) {
-					JOptionPane.showMessageDialog(sm, "파일 선택이 잘못되었습니다.");
-					selectLog();
-				}else {
-					temp="";
-				}				
-			}catch (StringIndexOutOfBoundsException sioobe) {
-			}*/
 			while ((temp = br.readLine()) != null) {
-				if (temp.contains("][http://")) {
+				if (!temp.contains("][http://")) {
 					JOptionPane.showMessageDialog(sm, "파일 선택이 잘못되었습니다.");
 					return;
 				}
