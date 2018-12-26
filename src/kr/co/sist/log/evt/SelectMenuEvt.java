@@ -48,13 +48,12 @@ public class SelectMenuEvt implements ActionListener {
 	private boolean reportFlag;
 	private int start;
 	private int end;
-	
-	
+
 	public SelectMenuEvt(SelectMenu sm) {
 		this.sm = sm;
 		initInstances();
 	}
-	
+
 	public void initInstances() {
 		browserCnt = new int[browser.length];
 		mapKey = new HashMap<String, Integer>();
@@ -63,9 +62,12 @@ public class SelectMenuEvt implements ActionListener {
 		mapHour = new HashMap<String, Integer>();
 		mapBrowserShare = new HashMap<String, String>();
 		reportFlag = false;
-		code200 = 0; code404 = 0; code403 = 0;
+		code200 = 0;
+		code404 = 0;
+		code403 = 0;
 		requestNum = 0;
-		start = 0; end = 0;
+		start = 0;
+		end = 0;
 	}
 
 	@Override
@@ -73,8 +75,7 @@ public class SelectMenuEvt implements ActionListener {
 		if (e.getSource() == sm.getJbView()) {
 			initInstances();
 			try {
-			selectLog();
-
+				selectLog();
 				readLog();
 
 				if (requestNum != 0) {
@@ -110,10 +111,10 @@ public class SelectMenuEvt implements ActionListener {
 				JOptionPane.showMessageDialog(sm, "View를 먼저 실행 후 Report가 가능합니다.");
 			}
 		}
-		
+
 		if (e.getSource() == sm.getJbLineView()) {
 			initInstances();
-			
+
 			if (sm.getJtStart().getText().equals("")) {
 				JOptionPane.showMessageDialog(sm, "시작라인을 입력해주세요.");
 				sm.getJtStart().requestFocus();
@@ -136,7 +137,7 @@ public class SelectMenuEvt implements ActionListener {
 						sm.getJtEnd().requestFocus();
 						return;
 					}
-					if(start > end) {
+					if (start > end) {
 						JOptionPane.showMessageDialog(sm, "끝라인은 시작라인보다 커야 합니다.");
 						sm.getJtEnd().requestFocus();
 						return;
@@ -151,14 +152,13 @@ public class SelectMenuEvt implements ActionListener {
 						sm.getJtEnd().requestFocus();
 						return;
 					}
-					
-					try {
-					selectLog();
 
+					try {
+						selectLog();
 						readLog();
-						
+
 						if (start > requestNum) {
-							JOptionPane.showMessageDialog(sm, "시작라인은 "+requestNum+"보다 클 수 없습니다.");
+							JOptionPane.showMessageDialog(sm, "시작라인은 " + requestNum + "보다 클 수 없습니다.");
 							reportFlag = false;
 							return;
 						}
@@ -184,26 +184,28 @@ public class SelectMenuEvt implements ActionListener {
 			}
 		}
 	}
-	
+
 	public void mkLogReport() throws IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		Date d= new Date();
-		String s =sdf.format(d);
+		Date d = new Date();
+		String s = sdf.format(d);
 		StringBuilder sb = new StringBuilder();
 		sb.append("report_").append(s).append(".dat");
-		File file = new File("C:/dev/Report/");		
+		File file = new File("C:/dev/Report/");
 		file.mkdirs();
-		
-		BufferedWriter bw=null;
+
+		BufferedWriter bw = null;
 		try {
-			bw = new BufferedWriter(new FileWriter("C:/dev/Report/"+sb.toString()));
+			bw = new BufferedWriter(new FileWriter("C:/dev/Report/" + sb.toString()));
 			bw.write(printReport());
 			bw.flush();
-		}finally{
-			if(bw!=null) {bw.close();}
+		} finally {
+			if (bw != null) {
+				bw.close();
+			}
 		}
 	}
-	
+
 	public void calLogTxtCreationDate() {
 		try {
 			BasicFileAttributes attrs = Files.readAttributes(new File(filePath).toPath(), BasicFileAttributes.class);
@@ -228,25 +230,24 @@ public class SelectMenuEvt implements ActionListener {
 		sb.append("-------------------------------------------------------------\n");
 		sb.append("1. 최다 사용키: ").append(mostFrequentKey).append(" ").append(mapKey.get(mostFrequentKey)).append("회\n");
 		sb.append("2. 브라우저별 접속 횟수와 비율 : \n");
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			key = it.next();
 			sb.append("\t").append(key).append(" : ").append(mapBrowser.get(key)).append("번(")
-			.append(mapBrowserShare.get(key)).append("%)\n");
+					.append(mapBrowserShare.get(key)).append("%)\n");
 		}
-		sb.append("3. 서비스를 성공적수행(200) 횟수, 실패(404)횟수 : \n")
-		.append("\t200 : ").append(code200).append("번 404 : ").append(code404).append("번\n");
+		sb.append("3. 서비스를 성공적수행(200) 횟수, 실패(404)횟수 : \n").append("\t200 : ").append(code200).append("번 404 : ")
+				.append(code404).append("번\n");
 		sb.append("4. 요청이 가장 많은 시간: [").append(mostFrequentHour).append("시]\n");
-		sb.append("5.비정상적인 요청(403)이 발생한 횟수, 비율 : ").append(code403).append("번(")
-		.append(code403Share).append("%)\n");
-		if(start == 0 && end == 0) {
-			sb.append("6. "+(start+1)+"~"+requestNum+"번째 정보 최다 사용 키의 이름과 횟수 : \n")
-			.append("\t").append(mostFrequentKey).append(mapKey.get(mostFrequentKey));
+		sb.append("5.비정상적인 요청(403)이 발생한 횟수, 비율 : ").append(code403).append("번(").append(code403Share).append("%)\n");
+		if (start == 0 && end == 0) {
+			sb.append("6. " + (start + 1) + "~" + requestNum + "번째 정보 최다 사용 키의 이름과 횟수 : \n").append("\t")
+					.append(mostFrequentKey).append(mapKey.get(mostFrequentKey));
 		} else {
-			sb.append("6. "+start+"~"+(end > requestNum ? requestNum : end)+"번째 정보 최다 사용 키의 이름과 횟수 : \n")
-			.append("\t").append(mostFrequentKeyBetweenStartAndEnd).append(" ")
-			.append(mapKeyBetweenStartAndEnd.get(mostFrequentKeyBetweenStartAndEnd)).append("회");
+			sb.append("6. " + start + "~" + (end > requestNum ? requestNum : end) + "번째 정보 최다 사용 키의 이름과 횟수 : \n")
+					.append("\t").append(mostFrequentKeyBetweenStartAndEnd).append(" ")
+					.append(mapKeyBetweenStartAndEnd.get(mostFrequentKeyBetweenStartAndEnd)).append("회");
 		}
-		
+
 		return sb.toString();
 	}
 
@@ -256,8 +257,7 @@ public class SelectMenuEvt implements ActionListener {
 			if (entry.getValue() == maxValue) {
 				mostFrequentKey = entry.getKey();
 			}
-		} 
-
+		}
 	}
 
 	public void calMostFrequentKeyBetweenStartAndEnd() {
@@ -271,12 +271,12 @@ public class SelectMenuEvt implements ActionListener {
 
 	public void calMostFrequentHour() {
 		Set<String> setHour = mapHour.keySet();
-		Iterator<String> it = setHour.iterator(); 
-		
+		Iterator<String> it = setHour.iterator();
+
 		int max = 0;
 		String hour = "";
-		
-		while(it.hasNext()) {
+
+		while (it.hasNext()) {
 			hour = it.next();
 			if (mapHour.get(hour) > max) {
 				mostFrequentHour = hour;
@@ -308,7 +308,6 @@ public class SelectMenuEvt implements ActionListener {
 		fName = fd.getFile();
 		filePath = dirPath + fName;
 	}
-
 	public void readLog() throws IOException, FileNotFoundException {
 
 		BufferedReader br = null;
@@ -316,15 +315,15 @@ public class SelectMenuEvt implements ActionListener {
 			br = new BufferedReader(new FileReader(filePath));
 
 			String temp = "";
-			while ((temp = br.readLine()) != null) { 
-
+			
+			while ((temp = br.readLine()) != null) {
 				requestNum++;
 				countKey(temp);
 				countBrowser(temp);
 				countHttpStatusCode(temp);
 				countRequestHour(temp);
 				if (start != 0 && end != 0) {
-					if (requestNum >= start && requestNum <= end) { 
+					if (requestNum >= start && requestNum <= end) {
 						countKeyBetweenStartAndEnd(temp);
 					}
 				}
@@ -337,6 +336,7 @@ public class SelectMenuEvt implements ActionListener {
 		}
 	}
 
+
 	public void countKey(String temp) {
 		String key = null;
 		if (temp.contains("key")) {
@@ -344,7 +344,7 @@ public class SelectMenuEvt implements ActionListener {
 			mapKey.put(key, mapKey.get(key) != null ? mapKey.get(key) + 1 : 1);
 		}
 	}
-	
+
 	public void countKeyBetweenStartAndEnd(String temp) {
 		String key = null;
 		if (temp.contains("key")) {
@@ -360,90 +360,108 @@ public class SelectMenuEvt implements ActionListener {
 				browserCnt[i]++;
 			}
 			mapBrowser.put(browser[i], browserCnt[i]);
-		} 
+		}
 	}
 
 	public void countHttpStatusCode(String temp) {
-		int serviceCode  = Integer.parseInt(temp.substring(temp.indexOf("[")+1, temp.indexOf("]")));
-				
-		if(serviceCode ==200) {
+		int serviceCode = Integer.parseInt(temp.substring(temp.indexOf("[") + 1, temp.indexOf("]")));
+
+		if (serviceCode == 200) {
 			code200++;
-		}else if(serviceCode==404){
+		} else if (serviceCode == 404) {
 			code404++;
-		}else if(serviceCode ==403){
+		} else if (serviceCode == 403) {
 			code403++;
 		}
 	}
-	
-	public void countRequestHour(String temp) {
-		String hour = temp.substring(
-				temp.lastIndexOf("[")+1, temp.lastIndexOf("]"))
-				.substring(11, 13);
 
-		mapHour.put(hour, mapHour.get(hour) != null ? mapHour.get(hour)+1 : 1);
+	public void countRequestHour(String temp) {
+		String hour = temp.substring(temp.lastIndexOf("[") + 1, temp.lastIndexOf("]")).substring(11, 13);
+
+		mapHour.put(hour, mapHour.get(hour) != null ? mapHour.get(hour) + 1 : 1);
 	}
-	
+
 	// getters
 	public Map<String, Integer> getMapKeyBetweenStartAndEnd() {
 		return mapKeyBetweenStartAndEnd;
 	}
+
 	public String getMostFrequentHour() {
 		return mostFrequentHour;
 	}
+
 	public String getMostFrequentKeyBetweenStartAndEnd() {
 		return mostFrequentKeyBetweenStartAndEnd;
 	}
+
 	public String[] getBrowser() {
 		return browser;
 	}
+
 	public int[] getBrowserCnt() {
 		return browserCnt;
 	}
+
 	public SelectMenu getsm() {
 		return sm;
 	}
+
 	public String getFilePath() {
 		return filePath;
 	}
+
 	public Map<String, Integer> getMapKey() {
 		return mapKey;
 	}
+
 	public Map<String, Integer> getMapBrowser() {
 		return mapBrowser;
 	}
+
 	public Map<String, Integer> getMapHour() {
 		return mapHour;
 	}
+
 	public int getCode200() {
 		return code200;
 	}
+
 	public int getCode404() {
 		return code404;
 	}
+
 	public int getCode403() {
 		return code403;
 	}
+
 	public int getRequestNum() {
 		return requestNum;
 	}
+
 	public String getLogTxtCreationDate() {
 		return logTxtCreationDate;
 	}
+
 	public String getCode403Share() {
 		return code403Share;
 	}
+
 	public Map<String, String> getMapBrowserShare() {
 		return mapBrowserShare;
 	}
+
 	public String getMostFrequentKey() {
 		return mostFrequentKey;
 	}
+
 	public String getfName() {
 		return fName;
 	}
+
 	public int getStart() {
 		return start;
 	}
+
 	public int getEnd() {
 		return end;
 	}
