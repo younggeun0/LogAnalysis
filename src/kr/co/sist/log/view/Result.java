@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 import kr.co.sist.log.evt.ResultEvt;
 import kr.co.sist.log.evt.SelectMenuEvt;
@@ -33,7 +35,7 @@ public class Result extends JDialog {
 		JPanel jpBrowser = new JPanel();
 		setLayout(new GridLayout(1, 5));
 		
-		JLabel[] jlBrowser = new JLabel[sme.getBrowser().length];
+		JTextField[] jlBrowser = new JTextField[sme.getBrowser().length];
 		
 		Map<String, Integer> mapBrowser = sme.getMapBrowser();
 		Map<String, String> mapBrowserShare = sme.getMapBrowserShare();
@@ -49,7 +51,7 @@ public class Result extends JDialog {
 			
 			content.append(bName).append(" : ").append(mapBrowser.get(bName)).append(" (")
 			.append(mapBrowserShare.get(bName)).append("%)");
-			jlBrowser[i] = new JLabel(content.toString());
+			jlBrowser[i] = new JTextField(content.toString());
 			jpBrowser.add(jlBrowser[i]);
 			i++;
 			content.delete(0, content.length());
@@ -62,12 +64,12 @@ public class Result extends JDialog {
 		super(sl, "결과 출력",true);
 		this.sme = sme;
 		
-		JPanel pnNo = new JPanel();
+		JPanel bg = new JPanel();
 		JPanel pnCe= new JPanel();
 		JButton jbConfirm = new JButton("확인");
 		jbConfirm.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
 	
-		
+//		Icon = ImageIcon("");
 		File reportFile = new File(sme.getFilePath());
 		
 		reportFile.lastModified();
@@ -78,13 +80,13 @@ public class Result extends JDialog {
 		add(new JLabel("1. 최다 사용 key의 이름과 횟수")).setBounds(30, 50, 200, 50);
 		add(new JTextField(sme.getMostFrequentKey()+" : "+sme.getMapKey().get(sme.getMostFrequentKey())+"번")).setBounds(320, 60, 200, 30);
 		add(new JLabel("2. 브라우저별 접속횟수, 비율")).setBounds(30, 130, 200, 50);
-		add(browserInfo()).setBounds(300, 100, 200, 70); 
+		add(browserInfo()).setBounds(300, 100, 200, 150); 
 		add(new JLabel("3. 서비스 성공(200) 실패(404) 횟수")).setBounds(30, 230, 200, 50);
 		add(new JTextField("성공(200) : "+sme.getCode200()+", 실패(404) : "+sme.getCode404())).setBounds(300, 230, 200, 50);
 		add(new JLabel("4. 요청이 가장 많은 시간")).setBounds(30, 310, 200, 30);
-		add(new JTextArea(sme.getMostFrequentHour()+"시")).setBounds(300	, 310, 200,30);
+		add(new JTextArea(sme.getMostFrequentHour()+"시")).setBounds(300	, 325, 200,30);
 		add(new JLabel("5. 비정상 요청 횟수와 비율")).setBounds(30, 360, 200, 30);
-		add(new JLabel(sme.getCode403()+" ("
+		add(new JTextField(sme.getCode403()+" ("
 				+ String.format("%4.2f", 
 						sme.getCode403()/(double)sme.getRequestNum()*100)
 				+"%)")).setBounds(300, 360, 200, 30);

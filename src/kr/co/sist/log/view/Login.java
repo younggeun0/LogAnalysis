@@ -1,6 +1,7 @@
 package kr.co.sist.log.view;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -8,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -23,10 +25,21 @@ public class Login extends JFrame {
 	private JTextField jtId;
 	private JPasswordField jpfPw;
 	private JButton jbLogin;
+	ImageIcon icon;
 
 	public Login() {
 		super("·Î±×ÀÎ");
 
+		icon = new ImageIcon("C:\\Users\\owner\\Desktop\\gifpanel.gif");
+		JPanel bgr = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.drawImage(icon.getImage(), 0,0,null);
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
+		bgr.setLayout(null);
+		
 		ImageIcon ii = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\login.png");
 		JLabel jlLoginImage = new JLabel(ii);
 		jtId = new JTextField();
@@ -53,13 +66,14 @@ public class Login extends JFrame {
 		jpfPw.setBounds(180,360, 180, 30);
 		jbLogin.setBounds(50, 430, 300, 100);
 		
-		add(jlLoginImage);
-		add(jlId);
-		add(jlPw);
-		add(jtId);
-		add(jpfPw);
-		add(jbLogin);
+		bgr.add(jlLoginImage);
+		bgr.add(jlId);
+		bgr.add(jlPw);
+		bgr.add(jtId);
+		bgr.add(jpfPw);
+		bgr.add(jbLogin);
 			
+		setContentPane(bgr);
 		setBounds(500,250,400, 600);
 		setResizable(false);
 		setVisible(true);
