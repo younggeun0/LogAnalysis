@@ -305,7 +305,7 @@ public class SelectMenuEvt implements ActionListener {
 	}
 
 	public void calCode403Share() {
-		code403Share = String.format("%3.2f", (code403 / (double) requestNum) * 100);
+		code403Share = String.format("%4.2f", (code403 / (double) requestNum) * 100);
 	}
 
 	public void selectLog() {
