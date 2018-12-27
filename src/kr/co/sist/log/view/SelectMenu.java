@@ -23,12 +23,13 @@ public class SelectMenu extends JDialog {
 	private JButton jbLineView;
 	private JTextField jtStart;
 	private JTextField jtEnd;
-	ImageIcon icon;//¿ÃπÃ¡ˆ æ∆¿Ãƒ‹
+	ImageIcon icon;//√Ä√å¬π√å√Å√∂ ¬æ√Ü√Ä√å√Ñ√ú
 	
 	public SelectMenu(JFrame login) {
 		super(login, "Log Analysis App", true);
 		
-		//¿ÃπÃ¡ˆ ª¿‘
+
+		//√Ä√å¬π√å√Å√∂ ¬ª√∞√Ä√î
 		icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\aaa.jpg");
 		JPanel background = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -40,10 +41,9 @@ public class SelectMenu extends JDialog {
 		
 		background.setLayout(null);
 		
-		///
 		
-		JLabel jlStart = new JLabel("Ω√¿€");
-		JLabel jlEnd = new JLabel("≥°");
+		JLabel jlStart = new JLabel("¬Ω√É√Ä√õ");
+		JLabel jlEnd = new JLabel("¬≥¬°");
 		
 		jbView = new JButton("View");
 		jbReport = new JButton("Report");
@@ -72,15 +72,35 @@ public class SelectMenu extends JDialog {
 		background.add(jlEnd);
 		jlEnd.setBounds(55,200,50,30);
 		
+
+		jlMain.setBounds(40, 20, 330, 250);
+		add(jlMain);
+		jbView.setBounds(40, 290, 150, 50);
+		add(jbView);
+		jbReport.setBounds(220, 290, 150, 50);
+		add(jbReport);
+		jbLineView.setBounds(260, 360, 110, 70);
+		add(jbLineView);
+		jtStart.setBounds(95, 360, 150, 30);
+		add(jtStart);
+		jtEnd.setBounds(95, 400, 150, 30);
+		add(jtEnd);
+		jlStart.setBounds(55,360,50,30);
+		add(jlStart);
+		jlEnd.setBounds(55,400,50,30);
+		add(jlEnd);
+
 		
 		SelectMenuEvt sme = new SelectMenuEvt(this);
 		jbView.addActionListener(sme);
 		jbReport.addActionListener(sme);
 		jbLineView.addActionListener(sme);
 		
+
 //		ScrollPane = new JScrollPane(background);
 		setContentPane(background);
 		setBounds(400, 300, 420, 300);
+
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

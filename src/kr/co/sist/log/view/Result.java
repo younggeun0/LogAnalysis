@@ -23,8 +23,8 @@ import kr.co.sist.log.evt.ResultEvt;
 import kr.co.sist.log.evt.SelectMenuEvt;
 
 
-/////////////// 12-22 Result JDialog±¸Çö, EventÃ³¸®(Á¤¹Ì) /////////////////////
-// //////////// 12-24 Result µğÀÚÀÎ º¯°æ(¿µ±Ù), sme·ÎºÎÅÍ Ãâ·Â °á°ú ¼³Á¤ //////
+/////////////// 12-22 Result JDialogêµ¬í˜„, Eventì²˜ë¦¬(ì •ë¯¸) /////////////////////
+// //////////// 12-24 Result ë””ìì¸ ë³€ê²½(ì˜ê·¼), smeë¡œë¶€í„° ì¶œë ¥ ê²°ê³¼ ì„¤ì • //////
 @SuppressWarnings("serial")
 public class Result extends JDialog {
 	
@@ -64,8 +64,9 @@ public class Result extends JDialog {
 		return jpBrowser;
 	}
 
+
 	public Result(SelectMenuEvt sme, SelectMenu sl) {
-		super(sl, "°á°ú Ãâ·Â",true);
+		super(sl, "ê²°ê³¼ ì¶œë ¥",true);
 		icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\resultchang2.jpg");
 		JPanel bgr = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -73,43 +74,45 @@ public class Result extends JDialog {
 				setOpaque(false);
 			}
 		};
+
 		
 		bgr.setLayout(null);
 		this.sme = sme;
 		
 		JPanel bg = new JPanel();
-		JButton jbConfirm = new JButton("È®ÀÎ");
+		JButton jbConfirm = new JButton("í™•ì¸");
 //		jbConfirm.setFont(new Font(Font.DIALOG, Font.BOLD));
 	
 //		Icon = ImageIcon("");
 		File reportFile = new File(sme.getFilePath());
-		
-		bgr.add(new JLabel("ÆÄÀÏ¸í")).setBounds(40, 5, 100, 50);
+
+		bgr.add(new JLabel("íŒŒì¼ëª…")).setBounds(40, 5, 100, 50);
 		bgr.add(new JLabel(reportFile.getName())).setBounds(125, 10, 100, 30);
-		bgr.add(new JLabel("»ı¼ºµÈ ³¯Â¥")).setBounds(300, 10, 100, 30);
+		bgr.add(new JLabel("ìƒì„±ëœ ë‚ ì§œ")).setBounds(300, 10, 100, 30);
 		bgr.add(new JLabel(sme.getLogTxtCreationDate())).setBounds(380, 10, 150, 20);
-		bgr.add(new JLabel("1. ÃÖ´Ù »ç¿ë keyÀÇ ÀÌ¸§°ú È½¼ö")).setBounds(80, 50, 200, 50);
-		bgr.add(new JLabel(sme.getMostFrequentKey()+" : "+sme.getMapKey().get(sme.getMostFrequentKey())+"¹ø")).setBounds(380, 60, 200, 30);
-		bgr.add(new JLabel("2. ºê¶ó¿ìÀúº° Á¢¼ÓÈ½¼ö, ºñÀ²")).setBounds(80, 130, 200, 50);
+		bgr.add(new JLabel("1. ìµœë‹¤ ì‚¬ìš© keyì˜ ì´ë¦„ê³¼ íšŸìˆ˜")).setBounds(80, 50, 200, 50);
+		bgr.add(new JLabel(sme.getMostFrequentKey()+" : "+sme.getMapKey().get(sme.getMostFrequentKey())+"ë²ˆ")).setBounds(380, 60, 200, 30);
+		bgr.add(new JLabel("2. ë¸Œë¼ìš°ì €ë³„ ì ‘ì†íšŸìˆ˜, ë¹„ìœ¨")).setBounds(80, 130, 200, 50);
 		bgr.add(browserInfo()).setBounds(380, 100, 200, 150); 
-		bgr.add(new JLabel("3. ¼­ºñ½º ¼º°ø(200) ½ÇÆĞ(404) È½¼ö")).setBounds(80, 230, 200, 50);
-		bgr.add(new JLabel("¼º°ø(200) : "+sme.getCode200()+", ½ÇÆĞ(404) : "+sme.getCode404())).setBounds(380, 230, 200, 50);
-		bgr.add(new JLabel("4. ¿äÃ»ÀÌ °¡Àå ¸¹Àº ½Ã°£")).setBounds(80, 310, 200, 30);
-		bgr.add(new JLabel(sme.getMostFrequentHour()+"½Ã")).setBounds(380	, 310, 200,30);
-		bgr.add(new JLabel("5. ºñÁ¤»ó ¿äÃ» È½¼ö¿Í ºñÀ²")).setBounds(80, 360, 200, 30);
+		bgr.add(new JLabel("3. ì„œë¹„ìŠ¤ ì„±ê³µ(200) ì‹¤íŒ¨(404) íšŸìˆ˜")).setBounds(80, 230, 200, 50);
+		bgr.add(new JLabel("ì„±ê³µ(200) : "+sme.getCode200()+", ì‹¤íŒ¨(404) : "+sme.getCode404())).setBounds(380, 230, 200, 50);
+		bgr.add(new JLabel("4. ìš”ì²­ì´ ê°€ì¥ ë§ì€ ì‹œê°„")).setBounds(80, 310, 200, 30);
+		bgr.add(new JLabel(sme.getMostFrequentHour()+"ì‹œ")).setBounds(380	, 310, 200,30);
+		bgr.add(new JLabel("5. ë¹„ì •ìƒ ìš”ì²­ íšŸìˆ˜ì™€ ë¹„ìœ¨")).setBounds(80, 360, 200, 30);
 		bgr.add(new JLabel(sme.getCode403()+" ("
+
 				+ String.format("%4.2f", 
 						sme.getCode403()/(double)sme.getRequestNum()*100)
 				+"%)")).setBounds(380, 360, 200, 30);
 		if (sme.getStart() == 0 && sme.getEnd() == 0) {
-			bgr.add(new JLabel("6. "+(sme.getStart()+1)+"~"+sme.getRequestNum()+" ¶óÀÎ °¡Àå °íºóµµ key, È½¼ö")).setBounds(80, 410, 250, 30);
+			bgr.add(new JLabel("6. "+(sme.getStart()+1)+"~"+sme.getRequestNum()+" ë¼ì¸ ê°€ì¥ ê³ ë¹ˆë„ key, íšŸìˆ˜")).setBounds(80, 410, 250, 30);
 			bgr.add(new JLabel(sme.getMostFrequentKey()+" : "
-					+sme.getMapKey().get(sme.getMostFrequentKey())+"¹ø")).setBounds(380, 410, 200, 30);
+					+sme.getMapKey().get(sme.getMostFrequentKey())+"ë²ˆ")).setBounds(380, 410, 200, 30);
 		} else {
 			bgr.add(new JLabel("6. "+sme.getStart()+"~"+(sme.getEnd() > sme.getRequestNum() ? sme.getRequestNum() : sme.getEnd())
-					+" ¶óÀÎ °¡Àå ºóµµ¼ö°¡ ³ôÀº key¿Í È½¼ö"));
+					+" ë¼ì¸ ê°€ì¥ ë¹ˆë„ìˆ˜ê°€ ë†’ì€ keyì™€ íšŸìˆ˜"));
 			bgr.add(new JLabel(sme.getMostFrequentKeyBetweenStartAndEnd()+" : "
-					+sme.getMapKeyBetweenStartAndEnd().get(sme.getMostFrequentKeyBetweenStartAndEnd())+"¹ø"));
+					+sme.getMapKeyBetweenStartAndEnd().get(sme.getMostFrequentKeyBetweenStartAndEnd())+"ë²ˆ"));
 		}
 //		pnNo.setLayout(new GridLayout(1, 4));
 //		pnCe.setLayout(new GridLayout(6, 2));

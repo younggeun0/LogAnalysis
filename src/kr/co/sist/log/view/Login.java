@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -16,19 +17,19 @@ import javax.swing.KeyStroke;
 
 import kr.co.sist.log.evt.LoginEvt;
 
-/////////////// 12-22-2018 ·Î±×ÀÎ  JFrame±¸Çö(Çì¿ø) /////////////////
-/////////////// 12-23-2018 ·Î±×ÀÎ µğÀÚÀÎ Ãß°¡(¿µ±Ù) /////////////////
-// º¯°æ ³»¿ë : ¹èÄ¡, ÄÄÆ÷³ÍÆ® »çÀÌÁî ¼öÁ¤/ ÀÌ¹ÌÁö Ãß°¡
+/////////////// 12-22-2018 ë¡œê·¸ì¸  JFrameêµ¬í˜„(í—¤ì›) /////////////////
+/////////////// 12-23-2018 ë¡œê·¸ì¸ ë””ìì¸ ì¶”ê°€(ì˜ê·¼) /////////////////
+// ë³€ê²½ ë‚´ìš© : ë°°ì¹˜, ì»´í¬ë„ŒíŠ¸ ì‚¬ì´ì¦ˆ ìˆ˜ì •/ ì´ë¯¸ì§€ ì¶”ê°€
 @SuppressWarnings("serial")
 public class Login extends JFrame {
-	
+
 	private JTextField jtId;
 	private JPasswordField jpfPw;
 	private JButton jbLogin;
 	ImageIcon icon;
 
 	public Login() {
-		super("·Î±×ÀÎ");
+		super("ë¡œê·¸ì¸");
 
 		icon = new ImageIcon("C:\\Users\\owner\\Desktop\\gifpanel.gif");
 		JPanel bgr = new JPanel() {
@@ -41,30 +42,44 @@ public class Login extends JFrame {
 		bgr.setLayout(null);
 		
 		ImageIcon ii = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\login.png");
+	    icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\aa.jpg");
+	      JPanel background = new JPanel() {
+	         public void paintComponent(Graphics g) {
+	            g.drawImage(icon.getImage(), 0,0,null);
+	            setOpaque(false);
+	            super.paintComponent(g);
+	         }
+	      };
+	      
+	      background.setLayout(null);
+	      
+	      
 		JLabel jlLoginImage = new JLabel(ii);
 		jtId = new JTextField();
 		jpfPw = new JPasswordField();
-		jbLogin = new JButton("·Î±×ÀÎ");
+		jbLogin = new JButton("ë¡œê·¸ì¸");
 		jbLogin.setFont(new Font(Font.DIALOG, Font.BOLD, 40));
-		JLabel jlId= new JLabel("¾ÆÀÌµğ");
+		JLabel jlId = new JLabel("ì•„ì´ë””");
 		jlId.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
-		JLabel jlPw = new JLabel("ºñ¹Ğ¹øÈ£");
+		JLabel jlPw = new JLabel("ë¹„ë°€ë²ˆí˜¸");
 		jlPw.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
-		
-		setLayout(null);
-		
+
+//		setLayout(null);
+
 		LoginEvt le = new LoginEvt(this);
 		jbLogin.addActionListener(le);
 		jbLogin.setActionCommand("login");
 		jtId.registerKeyboardAction(le, "login", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
-		jpfPw.registerKeyboardAction(le, "login", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
-		
+		jpfPw.registerKeyboardAction(le, "login", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
+				JComponent.WHEN_FOCUSED);
+
 		jlLoginImage.setBounds(30, 30, 330, 214);
 		jlId.setBounds(30, 300, 150, 30);
 		jlPw.setBounds(30, 360, 150, 30);
-		jtId.setBounds(180,300, 180, 30);
-		jpfPw.setBounds(180,360, 180, 30);
+		jtId.setBounds(180, 300, 180, 30);
+		jpfPw.setBounds(180, 360, 180, 30);
 		jbLogin.setBounds(50, 430, 300, 100);
+
 		
 		bgr.add(jlLoginImage);
 		bgr.add(jlId);
@@ -75,6 +90,7 @@ public class Login extends JFrame {
 			
 		setContentPane(bgr);
 		setBounds(500,250,400, 600);
+
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,8 +99,8 @@ public class Login extends JFrame {
 	public JTextField getJtId() {
 		return jtId;
 	}
+
 	public JPasswordField getJpfPw() {
 		return jpfPw;
 	}
 }
-
