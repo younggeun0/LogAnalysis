@@ -1,7 +1,5 @@
 # 로그 분석 시스템
 
-* 제작기간 일주일 (2018.12.22~2018.12.28)
-
 ![logFile](https://github.com/younggeun0/logAnalysisApp/blob/master/img/logFile.png?raw=true)
 
 * **로그 기록이 담긴 txt파일에서 원하는 정보를 얻기 위한 프로그램**
@@ -39,3 +37,6 @@
     * hour 로그처리, Login JFrame 구현, 테스팅
   * **kimkunha**
     * key 로그처리, 테스팅
+
+
+* 제작기간 일주일 (2018.12.22~2018.12.28)

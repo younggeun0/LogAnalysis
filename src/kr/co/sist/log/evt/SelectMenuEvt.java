@@ -299,7 +299,7 @@ public class SelectMenuEvt implements ActionListener {
 		Iterator<String> ita = set.iterator();
 		Iterator<String> ita2 = set.iterator();
 
-		for (int i = 0; i < browser.length; i++) {
+		while(ita.hasNext()) {
 			mapBrowserShare.put(ita2.next(),
 					String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
 		}
