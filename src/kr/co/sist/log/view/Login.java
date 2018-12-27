@@ -32,7 +32,7 @@ public class Login extends JFrame {
 		super("·Î±×ÀÎ");
 
 		ImageIcon ii = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\login.png");
-	    icon = new ImageIcon("C:\\Users\\SIST\\Desktop\\aa.jpg");
+	    icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\aa.jpg");
 	      JPanel background = new JPanel() {
 	         public void paintComponent(Graphics g) {
 	            g.drawImage(icon.getImage(), 0,0,null);
