@@ -12,6 +12,7 @@
   * 입력 라인에 해당하는 최다 사용 키의 이름과 횟수
 
 ![ui01](https://github.com/younggeun0/logAnalysisApp/blob/master/img/UI01.png?raw=true)
+![ui02](https://github.com/younggeun0/logAnalysisApp/blob/master/img/UI02.png?raw=true)
 
 * **기본 UI**
   * Login 후 사용 가능
@@ -20,7 +21,7 @@
     * 로그파일 선택 후 Result JDialog 창이 뜨며 결과를 보여줌.
   * Report 버튼을 누르면 해당 경로("C:/dev/report")에 현재 시간정보를 가진 `.dat`파일 생성
     * 단, Report 버튼은 View 버튼 클릭을 수행 후에만 클릭이 가능.
-
+  * Result엔 처리된 원하는 로그정보를 JLabel로 표기
 
 * **클래스 다이어그램**
 
