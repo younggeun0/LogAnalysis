@@ -368,8 +368,8 @@ public class SelectMenuEvt implements ActionListener {
 		for (int i = 0; i < browser.length; i++) {
 			if (temp.contains(browser[i])) {
 				browserCnt[i]++;
+				mapBrowser.put(browser[i], browserCnt[i]);
 			}
-			mapBrowser.put(browser[i], browserCnt[i]);
 		}
 	}
 
