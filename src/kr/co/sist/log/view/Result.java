@@ -56,6 +56,7 @@ public class Result extends JDialog {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public Result(SelectMenuEvt sme, SelectMenu sm) {
 		super(sm, "결과 출력",true);
 		this.sme = sme;
@@ -139,10 +140,38 @@ public class Result extends JDialog {
 		bgr.add(new JLabel("5. 비정상 요청 횟수와 비율")).setBounds(80, 360, 200, 30);
 		bgr.add(new JLabel(sme.getCode403()+" ("
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
+	public Result(SelectMenuEvt sme, SelectMenu sm) {
+		super(sm, "결과 출력",true);
+		this.sme = sme;
+		
+		JPanel pnNo = new JPanel();
+		JPanel pnCe= new JPanel();
+		JButton jbConfirm = new JButton("확인"); 
+		jbConfirm.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
+		
+		File reportFile = new File(sme.getFilePath());
+		
+		pnNo.add(new JButton("파일명"));
+		pnNo.add(new JLabel(reportFile.getName()));
+		pnNo.add(new JButton("생성된 날짜"));
+		pnNo.add(new JLabel(sme.getLogTxtCreationDate()));
+		pnCe.add(new JButton("1. 최다 사용 key의 이름과 횟수"));
+		pnCe.add(new JLabel(sme.getMostFrequentKey()+" : "+sme.getMapKey().get(sme.getMostFrequentKey())+"번"));
+		pnCe.add(new JButton("2. 브라우저별 접속횟수, 비율"));
+		pnCe.add(browserInfo()); 
+		pnCe.add(new JButton("3. 서비스 성공(200) 실패(404) 횟수"));
+		pnCe.add(new JLabel("성공(200) : "+sme.getCode200()+", 실패(404) : "+sme.getCode404()));
+		pnCe.add(new JButton("4. 요청이 가장 많은 시간"));
+		pnCe.add(new JLabel(sme.getMostFrequentHour()+"시"));
+		pnCe.add(new JButton("5. 비정상 요청 횟수와 비율"));
+		pnCe.add(new JLabel(sme.getCode403()+" ("
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 				+ String.format("%4.2f", 
 						sme.getCode403()/(double)sme.getRequestNum()*100)
 				+"%)"));
 		if (sme.getStart() == 0 && sme.getEnd() == 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -180,12 +209,22 @@ public class Result extends JDialog {
 					+" 라인 가장 빈도수가 높은 key와 횟수"));
 			bgr.add(new JLabel(sme.getMostFrequentKeyBetweenStartAndEnd()+" : "
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
+			pnCe.add(new JButton("6. "+(sme.getStart()+1)+"~"+sme.getRequestNum()+" 라인 가장 빈도수가 높은 key와 횟수"));
+			pnCe.add(new JLabel(sme.getMostFrequentKey()+" : "
+					+sme.getMapKey().get(sme.getMostFrequentKey())+"번"));
+		} else {
+			pnCe.add(new JButton("6. "+sme.getStart()+"~"+(sme.getEnd() > sme.getRequestNum() ? sme.getRequestNum() : sme.getEnd())
+					+" 라인 가장 빈도수가 높은 key와 횟수"));
+			pnCe.add(new JLabel(sme.getMostFrequentKeyBetweenStartAndEnd()+" : "
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 					+sme.getMapKeyBetweenStartAndEnd().get(sme.getMostFrequentKeyBetweenStartAndEnd())+"번"));
 		}
 		pnNo.setLayout(new GridLayout(1, 4));
 		pnCe.setLayout(new GridLayout(6, 2));
 		setLayout(new BorderLayout());
 		
+<<<<<<< HEAD
 <<<<<<< HEAD
 		add("North",pnNo);
 		add("Center",pnCe);
@@ -196,14 +235,22 @@ public class Result extends JDialog {
 //		add("Center",pnCe);
 //		add("South",jbConfirm);
 >>>>>>> parent of cdbdae5... 理쒖쥌
+=======
+		add("North",pnNo);
+		add("Center",pnCe);
+		add("South",jbConfirm);
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 		
 		ResultEvt r = new ResultEvt(this);
 		jbConfirm.addActionListener(r);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		setContentPane(bgr);
 >>>>>>> parent of cdbdae5... 理쒖쥌
+=======
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 		setBounds(400, 300, 650, 500);
 		setVisible(true);
 		setResizable(false);

@@ -38,6 +38,7 @@ public class Login extends JFrame {
 		jbLogin.setFont(new Font(Font.DIALOG, Font.BOLD, 40));
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		JLabel jlId = new JLabel("아이디");
 =======
 		JLabel jlId= new JLabel("아이디");
@@ -45,6 +46,9 @@ public class Login extends JFrame {
 =======
 		JLabel jlId= new JLabel("아이디");
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
+		JLabel jlId = new JLabel("아이디");
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 		jlId.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
 		JLabel jlPw = new JLabel("비밀번호");
 		jlPw.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
@@ -75,6 +79,7 @@ public class Login extends JFrame {
 
 		add(background);
 
+<<<<<<< HEAD
 		setBounds(500, 250, 400, 600);
 =======
 =======
@@ -93,6 +98,18 @@ public class Login extends JFrame {
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 =======
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
+		background.add(jlLoginImage);
+		background.add(jlId);
+		background.add(jlPw);
+		background.add(jtId);
+		background.add(jpfPw);
+		background.add(jbLogin);
+
+		add(background);
+
+		setBounds(500, 250, 400, 600);
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

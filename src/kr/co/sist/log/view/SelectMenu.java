@@ -23,16 +23,20 @@ public class SelectMenu extends JDialog {
 	private JTextField jtEnd;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	ImageIcon icon;//이미지 아이콘
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 =======
 	ImageIcon icon;//이미지 아이콘
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 	
 	public SelectMenu(JFrame login) {
 		super(login, "Log Analysis App", true);
 		
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		JLabel jlMain = new JLabel(new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\bg.png"));
@@ -57,6 +61,9 @@ public class SelectMenu extends JDialog {
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 =======
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
+		JLabel jlMain = new JLabel(new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\bg.png"));
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 		JLabel jlStart = new JLabel("시작");
 		JLabel jlEnd = new JLabel("끝");
 		
@@ -66,6 +73,7 @@ public class SelectMenu extends JDialog {
 		jtStart = new JTextField();
 		jtEnd = new JTextField();
 		
+<<<<<<< HEAD
 <<<<<<< HEAD
 		setLayout(null);
 =======
@@ -77,6 +85,10 @@ public class SelectMenu extends JDialog {
 		
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+		setLayout(null);
+		
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 		jlMain.setBounds(40, 20, 330, 250);
 		add(jlMain);
 		jbView.setBounds(40, 290, 150, 50);
@@ -93,6 +105,7 @@ public class SelectMenu extends JDialog {
 		add(jlStart);
 		jlEnd.setBounds(55,400,50,30);
 		add(jlEnd);
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
@@ -119,6 +132,8 @@ public class SelectMenu extends JDialog {
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 =======
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 		
 		SelectMenuEvt sme = new SelectMenuEvt(this);
 		jbView.addActionListener(sme);
@@ -128,6 +143,7 @@ public class SelectMenu extends JDialog {
 		jtStart.registerKeyboardAction(sme, "lineView", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
 		jtEnd.registerKeyboardAction(sme, "lineView", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
 		
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		setBounds(400, 100, 420, 500);
@@ -141,6 +157,9 @@ public class SelectMenu extends JDialog {
 		setContentPane(background);
 		setBounds(400, 300, 420, 300);
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
+		setBounds(400, 100, 420, 500);
+>>>>>>> parent of 8b15dee... Merge pull request #20 from younggeun0/temp
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
