@@ -17,9 +17,9 @@ import javax.swing.KeyStroke;
 
 import kr.co.sist.log.evt.LoginEvt;
 
-/////////////// 12-22-2018 ·Î±×ÀÎ  JFrame±¸Çö(Çì¿ø) /////////////////
-/////////////// 12-23-2018 ·Î±×ÀÎ µğÀÚÀÎ Ãß°¡(¿µ±Ù) /////////////////
-// º¯°æ ³»¿ë : ¹èÄ¡, ÄÄÆ÷³ÍÆ® »çÀÌÁî ¼öÁ¤/ ÀÌ¹ÌÁö Ãß°¡
+/////////////// 12-22-2018 ë¡œê·¸ì¸  JFrameêµ¬í˜„(í—¤ì›) /////////////////
+/////////////// 12-23-2018 ë¡œê·¸ì¸ ë””ìì¸ ì¶”ê°€(ì˜ê·¼) /////////////////
+// ë³€ê²½ ë‚´ìš© : ë°°ì¹˜, ì»´í¬ë„ŒíŠ¸ ì‚¬ì´ì¦ˆ ìˆ˜ì •/ ì´ë¯¸ì§€ ì¶”ê°€
 @SuppressWarnings("serial")
 public class Login extends JFrame {
 
@@ -29,8 +29,18 @@ public class Login extends JFrame {
 	ImageIcon icon;
 
 	public Login() {
-		super("·Î±×ÀÎ");
+		super("ë¡œê·¸ì¸");
 
+		icon = new ImageIcon("C:\\Users\\owner\\Desktop\\gifpanel.gif");
+		JPanel bgr = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.drawImage(icon.getImage(), 0,0,null);
+				setOpaque(false);
+				super.paintComponent(g);
+			}
+		};
+		bgr.setLayout(null);
+		
 		ImageIcon ii = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\login.png");
 	    icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\aa.jpg");
 	      JPanel background = new JPanel() {
@@ -47,11 +57,11 @@ public class Login extends JFrame {
 		JLabel jlLoginImage = new JLabel(ii);
 		jtId = new JTextField();
 		jpfPw = new JPasswordField();
-		jbLogin = new JButton("·Î±×ÀÎ");
+		jbLogin = new JButton("ë¡œê·¸ì¸");
 		jbLogin.setFont(new Font(Font.DIALOG, Font.BOLD, 40));
-		JLabel jlId = new JLabel("¾ÆÀÌµğ");
+		JLabel jlId = new JLabel("ì•„ì´ë””");
 		jlId.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
-		JLabel jlPw = new JLabel("ºñ¹Ğ¹øÈ£");
+		JLabel jlPw = new JLabel("ë¹„ë°€ë²ˆí˜¸");
 		jlPw.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
 
 //		setLayout(null);
@@ -70,16 +80,17 @@ public class Login extends JFrame {
 		jpfPw.setBounds(180, 360, 180, 30);
 		jbLogin.setBounds(50, 430, 300, 100);
 
-		background.add(jlLoginImage);
-		background.add(jlId);
-		background.add(jlPw);
-		background.add(jtId);
-		background.add(jpfPw);
-		background.add(jbLogin);
+		
+		bgr.add(jlLoginImage);
+		bgr.add(jlId);
+		bgr.add(jlPw);
+		bgr.add(jtId);
+		bgr.add(jpfPw);
+		bgr.add(jbLogin);
+			
+		setContentPane(bgr);
+		setBounds(500,250,400, 600);
 
-		add(background);
-
-		setBounds(500, 250, 400, 600);
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
