@@ -22,6 +22,10 @@ public class SelectMenu extends JDialog {
 	private JTextField jtStart;
 	private JTextField jtEnd;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	ImageIcon icon;//이미지 아이콘
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 =======
 	ImageIcon icon;//이미지 아이콘
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
@@ -30,8 +34,11 @@ public class SelectMenu extends JDialog {
 		super(login, "Log Analysis App", true);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		JLabel jlMain = new JLabel(new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\bg.png"));
 =======
+=======
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 		//이미지 삽입
 		icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\aaa.jpg");
 		JPanel background = new JPanel() {
@@ -46,6 +53,9 @@ public class SelectMenu extends JDialog {
 		
 		///
 		
+<<<<<<< HEAD
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 		JLabel jlStart = new JLabel("시작");
 		JLabel jlEnd = new JLabel("끝");
@@ -66,6 +76,7 @@ public class SelectMenu extends JDialog {
 >>>>>>> parent of cdbdae5... 理쒖쥌
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		jlMain.setBounds(40, 20, 330, 250);
 		add(jlMain);
 		jbView.setBounds(40, 290, 150, 50);
@@ -83,12 +94,18 @@ public class SelectMenu extends JDialog {
 		jlEnd.setBounds(55,400,50,30);
 		add(jlEnd);
 =======
+=======
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 		background.add(jbView);
 		jbView.setBounds(40, 90, 150, 50);
 		background.add(jbReport);
 		jbReport.setBounds(220, 90, 150, 50);
 		background.add(jbLineView);
+<<<<<<< HEAD
 		jbLineView.setBounds(260, 160, 110, 70);
+=======
+		jbLineView.setBounds(260, 185, 112, 40);
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 		background.add(jtStart);
 		jtStart.setBounds(95, 160, 150, 30);
 		background.add(jtEnd);
@@ -98,6 +115,9 @@ public class SelectMenu extends JDialog {
 		background.add(jlEnd);
 		jlEnd.setBounds(55,200,50,30);
 		
+<<<<<<< HEAD
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 		
 		SelectMenuEvt sme = new SelectMenuEvt(this);
@@ -109,7 +129,13 @@ public class SelectMenu extends JDialog {
 		jtEnd.registerKeyboardAction(sme, "lineView", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		setBounds(400, 100, 420, 500);
+=======
+//		ScrollPane = new JScrollPane(background);
+		setContentPane(background);
+		setBounds(400, 300, 420, 300);
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 =======
 //		ScrollPane = new JScrollPane(background);
 		setContentPane(background);

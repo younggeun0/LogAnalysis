@@ -55,6 +55,7 @@ public class Result extends JDialog {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public Result(SelectMenuEvt sme, SelectMenu sm) {
 		super(sm, "결과 출력",true);
 		this.sme = sme;
@@ -81,6 +82,8 @@ public class Result extends JDialog {
 		pnCe.add(new JButton("5. 비정상 요청 횟수와 비율"));
 		pnCe.add(new JLabel(sme.getCode403()+" ("
 =======
+=======
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 	public Result(SelectMenuEvt sme, SelectMenu sl) {
 		super(sl, "결과 출력",true);
 		icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\resultchang2.jpg");
@@ -102,6 +105,7 @@ public class Result extends JDialog {
 		File reportFile = new File(sme.getFilePath());
 		
 		bgr.add(new JLabel("파일명")).setBounds(40, 5, 100, 50);
+<<<<<<< HEAD
 		bgr.add(new JTextField(reportFile.getName())).setBounds(125, 10, 100, 30);
 		bgr.add(new JLabel("생성된 날짜")).setBounds(300, 10, 100, 30);
 		bgr.add(new JTextField(sme.getLogTxtCreationDate())).setBounds(380, 10, 150, 20);
@@ -120,10 +124,26 @@ public class Result extends JDialog {
 =======
 		bgr.add(new JTextField(sme.getCode403()+" ("
 >>>>>>> parent of cdbdae5... 理쒖쥌
+=======
+		bgr.add(new JLabel(reportFile.getName())).setBounds(125, 10, 100, 30);
+		bgr.add(new JLabel("생성된 날짜")).setBounds(300, 10, 100, 30);
+		bgr.add(new JLabel(sme.getLogTxtCreationDate())).setBounds(380, 10, 150, 20);
+		bgr.add(new JLabel("1. 최다 사용 key의 이름과 횟수")).setBounds(80, 50, 200, 50);
+		bgr.add(new JLabel(sme.getMostFrequentKey()+" : "+sme.getMapKey().get(sme.getMostFrequentKey())+"번")).setBounds(380, 60, 200, 30);
+		bgr.add(new JLabel("2. 브라우저별 접속횟수, 비율")).setBounds(80, 130, 200, 50);
+		bgr.add(browserInfo()).setBounds(380, 100, 200, 150); 
+		bgr.add(new JLabel("3. 서비스 성공(200) 실패(404) 횟수")).setBounds(80, 230, 200, 50);
+		bgr.add(new JLabel("성공(200) : "+sme.getCode200()+", 실패(404) : "+sme.getCode404())).setBounds(380, 230, 200, 50);
+		bgr.add(new JLabel("4. 요청이 가장 많은 시간")).setBounds(80, 310, 200, 30);
+		bgr.add(new JLabel(sme.getMostFrequentHour()+"시")).setBounds(380	, 310, 200,30);
+		bgr.add(new JLabel("5. 비정상 요청 횟수와 비율")).setBounds(80, 360, 200, 30);
+		bgr.add(new JLabel(sme.getCode403()+" ("
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 				+ String.format("%4.2f", 
 						sme.getCode403()/(double)sme.getRequestNum()*100)
 				+"%)"));
 		if (sme.getStart() == 0 && sme.getEnd() == 0) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 			pnCe.add(new JButton("6. "+(sme.getStart()+1)+"~"+sme.getRequestNum()+" 라인 가장 빈도수가 높은 key와 횟수"));
@@ -151,6 +171,15 @@ public class Result extends JDialog {
 =======
 			bgr.add(new JTextField(sme.getMostFrequentKeyBetweenStartAndEnd()+" : "
 >>>>>>> parent of cdbdae5... 理쒖쥌
+=======
+			bgr.add(new JLabel("6. "+(sme.getStart()+1)+"~"+sme.getRequestNum()+" 라인 가장 고빈도 key, 횟수")).setBounds(80, 410, 250, 30);
+			bgr.add(new JLabel(sme.getMostFrequentKey()+" : "
+					+sme.getMapKey().get(sme.getMostFrequentKey())+"번")).setBounds(380, 410, 200, 30);
+		} else {
+			bgr.add(new JLabel("6. "+sme.getStart()+"~"+(sme.getEnd() > sme.getRequestNum() ? sme.getRequestNum() : sme.getEnd())
+					+" 라인 가장 빈도수가 높은 key와 횟수"));
+			bgr.add(new JLabel(sme.getMostFrequentKeyBetweenStartAndEnd()+" : "
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 					+sme.getMapKeyBetweenStartAndEnd().get(sme.getMostFrequentKeyBetweenStartAndEnd())+"번"));
 		}
 		pnNo.setLayout(new GridLayout(1, 4));

@@ -37,7 +37,11 @@ public class Login extends JFrame {
 		jbLogin = new JButton("로그인");
 		jbLogin.setFont(new Font(Font.DIALOG, Font.BOLD, 40));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		JLabel jlId = new JLabel("아이디");
+=======
+		JLabel jlId= new JLabel("아이디");
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 =======
 		JLabel jlId= new JLabel("아이디");
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
@@ -60,6 +64,7 @@ public class Login extends JFrame {
 		jpfPw.setBounds(180,360, 180, 30);
 		jbLogin.setBounds(50, 430, 300, 100);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		background.add(jlLoginImage);
 		background.add(jlId);
@@ -72,6 +77,8 @@ public class Login extends JFrame {
 
 		setBounds(500, 250, 400, 600);
 =======
+=======
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 		
 		bgr.add(jlLoginImage);
 		bgr.add(jlId);
@@ -82,6 +89,9 @@ public class Login extends JFrame {
 			
 		setContentPane(bgr);
 		setBounds(500,250,400, 600);
+<<<<<<< HEAD
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+=======
 >>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 		setResizable(false);
 		setVisible(true);
