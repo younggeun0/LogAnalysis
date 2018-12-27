@@ -32,17 +32,18 @@ public class Login extends JFrame {
 		super("·Î±×ÀÎ");
 
 		ImageIcon ii = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\login.png");
-		icon = new ImageIcon("C:\\Users\\SIST\\Desktop\\aa.jpg");
-		JPanel background = new JPanel() {
-			public void paintComponent(Graphics g) {
-				g.drawImage(icon.getImage(), 0, 0, null);
-				setOpaque(false);
-				super.paintComponent(g);
-			}
-		};
-
-		background.setLayout(null);
-
+	    icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\aa.jpg");
+	      JPanel background = new JPanel() {
+	         public void paintComponent(Graphics g) {
+	            g.drawImage(icon.getImage(), 0,0,null);
+	            setOpaque(false);
+	            super.paintComponent(g);
+	         }
+	      };
+	      
+	      background.setLayout(null);
+	      
+	      
 		JLabel jlLoginImage = new JLabel(ii);
 		jtId = new JTextField();
 		jpfPw = new JPasswordField();
