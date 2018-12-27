@@ -199,12 +199,12 @@ public class SelectMenuEvt implements ActionListener {
 		String s = sdf.format(d);
 		StringBuilder sb = new StringBuilder();
 		sb.append("report_").append(s).append(".dat");
-		File file = new File("C:/dev/Report");
+		File file = new File("C:/dev/Report/");
 		file.mkdirs();
 
 		BufferedWriter bw = null;
 		try {
-			bw = new BufferedWriter(new FileWriter(file.getPath()+"/" + sb.toString()));
+			bw = new BufferedWriter(new FileWriter("C:/dev/Report/" + sb.toString()));
 			bw.write(printReport());
 			bw.flush();
 		} finally {
@@ -261,19 +261,18 @@ public class SelectMenuEvt implements ActionListener {
 
 	public void calMostFrequentKey() {
 		int maxValue = (Collections.max(mapKey.values())); //
-		for( String key : mapKey.keySet() ) {
-			if (mapKey.get(key) == maxValue) {
-				mostFrequentKey = key;
+		for (Map.Entry<String, Integer> entry : mapKey.entrySet()) {
+			if (entry.getValue() == maxValue) {
+				mostFrequentKey = entry.getKey();
 			}
 		}
-		
 	}
 
 	public void calMostFrequentKeyBetweenStartAndEnd() {
 		int maxValue = (Collections.max(mapKeyBetweenStartAndEnd.values()));
-		for (String key : mapKeyBetweenStartAndEnd.keySet()) {
-			if ( mapKeyBetweenStartAndEnd.get(key)== maxValue) {
-				mostFrequentKeyBetweenStartAndEnd = key;
+		for (Map.Entry<String, Integer> entry : mapKeyBetweenStartAndEnd.entrySet()) {
+			if (entry.getValue() == maxValue) {
+				mostFrequentKeyBetweenStartAndEnd = entry.getKey();
 			}
 		}
 	}
@@ -299,7 +298,7 @@ public class SelectMenuEvt implements ActionListener {
 		Iterator<String> ita = set.iterator();
 		Iterator<String> ita2 = set.iterator();
 
-		while(ita.hasNext()) {
+		for (int i = 0; i < browser.length; i++) {
 			mapBrowserShare.put(ita2.next(),
 					String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
 		}
@@ -369,8 +368,8 @@ public class SelectMenuEvt implements ActionListener {
 		for (int i = 0; i < browser.length; i++) {
 			if (temp.contains(browser[i])) {
 				browserCnt[i]++;
-				mapBrowser.put(browser[i], browserCnt[i]);
 			}
+			mapBrowser.put(browser[i], browserCnt[i]);
 		}
 	}
 

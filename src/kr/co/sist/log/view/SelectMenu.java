@@ -1,17 +1,15 @@
 package kr.co.sist.log.view;
 
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.ScrollPane;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 import kr.co.sist.log.evt.SelectMenuEvt;
 
@@ -23,13 +21,18 @@ public class SelectMenu extends JDialog {
 	private JButton jbLineView;
 	private JTextField jtStart;
 	private JTextField jtEnd;
-	ImageIcon icon;//√Ä√å¬π√å√Å√∂ ¬æ√Ü√Ä√å√Ñ√ú
+<<<<<<< HEAD
+=======
+	ImageIcon icon;//¿ÃπÃ¡ˆ æ∆¿Ãƒ‹
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 	
 	public SelectMenu(JFrame login) {
 		super(login, "Log Analysis App", true);
 		
-
-		//√Ä√å¬π√å√Å√∂ ¬ª√∞√Ä√î
+<<<<<<< HEAD
+		JLabel jlMain = new JLabel(new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\bg.png"));
+=======
+		//¿ÃπÃ¡ˆ ª¿‘
 		icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\aaa.jpg");
 		JPanel background = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -41,9 +44,11 @@ public class SelectMenu extends JDialog {
 		
 		background.setLayout(null);
 		
+		///
 		
-		JLabel jlStart = new JLabel("¬Ω√É√Ä√õ");
-		JLabel jlEnd = new JLabel("¬≥¬°");
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
+		JLabel jlStart = new JLabel("Ω√¿€");
+		JLabel jlEnd = new JLabel("≥°");
 		
 		jbView = new JButton("View");
 		jbReport = new JButton("Report");
@@ -51,28 +56,9 @@ public class SelectMenu extends JDialog {
 		jtStart = new JTextField();
 		jtEnd = new JTextField();
 		
-//		setLayout(null);
+		setLayout(null);
 		
-		jbView.setIcon(new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\viewIMG.jpg"));
-		jbReport.setIcon(new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\reviewIMG.jpg"));
-		jbLineView.setIcon(new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\LineView.jpg"));
-		
-		background.add(jbView);
-		jbView.setBounds(40, 90, 150, 50);
-		background.add(jbReport);
-		jbReport.setBounds(220, 90, 150, 50);
-		background.add(jbLineView);
-		jbLineView.setBounds(260, 185, 112, 40);
-		background.add(jtStart);
-		jtStart.setBounds(95, 160, 150, 30);
-		background.add(jtEnd);
-		jtEnd.setBounds(95, 200, 150, 30);
-		background.add(jlStart);
-		jlStart.setBounds(55,160,50,30);
-		background.add(jlEnd);
-		jlEnd.setBounds(55,200,50,30);
-		
-
+<<<<<<< HEAD
 		jlMain.setBounds(40, 20, 330, 250);
 		add(jlMain);
 		jbView.setBounds(40, 290, 150, 50);
@@ -89,18 +75,39 @@ public class SelectMenu extends JDialog {
 		add(jlStart);
 		jlEnd.setBounds(55,400,50,30);
 		add(jlEnd);
-
+=======
+		background.add(jbView);
+		jbView.setBounds(40, 90, 150, 50);
+		background.add(jbReport);
+		jbReport.setBounds(220, 90, 150, 50);
+		background.add(jbLineView);
+		jbLineView.setBounds(260, 185, 112, 40);
+		background.add(jtStart);
+		jtStart.setBounds(95, 160, 150, 30);
+		background.add(jtEnd);
+		jtEnd.setBounds(95, 200, 150, 30);
+		background.add(jlStart);
+		jlStart.setBounds(55,160,50,30);
+		background.add(jlEnd);
+		jlEnd.setBounds(55,200,50,30);
+		
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 		
 		SelectMenuEvt sme = new SelectMenuEvt(this);
 		jbView.addActionListener(sme);
 		jbReport.addActionListener(sme);
 		jbLineView.addActionListener(sme);
+		jbLineView.setActionCommand("lineView");
+		jtStart.registerKeyboardAction(sme, "lineView", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
+		jtEnd.registerKeyboardAction(sme, "lineView", KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_FOCUSED);
 		
-
+<<<<<<< HEAD
+		setBounds(400, 100, 420, 500);
+=======
 //		ScrollPane = new JScrollPane(background);
 		setContentPane(background);
 		setBounds(400, 300, 420, 300);
-
+>>>>>>> parent of a23d0c3... Merge branch 'master' into temp
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

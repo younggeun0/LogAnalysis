@@ -5,6 +5,6 @@ import kr.co.sist.log.view.Login;
 public class LogAnalysisRun {
 
 	public static void main(String[] args) {
-		new Login(); 
+		new Login();
 	}
 }
