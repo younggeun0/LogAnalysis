@@ -2,6 +2,7 @@ package kr.co.sist.log.view;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.io.File;
 import java.util.Iterator;
@@ -27,13 +28,16 @@ import kr.co.sist.log.evt.SelectMenuEvt;
 @SuppressWarnings("serial")
 public class Result extends JDialog {
 	
+	ImageIcon icon;
 	private SelectMenuEvt sme;
 	
-	ImageIcon icon = new ImageIcon("C:\\Users\\owner\\Desktop\\design\\reviewIMG.jpg");
+//	ImageIcon icon = new ImageIcon("C:\\Users\\owner\\Desktop\\design\\reviewIMG.jpg");
 	public JPanel browserInfo() {
 		
+		
 		JPanel jpBrowser = new JPanel();
-		setLayout(new GridLayout(1, 5));
+		jpBrowser.setOpaque(false);
+//		setLayout(new GridLayout(1, 5));
 		
 		JTextField[] jlBrowser = new JTextField[sme.getBrowser().length];
 		
@@ -62,51 +66,58 @@ public class Result extends JDialog {
 
 	public Result(SelectMenuEvt sme, SelectMenu sl) {
 		super(sl, "결과 출력",true);
+		icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\resultchang2.jpg");
+		JPanel bgr = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.drawImage(icon.getImage(),0,0,null);
+				setOpaque(false);
+			}
+		};
+		
+		bgr.setLayout(null);
 		this.sme = sme;
 		
 		JPanel bg = new JPanel();
-		JPanel pnCe= new JPanel();
 		JButton jbConfirm = new JButton("확인");
-		jbConfirm.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
+//		jbConfirm.setFont(new Font(Font.DIALOG, Font.BOLD));
 	
 //		Icon = ImageIcon("");
 		File reportFile = new File(sme.getFilePath());
 		
-		reportFile.lastModified();
-		add(new JLabel(icon)).setBounds(30, 10, 100, 50);
-		add(new JTextField(reportFile.getName())).setBounds(125, 10, 100, 30);
-		add(new JLabel("생성된 날짜")).setBounds(320, 10, 100, 30);
-		add(new JTextField(sme.getLogTxtCreationDate())).setBounds(430, 10, 150, 30);
-		add(new JLabel("1. 최다 사용 key의 이름과 횟수")).setBounds(30, 50, 200, 50);
-		add(new JTextField(sme.getMostFrequentKey()+" : "+sme.getMapKey().get(sme.getMostFrequentKey())+"번")).setBounds(320, 60, 200, 30);
-		add(new JLabel("2. 브라우저별 접속횟수, 비율")).setBounds(30, 130, 200, 50);
-		add(browserInfo()).setBounds(300, 100, 200, 150); 
-		add(new JLabel("3. 서비스 성공(200) 실패(404) 횟수")).setBounds(30, 230, 200, 50);
-		add(new JTextField("성공(200) : "+sme.getCode200()+", 실패(404) : "+sme.getCode404())).setBounds(300, 230, 200, 50);
-		add(new JLabel("4. 요청이 가장 많은 시간")).setBounds(30, 310, 200, 30);
-		add(new JTextArea(sme.getMostFrequentHour()+"시")).setBounds(300	, 325, 200,30);
-		add(new JLabel("5. 비정상 요청 횟수와 비율")).setBounds(30, 360, 200, 30);
-		add(new JTextField(sme.getCode403()+" ("
+		bgr.add(new JLabel("파일명")).setBounds(40, 5, 100, 50);
+		bgr.add(new JTextField(reportFile.getName())).setBounds(125, 10, 100, 30);
+		bgr.add(new JLabel("생성된 날짜")).setBounds(300, 10, 100, 30);
+		bgr.add(new JTextField(sme.getLogTxtCreationDate())).setBounds(380, 10, 150, 20);
+		bgr.add(new JLabel("1. 최다 사용 key의 이름과 횟수")).setBounds(80, 50, 200, 50);
+		bgr.add(new JTextField(sme.getMostFrequentKey()+" : "+sme.getMapKey().get(sme.getMostFrequentKey())+"번")).setBounds(380, 60, 200, 30);
+		bgr.add(new JLabel("2. 브라우저별 접속횟수, 비율")).setBounds(80, 130, 200, 50);
+		bgr.add(browserInfo()).setBounds(380, 100, 200, 150); 
+		bgr.add(new JLabel("3. 서비스 성공(200) 실패(404) 횟수")).setBounds(80, 230, 200, 50);
+		bgr.add(new JTextField("성공(200) : "+sme.getCode200()+", 실패(404) : "+sme.getCode404())).setBounds(380, 230, 200, 50);
+		bgr.add(new JLabel("4. 요청이 가장 많은 시간")).setBounds(80, 310, 200, 30);
+		bgr.add(new JTextArea(sme.getMostFrequentHour()+"시")).setBounds(380	, 310, 200,30);
+		bgr.add(new JLabel("5. 비정상 요청 횟수와 비율")).setBounds(80, 360, 200, 30);
+		bgr.add(new JTextField(sme.getCode403()+" ("
 				+ String.format("%4.2f", 
 						sme.getCode403()/(double)sme.getRequestNum()*100)
-				+"%)")).setBounds(300, 360, 200, 30);
+				+"%)")).setBounds(380, 360, 200, 30);
 		if (sme.getStart() == 0 && sme.getEnd() == 0) {
-			pnCe.add(new JTextField("6. "+(sme.getStart()+1)+"~"+sme.getRequestNum()+" 라인 가장 빈도수가 높은 key와 횟수"));
-			pnCe.add(new JTextField(sme.getMostFrequentKey()+" : "
+			bgr.add(new JTextField("6. "+(sme.getStart()+1)+"~"+sme.getRequestNum()+" 라인 가장 빈도수가 높은 key와 횟수"));
+			bgr.add(new JTextField(sme.getMostFrequentKey()+" : "
 					+sme.getMapKey().get(sme.getMostFrequentKey())+"번"));
 		} else {
-			pnCe.add(new JTextField("6. "+sme.getStart()+"~"+(sme.getEnd() > sme.getRequestNum() ? sme.getRequestNum() : sme.getEnd())
+			bgr.add(new JTextField("6. "+sme.getStart()+"~"+(sme.getEnd() > sme.getRequestNum() ? sme.getRequestNum() : sme.getEnd())
 					+" 라인 가장 빈도수가 높은 key와 횟수"));
-			pnCe.add(new JTextField(sme.getMostFrequentKeyBetweenStartAndEnd()+" : "
+			bgr.add(new JTextField(sme.getMostFrequentKeyBetweenStartAndEnd()+" : "
 					+sme.getMapKeyBetweenStartAndEnd().get(sme.getMostFrequentKeyBetweenStartAndEnd())+"번"));
 		}
-		add(jbConfirm).setBounds(325, 480, 70, 50);
 //		pnNo.setLayout(new GridLayout(1, 4));
 //		pnCe.setLayout(new GridLayout(6, 2));
 //		setLayout(new BorderLayout());
 		setLayout(null);
 		
 		
+		bgr.add(jbConfirm).setBounds(270, 410, 60, 30);
 //		add("North",pnNo);
 //		add("Center",pnCe);
 //		add("South",jbConfirm);
@@ -114,6 +125,7 @@ public class Result extends JDialog {
 		ResultEvt r = new ResultEvt(this);
 		jbConfirm.addActionListener(r);
 		
+		setContentPane(bgr);
 		setBounds(400, 300, 650, 500);
 		setVisible(true);
 		setResizable(false);

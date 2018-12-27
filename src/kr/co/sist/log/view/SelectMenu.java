@@ -29,7 +29,7 @@ public class SelectMenu extends JDialog {
 		super(login, "Log Analysis App", true);
 		
 		//이미지 삽입
-		icon = new ImageIcon("C:\\Users\\owner\\Desktop\\aaa.jpg");
+		icon = new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\aaa.jpg");
 		JPanel background = new JPanel() {
 			public void paintComponent(Graphics g) {
 				g.drawImage(icon.getImage(), 0,0,null);
