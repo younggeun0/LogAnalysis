@@ -93,7 +93,7 @@ public class Result extends JDialog {
 		} else {
 			bgr.add(new JLabel("6. " + sme.getStart() + "~"
 					+ (sme.getEnd() > sme.getRequestNum() ? sme.getRequestNum() : sme.getEnd())
-					+ " 라인 가장 빈도수가 높은 key와 횟수")).setBounds(80, 410, 250, 30);
+					+ " 라인 최고빈도 key와 횟수")).setBounds(80, 410, 250, 30);
 			bgr.add(new JLabel(sme.getMostFrequentKeyBetweenStartAndEnd() + " : "
 					+ sme.getMapKeyBetweenStartAndEnd().get(sme.getMostFrequentKeyBetweenStartAndEnd()) + "번")).setBounds(380, 410, 200, 30);
 		}
