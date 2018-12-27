@@ -199,12 +199,12 @@ public class SelectMenuEvt implements ActionListener {
 		String s = sdf.format(d);
 		StringBuilder sb = new StringBuilder();
 		sb.append("report_").append(s).append(".dat");
-		File file = new File("C:/dev/Report/");
+		File file = new File("C:/dev/Report");
 		file.mkdirs();
 
 		BufferedWriter bw = null;
 		try {
-			bw = new BufferedWriter(new FileWriter("C:/dev/Report/" + sb.toString()));
+			bw = new BufferedWriter(new FileWriter(file.getPath()+"/" + sb.toString()));
 			bw.write(printReport());
 			bw.flush();
 		} finally {
