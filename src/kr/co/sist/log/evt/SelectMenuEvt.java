@@ -261,18 +261,19 @@ public class SelectMenuEvt implements ActionListener {
 
 	public void calMostFrequentKey() {
 		int maxValue = (Collections.max(mapKey.values())); //
-		for (Map.Entry<String, Integer> entry : mapKey.entrySet()) {
-			if (entry.getValue() == maxValue) {
-				mostFrequentKey = entry.getKey();
+		for( String key : mapKey.keySet() ) {
+			if (mapKey.get(key) == maxValue) {
+				mostFrequentKey = key;
 			}
 		}
+		
 	}
 
 	public void calMostFrequentKeyBetweenStartAndEnd() {
 		int maxValue = (Collections.max(mapKeyBetweenStartAndEnd.values()));
-		for (Map.Entry<String, Integer> entry : mapKeyBetweenStartAndEnd.entrySet()) {
-			if (entry.getValue() == maxValue) {
-				mostFrequentKeyBetweenStartAndEnd = entry.getKey();
+		for (String key : mapKeyBetweenStartAndEnd.keySet()) {
+			if ( mapKeyBetweenStartAndEnd.get(key)== maxValue) {
+				mostFrequentKeyBetweenStartAndEnd = key;
 			}
 		}
 	}
@@ -298,7 +299,7 @@ public class SelectMenuEvt implements ActionListener {
 		Iterator<String> ita = set.iterator();
 		Iterator<String> ita2 = set.iterator();
 
-		for (int i = 0; i < browser.length; i++) {
+		while(ita.hasNext()) {
 			mapBrowserShare.put(ita2.next(),
 					String.format("%4.2f", ((mapBrowser.get(ita.next()) / (double) requestNum) * 100)));
 		}
@@ -368,8 +369,8 @@ public class SelectMenuEvt implements ActionListener {
 		for (int i = 0; i < browser.length; i++) {
 			if (temp.contains(browser[i])) {
 				browserCnt[i]++;
+				mapBrowser.put(browser[i], browserCnt[i]);
 			}
-			mapBrowser.put(browser[i], browserCnt[i]);
 		}
 	}
 

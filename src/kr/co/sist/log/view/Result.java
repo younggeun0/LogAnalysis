@@ -65,7 +65,6 @@ public class Result extends JDialog {
 		
 		File reportFile = new File(sme.getFilePath());
 		
-		reportFile.lastModified();
 		pnNo.add(new JButton("颇老疙"));
 		pnNo.add(new JLabel(reportFile.getName()));
 		pnNo.add(new JButton("积己等 朝楼"));
