@@ -2,7 +2,7 @@
 
 * 제작기간 일주일 (2018.12.22~2018.12.28)
 
-![logFile](https://github.com/younggeun0/logAnalysisApp/blob/master/img/logFile.jpg?raw=true)
+![logFile](https://github.com/younggeun0/logAnalysisApp/blob/master/img/logFile.png?raw=true)
 
 * **로그 기록이 담긴 txt파일에서 원하는 정보를 얻기 위한 프로그램**
 * **원하는 로그 정보**
@@ -13,7 +13,7 @@
   * 비정상적인 요청(403)이 발생한 횟수, 비율(%)
   * 입력 라인에 해당하는 최다 사용 키의 이름과 횟수
 
-![ui01](https://github.com/younggeun0/logAnalysisApp/blob/master/img/UI01.jpg?raw=true))
+![ui01](https://github.com/younggeun0/logAnalysisApp/blob/master/img/UI01.png?raw=true)
 
 * **기본 UI**
   * Login 후 사용 가능
