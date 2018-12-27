@@ -261,18 +261,18 @@ public class SelectMenuEvt implements ActionListener {
 
 	public void calMostFrequentKey() {
 		int maxValue = (Collections.max(mapKey.values())); //
-		for (Map.Entry<String, Integer> entry : mapKey.entrySet()) {
-			if (entry.getValue() == maxValue) {
-				mostFrequentKey = entry.getKey();
+		for (String key : mapKey.keySet()) {
+			if (mapKey.get(key) == maxValue) {
+				mostFrequentKey = key;
 			}
 		}
 	}
 
 	public void calMostFrequentKeyBetweenStartAndEnd() {
 		int maxValue = (Collections.max(mapKeyBetweenStartAndEnd.values()));
-		for (Map.Entry<String, Integer> entry : mapKeyBetweenStartAndEnd.entrySet()) {
-			if (entry.getValue() == maxValue) {
-				mostFrequentKeyBetweenStartAndEnd = entry.getKey();
+		for (String key : mapKeyBetweenStartAndEnd.keySet()) {
+			if (mapKeyBetweenStartAndEnd.get(key) == maxValue) {
+				mostFrequentKeyBetweenStartAndEnd = key;
 			}
 		}
 	}
