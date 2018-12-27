@@ -53,15 +53,16 @@ public class SelectMenu extends JDialog {
 		
 //		setLayout(null);
 		
-		jbView.setIcon(new ImageIcon("C:\\Users\\owner\\Desktop\\design\\viewIMG.jpg"));
-		jbReport.setIcon(new ImageIcon("C:\\Users\\owner\\Desktop\\design\\reviewIMG.jpg"));
+		jbView.setIcon(new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\viewIMG.jpg"));
+		jbReport.setIcon(new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\reviewIMG.jpg"));
+		jbLineView.setIcon(new ImageIcon("C:\\dev\\workspace\\logAnalysisApp\\img\\LineView.jpg"));
 		
 		background.add(jbView);
 		jbView.setBounds(40, 90, 150, 50);
 		background.add(jbReport);
 		jbReport.setBounds(220, 90, 150, 50);
 		background.add(jbLineView);
-		jbLineView.setBounds(260, 160, 110, 70);
+		jbLineView.setBounds(260, 185, 112, 40);
 		background.add(jtStart);
 		jtStart.setBounds(95, 160, 150, 30);
 		background.add(jtEnd);
