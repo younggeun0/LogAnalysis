@@ -56,7 +56,14 @@ public class SelectMenu extends JDialog {
 		jtStart = new JTextField();
 		jtEnd = new JTextField();
 		
+<<<<<<< HEAD
 		setLayout(null);
+=======
+//		setLayout(null);
+		
+		jbView.setIcon(new ImageIcon("C:\\Users\\owner\\Desktop\\design\\viewIMG.jpg"));
+		jbReport.setIcon(new ImageIcon("C:\\Users\\owner\\Desktop\\design\\reviewIMG.jpg"));
+>>>>>>> parent of cdbdae5... 최종
 		
 <<<<<<< HEAD
 		jlMain.setBounds(40, 20, 330, 250);
@@ -81,7 +88,7 @@ public class SelectMenu extends JDialog {
 		background.add(jbReport);
 		jbReport.setBounds(220, 90, 150, 50);
 		background.add(jbLineView);
-		jbLineView.setBounds(260, 185, 112, 40);
+		jbLineView.setBounds(260, 160, 110, 70);
 		background.add(jtStart);
 		jtStart.setBounds(95, 160, 150, 30);
 		background.add(jtEnd);
