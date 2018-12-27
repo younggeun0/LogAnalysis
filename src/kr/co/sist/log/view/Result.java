@@ -54,8 +54,8 @@ public class Result extends JDialog {
 		return jpBrowser;
 	}
 
-	public Result(SelectMenuEvt sme, SelectMenu sl) {
-		super(sl, "결과 출력",true);
+	public Result(SelectMenuEvt sme, SelectMenu sm) {
+		super(sm, "결과 출력",true);
 		this.sme = sme;
 		
 		JPanel pnNo = new JPanel();
