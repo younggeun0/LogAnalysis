@@ -1,4 +1,4 @@
-# 로그 분석 시스템
+# 로그 분석 Java 프로그램 
 
 ![logFile](https://github.com/younggeun0/logAnalysisApp/blob/master/img/logFile.png?raw=true)
 
