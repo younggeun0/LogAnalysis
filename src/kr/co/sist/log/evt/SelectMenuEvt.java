@@ -76,6 +76,9 @@ public class SelectMenuEvt implements ActionListener {
 			initInstances();
 			try {
 				selectLog();
+				if (filePath.isEmpty()) {
+					return;
+				}
 				readLog();
 
 				if (requestNum != 0) {
@@ -160,6 +163,9 @@ public class SelectMenuEvt implements ActionListener {
 
 					try {
 						selectLog();
+						if (filePath.isEmpty()) {
+							return;
+						}
 						readLog();
 
 						if (start > requestNum) {
@@ -314,7 +320,14 @@ public class SelectMenuEvt implements ActionListener {
 
 		String dirPath = fd.getDirectory();
 		fName = fd.getFile();
-		filePath = dirPath + fName;
+		System.out.println(fName);
+		// log파일 인지 확인하는 예외처리
+		if (!fName.contains(".log")) {
+			JOptionPane.showMessageDialog(sm, "log파일이 아닙니다.");
+			filePath = "";
+		} else {
+			filePath = dirPath + fName;
+		}
 	}
 	public void readLog() throws IOException, FileNotFoundException {
 
@@ -324,10 +337,6 @@ public class SelectMenuEvt implements ActionListener {
 
 			String temp = "";
 			while ((temp = br.readLine()) != null) {
-				if (!temp.contains("][http://")) {
-					JOptionPane.showMessageDialog(sm, "파일 선택이 잘못되었습니다.");
-					return;
-				}
 				requestNum++;
 				countKey(temp);
 				countBrowser(temp);
