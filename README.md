@@ -25,7 +25,7 @@
 
 * **클래스 다이어그램**
 
-![class diagram](https://github.com/younggeun0/logAnalysisApp/blob/master/img/classDiagram(logAnalysis).jpg?raw=true)
+![class diagram](https://github.com/younggeun0/logAnalysisApp/blob/master/img/classDiagram.jpg?raw=true)
 
 * **업무분장**
   * **younggeun0**
