@@ -40,4 +40,19 @@
     * key 로그처리, 테스팅
 
 
-* 제작기간 일주일 (2018.12.22~2018.12.28)
+* **제작기간 일주일 (2018.12.22~2018.12.28)**
+
+* **최종 결과물**
+
+![01](https://github.com/younggeun0/logAnalysisApp/blob/master/img/completion/01.png?raw=true)
+
+![02](https://github.com/younggeun0/logAnalysisApp/blob/master/img/completion/02.png?raw=true)
+
+![03](https://github.com/younggeun0/logAnalysisApp/blob/master/img/completion/03.png?raw=true)
+
+![04](https://github.com/younggeun0/logAnalysisApp/blob/master/img/completion/04.png?raw=true)
+
+![05](https://github.com/younggeun0/logAnalysisApp/blob/master/img/completion/05.png?raw=true)
+
+![06](https://github.com/younggeun0/logAnalysisApp/blob/master/img/completion/06.png?raw=true)
+
