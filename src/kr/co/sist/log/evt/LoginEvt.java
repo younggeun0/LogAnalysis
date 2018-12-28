@@ -37,9 +37,11 @@ public class LoginEvt implements ActionListener {
 			
 			if(id.equals("admin")&& pw.equals("1234")) {
 				JOptionPane.showMessageDialog(login, "로그인 성공");
+				login.dispose();
 				new SelectMenu(login);
 			}else if(id.equals("root")&& pw.equals("1111")) {
 				JOptionPane.showMessageDialog(login, "로그인 성공");
+				login.dispose();
 				new SelectMenu(login);
 			}else {
 				JOptionPane.showMessageDialog(login, "로그인 실패");	
