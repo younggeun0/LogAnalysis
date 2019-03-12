@@ -57,3 +57,6 @@
 
 ![06](https://github.com/younggeun0/logAnalysisApp/blob/master/img/completion/06.png?raw=true)
 
+## 시연
+
+![시연](https://github.com/younggeun0/logAnalysisApp/blob/master/first_team.gif?raw=true)
